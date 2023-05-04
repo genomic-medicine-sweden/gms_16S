@@ -5,6 +5,7 @@ Under construction.
 
 --
 Quick start
+gunzip the files in the database directory if they are gzipped first.
 
 `nextflow run main.nf --input assets/samplesheet_mod.csv \
     --outdir results_emu \
