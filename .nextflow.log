@@ -1,0 +1,542 @@
+May-04 15:54:16.474 [main] DEBUG nextflow.cli.Launcher - $> nextflow run main.nf --input assets/samplesheet_mod.csv --outdir results_idag --db /aux/db/workdir_fwa010/emu_pipe_project/nf-core-gmsemu/assets/test_assets/database/ --seqtype map-ont -profile singularity,test
+May-04 15:54:16.541 [main] INFO  nextflow.cli.CmdRun - N E X T F L O W  ~  version 23.04.1
+May-04 15:54:16.568 [main] DEBUG nextflow.plugin.PluginsFacade - Setting up plugin manager > mode=prod; embedded=false; plugins-dir=/home/orebroll.se/fwa010/.nextflow/plugins; core-plugins: nf-amazon@1.16.2,nf-azure@1.0.1,nf-codecommit@0.1.4,nf-console@1.0.5,nf-ga4gh@1.0.5,nf-google@1.7.3,nf-tower@1.5.12,nf-wave@0.8.2
+May-04 15:54:16.578 [main] INFO  org.pf4j.DefaultPluginStatusProvider - Enabled plugins: []
+May-04 15:54:16.579 [main] INFO  org.pf4j.DefaultPluginStatusProvider - Disabled plugins: []
+May-04 15:54:16.582 [main] INFO  org.pf4j.DefaultPluginManager - PF4J version 3.4.1 in 'deployment' mode
+May-04 15:54:16.591 [main] INFO  org.pf4j.AbstractPluginManager - No plugins
+May-04 15:54:16.606 [main] DEBUG nextflow.config.ConfigBuilder - Found config local: /aux/db/workdir_fwa010/emu_pipe_project/gms_16S/nextflow.config
+May-04 15:54:16.607 [main] DEBUG nextflow.config.ConfigBuilder - Parsing config file: /aux/db/workdir_fwa010/emu_pipe_project/gms_16S/nextflow.config
+May-04 15:54:16.629 [main] DEBUG nextflow.config.ConfigBuilder - Applying config profile: `singularity,test`
+May-04 15:54:18.552 [main] DEBUG nextflow.config.ConfigBuilder - Available config profiles: [cfc_dev, ifb_core, denbi_qbic, alice, mjolnir_globe, uppmax, uge, rosalind_uge, lugh, unibe_ibu, vai, czbiohub_aws, jax, ccga_med, scw, tigem, tubingen_apg, google, ipop_up, googlels, eddie, medair, bi, bigpurple, sbc_sharc, adcra, cedars, vsc_kul_uhasselt, pawsey_nimbus, ucl_myriad, utd_ganymede, charliecloud, icr_davros, ceres, munin, arm, rosalind, hasta, cfc, uzh, ebc, ku_sund_dangpu, ccga_dx, crick, marvin, biohpc_gen, shifter, mana, mamba, wehi, awsbatch, imperial, maestro, genotoul, abims, janelia, nihbiowulf, nu_genomics, googlebatch, oist, sahmri, mpcdf, leicester, vsc_ugent, sage, cambridge, podman, cheaha, xanadu, test, computerome, seg_globe, sanger, dkfz, pasteur, test_full, azurebatch, hki, crukmi, docker, engaging, gis, psmn, eva, fgcz, conda, crg, singularity, prince, utd_sysbio, debug, genouest, cbe, phoenix, gitpod, seawulf, uct_hpc, aws_tower, binac]
+May-04 15:54:18.588 [main] DEBUG nextflow.cli.CmdRun - Applied DSL=2 from script declararion
+May-04 15:54:18.603 [main] INFO  nextflow.cli.CmdRun - Launching `main.nf` [curious_goodall] DSL2 - revision: a35b9a734c
+May-04 15:54:18.604 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins default=[]
+May-04 15:54:18.604 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins resolved requirement=[]
+May-04 15:54:18.609 [main] DEBUG nextflow.secret.LocalSecretsProvider - Secrets store: /home/orebroll.se/fwa010/.nextflow/secrets/store.json
+May-04 15:54:18.612 [main] DEBUG nextflow.secret.SecretsLoader - Discovered secrets providers: [nextflow.secret.LocalSecretsProvider@19b02dfd] - activable => nextflow.secret.LocalSecretsProvider@19b02dfd
+May-04 15:54:18.672 [main] DEBUG nextflow.Session - Session UUID: 273965f1-5ce7-4ce9-922d-9f0566ea1d9b
+May-04 15:54:18.672 [main] DEBUG nextflow.Session - Run name: curious_goodall
+May-04 15:54:18.672 [main] DEBUG nextflow.Session - Executor pool size: 4
+May-04 15:54:18.683 [main] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'FileTransfer' minSize=10; maxSize=12; workQueue=LinkedBlockingQueue[10000]; allowCoreThreadTimeout=false
+May-04 15:54:18.709 [main] DEBUG nextflow.cli.CmdRun - 
+  Version: 23.04.1 build 5866
+  Created: 15-04-2023 06:51 UTC (08:51 CEST)
+  System: Linux 5.14.0-75.el9.x86_64
+  Runtime: Groovy 3.0.16 on OpenJDK 64-Bit Server VM 11.0.16.1+1-LTS
+  Encoding: UTF-8 (UTF-8)
+  Process: 1982088@rosalind.orebroll.se [10.10.30.190]
+  CPUs: 4 - Mem: 15.6 GB (1.9 GB) - Swap: 8 GB (5.3 GB)
+May-04 15:54:18.732 [main] DEBUG nextflow.Session - Work-dir: /aux/db/workdir_fwa010/emu_pipe_project/gms_16S/work [xfs]
+May-04 15:54:18.748 [main] DEBUG nextflow.executor.ExecutorFactory - Extension executors providers=[]
+May-04 15:54:18.757 [main] DEBUG nextflow.Session - Observer factory: DefaultObserverFactory
+May-04 15:54:18.837 [main] DEBUG nextflow.cache.CacheFactory - Using Nextflow cache factory: nextflow.cache.DefaultCacheFactory
+May-04 15:54:18.849 [main] DEBUG nextflow.util.CustomThreadPool - Creating default thread pool > poolSize: 5; maxThreads: 1000
+May-04 15:54:18.935 [main] DEBUG nextflow.Session - Session start
+May-04 15:54:18.939 [main] DEBUG nextflow.trace.TraceFileObserver - Workflow started -- trace file: /aux/db/workdir_fwa010/emu_pipe_project/gms_16S/results_idag/pipeline_info/execution_trace_2023-05-04_15-54-18.txt
+May-04 15:54:18.951 [main] DEBUG nextflow.Session - Using default localLib path: /aux/db/workdir_fwa010/emu_pipe_project/gms_16S/lib
+May-04 15:54:18.954 [main] DEBUG nextflow.Session - Adding to the classpath library: /aux/db/workdir_fwa010/emu_pipe_project/gms_16S/lib
+May-04 15:54:18.955 [main] DEBUG nextflow.Session - Adding to the classpath library: /aux/db/workdir_fwa010/emu_pipe_project/gms_16S/lib/nfcore_external_java_deps.jar
+May-04 15:54:19.861 [main] DEBUG nextflow.script.ScriptRunner - > Launching execution
+May-04 15:54:19.904 [main] INFO  nextflow.Nextflow - 
+
+-[2m----------------------------------------------------[0m-
+                                        [0;32m,--.[0;30m/[0;32m,-.[0m
+[0;34m        ___     __   __   __   ___     [0;32m/,-._.--~'[0m
+[0;34m  |\ | |__  __ /  ` /  \ |__) |__         [0;33m}  {[0m
+[0;34m  | \| |       \__, \__/ |  \ |___     [0;32m\`-._,-`-,[0m
+                                        [0;32m`._,._,'[0m
+[0;35m  nf-core/gmsemu v1.0dev[0m
+-[2m----------------------------------------------------[0m-
+[1mCore Nextflow options[0m
+  [0;34mrunName                   : [0;32mcurious_goodall[0m
+  [0;34mcontainerEngine           : [0;32msingularity[0m
+  [0;34mlaunchDir                 : [0;32m/aux/db/workdir_fwa010/emu_pipe_project/gms_16S[0m
+  [0;34mworkDir                   : [0;32m/aux/db/workdir_fwa010/emu_pipe_project/gms_16S/work[0m
+  [0;34mprojectDir                : [0;32m/aux/db/workdir_fwa010/emu_pipe_project/gms_16S[0m
+  [0;34muserName                  : [0;32mfwa010[0m
+  [0;34mprofile                   : [0;32msingularity,test[0m
+  [0;34mconfigFiles               : [0;32m/aux/db/workdir_fwa010/emu_pipe_project/gms_16S/nextflow.config[0m
+
+[1mInput/output options[0m
+  [0;34minput                     : [0;32massets/samplesheet_mod.csv[0m
+  [0;34moutdir                    : [0;32mresults_idag[0m
+
+[1mReference genome options[0m
+  [0;34mgenome                    : [0;32mR64-1-1[0m
+  [0;34mfasta                     : [0;32ms3://ngi-igenomes/igenomes/Saccharomyces_cerevisiae/Ensembl/R64-1-1/Sequence/WholeGenomeFasta/genome.fa[0m
+
+[1mInstitutional config options[0m
+  [0;34mconfig_profile_name       : [0;32mTest profile[0m
+  [0;34mconfig_profile_description: [0;32mMinimal test dataset to check pipeline function[0m
+
+[1mMax job request options[0m
+  [0;34mmax_cpus                  : [0;32m2[0m
+  [0;34mmax_memory                : [0;32m6.GB[0m
+  [0;34mmax_time                  : [0;32m6.h[0m
+
+[1mOther parameters[0m
+  [0;34mreads                     : [0;32mnull[0m
+  [0;34mdb                        : [0;32m/aux/db/workdir_fwa010/emu_pipe_project/nf-core-gmsemu/assets/test_assets/database/[0m
+  [0;34mseqtype                   : [0;32mmap-ont[0m
+
+!! Only displaying parameters that differ from the pipeline defaults !!
+-[2m----------------------------------------------------[0m-
+If you use nf-core/gmsemu for your analysis please cite:
+
+* The nf-core framework
+  https://doi.org/10.1038/s41587-020-0439-x
+
+* Software dependencies
+  https://github.com/nf-core/gmsemu/blob/master/CITATIONS.md
+-[2m----------------------------------------------------[0m-
+May-04 15:54:20.009 [main] WARN  nextflow.Nextflow - Found unexpected parameters:
+* --seqtype: map-ont
+* --reads: null
+* --db: /aux/db/workdir_fwa010/emu_pipe_project/nf-core-gmsemu/assets/test_assets/database/
+May-04 15:54:20.010 [main] INFO  nextflow.Nextflow - - [2mIgnore this warning: params.schema_ignore_params = "seqtype,reads,db" [0m
+May-04 15:54:20.223 [main] DEBUG nextflow.plugin.PluginUpdater - Installing plugin nf-amazon version: 1.16.2
+May-04 15:54:20.228 [main] INFO  org.pf4j.AbstractPluginManager - Plugin 'nf-amazon@1.16.2' resolved
+May-04 15:54:20.228 [main] INFO  org.pf4j.AbstractPluginManager - Start plugin 'nf-amazon@1.16.2'
+May-04 15:54:20.245 [main] DEBUG nextflow.plugin.BasePlugin - Plugin started nf-amazon@1.16.2
+May-04 15:54:20.256 [main] DEBUG nextflow.file.FileHelper - > Added 'S3FileSystemProvider' to list of installed providers [s3]
+May-04 15:54:20.256 [main] DEBUG nextflow.file.FileHelper - Started plugin 'nf-amazon' required to handle file: s3://ngi-igenomes/igenomes/Saccharomyces_cerevisiae/Ensembl/R64-1-1/Sequence/WholeGenomeFasta/genome.fa
+May-04 15:54:20.263 [main] DEBUG nextflow.file.FileHelper - Creating a file system instance for provider: S3FileSystemProvider
+May-04 15:54:20.272 [main] DEBUG nextflow.file.FileHelper - AWS S3 config details: {max_error_retry=5}
+May-04 15:54:20.598 [main] DEBUG com.upplication.s3fs.AmazonS3Client - Setting S3 glacierRetrievalTier=null
+May-04 15:54:20.639 [main] WARN  c.a.i.InstanceMetadataServiceResourceFetcher - Fail to retrieve token 
+com.amazonaws.AmazonServiceException: Gateway Timeout (Service: null; Status Code: 504; Error Code: null; Request ID: null; Proxy: null)
+	at com.amazonaws.internal.EC2ResourceFetcher.handleErrorResponse(EC2ResourceFetcher.java:149)
+	at com.amazonaws.internal.EC2ResourceFetcher.doReadResource(EC2ResourceFetcher.java:94)
+	at com.amazonaws.internal.InstanceMetadataServiceResourceFetcher.getToken(InstanceMetadataServiceResourceFetcher.java:91)
+	at com.amazonaws.internal.InstanceMetadataServiceResourceFetcher.readResource(InstanceMetadataServiceResourceFetcher.java:69)
+	at com.amazonaws.internal.EC2ResourceFetcher.readResource(EC2ResourceFetcher.java:66)
+	at com.amazonaws.auth.InstanceMetadataServiceCredentialsFetcher.getCredentialsEndpoint(InstanceMetadataServiceCredentialsFetcher.java:60)
+	at com.amazonaws.auth.InstanceMetadataServiceCredentialsFetcher.getCredentialsResponse(InstanceMetadataServiceCredentialsFetcher.java:48)
+	at com.amazonaws.auth.BaseCredentialsFetcher.fetchCredentials(BaseCredentialsFetcher.java:124)
+	at com.amazonaws.auth.BaseCredentialsFetcher.getCredentials(BaseCredentialsFetcher.java:80)
+	at com.amazonaws.auth.InstanceProfileCredentialsProvider.getCredentials(InstanceProfileCredentialsProvider.java:166)
+	at com.amazonaws.auth.EC2ContainerCredentialsProviderWrapper.getCredentials(EC2ContainerCredentialsProviderWrapper.java:75)
+	at com.amazonaws.auth.AWSCredentialsProviderChain.getCredentials(AWSCredentialsProviderChain.java:118)
+	at com.amazonaws.services.s3.S3CredentialsProviderChain.getCredentials(S3CredentialsProviderChain.java:36)
+	at com.amazonaws.http.AmazonHttpClient$RequestExecutor.getCredentialsFromContext(AmazonHttpClient.java:1269)
+	at com.amazonaws.http.AmazonHttpClient$RequestExecutor.runBeforeRequestHandlers(AmazonHttpClient.java:845)
+	at com.amazonaws.http.AmazonHttpClient$RequestExecutor.doExecute(AmazonHttpClient.java:794)
+	at com.amazonaws.http.AmazonHttpClient$RequestExecutor.executeWithTimer(AmazonHttpClient.java:781)
+	at com.amazonaws.http.AmazonHttpClient$RequestExecutor.execute(AmazonHttpClient.java:755)
+	at com.amazonaws.http.AmazonHttpClient$RequestExecutor.access$500(AmazonHttpClient.java:715)
+	at com.amazonaws.http.AmazonHttpClient$RequestExecutionBuilderImpl.execute(AmazonHttpClient.java:697)
+	at com.amazonaws.http.AmazonHttpClient.execute(AmazonHttpClient.java:561)
+	at com.amazonaws.http.AmazonHttpClient.execute(AmazonHttpClient.java:541)
+	at com.amazonaws.services.s3.AmazonS3Client.invoke(AmazonS3Client.java:5456)
+	at com.amazonaws.services.s3.AmazonS3Client.getBucketRegionViaHeadRequest(AmazonS3Client.java:6432)
+	at com.amazonaws.services.s3.AmazonS3Client.fetchRegionFromCache(AmazonS3Client.java:6404)
+	at com.amazonaws.services.s3.AmazonS3Client.invoke(AmazonS3Client.java:5441)
+	at com.amazonaws.services.s3.AmazonS3Client.invoke(AmazonS3Client.java:5403)
+	at com.amazonaws.services.s3.AmazonS3Client.invoke(AmazonS3Client.java:5397)
+	at com.amazonaws.services.s3.AmazonS3Client.listObjects(AmazonS3Client.java:928)
+	at com.upplication.s3fs.AmazonS3Client.listObjects(AmazonS3Client.java:167)
+	at com.upplication.s3fs.util.S3ObjectSummaryLookup.lookup(S3ObjectSummaryLookup.java:112)
+	at com.upplication.s3fs.S3FileSystemProvider.checkAccess(S3FileSystemProvider.java:668)
+	at java.base/java.nio.file.Files.exists(Files.java:2440)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:107)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:323)
+	at org.codehaus.groovy.runtime.callsite.StaticMetaMethodSite.invoke(StaticMetaMethodSite.java:44)
+	at org.codehaus.groovy.runtime.callsite.StaticMetaMethodSite.call(StaticMetaMethodSite.java:89)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCall(CallSiteArray.java:47)
+	at org.codehaus.groovy.runtime.callsite.StaticMetaMethodSite.call(StaticMetaMethodSite.java:94)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:139)
+	at nextflow.extension.FilesEx.exists(FilesEx.groovy:456)
+	at nextflow.file.FileHelper.checkIfExists(FileHelper.groovy:1064)
+	at nextflow.file.FileHelper$checkIfExists$1.call(Unknown Source)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCall(CallSiteArray.java:47)
+	at nextflow.file.FileHelper$checkIfExists$1.call(Unknown Source)
+	at nextflow.Nextflow.file(Nextflow.groovy:112)
+	at nextflow.Nextflow$file.callStatic(Unknown Source)
+	at Script_7180a78b.runScript(Script_7180a78b:15)
+	at nextflow.script.BaseScript.run0(BaseScript.groovy:145)
+	at nextflow.script.BaseScript.run(BaseScript.groovy:192)
+	at nextflow.script.ScriptParser.runScript(ScriptParser.groovy:229)
+	at nextflow.script.ScriptParser.runScript(ScriptParser.groovy:215)
+	at nextflow.script.ScriptParser.runScript(ScriptParser.groovy:205)
+	at nextflow.script.IncludeDef.memoizedMethodPriv$loadModule0PathMapSession(IncludeDef.groovy:151)
+	at nextflow.script.IncludeDef.access$0(IncludeDef.groovy)
+	at nextflow.script.IncludeDef$__clinit__closure2.doCall(IncludeDef.groovy)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:107)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:323)
+	at org.codehaus.groovy.runtime.metaclass.ClosureMetaClass.invokeMethod(ClosureMetaClass.java:274)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1035)
+	at groovy.lang.Closure.call(Closure.java:412)
+	at org.codehaus.groovy.runtime.memoize.Memoize$MemoizeFunction.lambda$call$0(Memoize.java:137)
+	at org.codehaus.groovy.runtime.memoize.ConcurrentCommonCache.getAndPut(ConcurrentCommonCache.java:137)
+	at org.codehaus.groovy.runtime.memoize.ConcurrentCommonCache.getAndPut(ConcurrentCommonCache.java:113)
+	at org.codehaus.groovy.runtime.memoize.Memoize$MemoizeFunction.call(Memoize.java:136)
+	at nextflow.script.IncludeDef.loadModule0(IncludeDef.groovy)
+	at nextflow.script.IncludeDef.load0(IncludeDef.groovy:123)
+	at nextflow.script.IncludeDef$load0$1.call(Unknown Source)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCall(CallSiteArray.java:47)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:125)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:139)
+	at Script_a1e1b6e6.runScript(Script_a1e1b6e6:37)
+	at nextflow.script.BaseScript.run0(BaseScript.groovy:145)
+	at nextflow.script.BaseScript.run(BaseScript.groovy:192)
+	at nextflow.script.ScriptParser.runScript(ScriptParser.groovy:229)
+	at nextflow.script.ScriptRunner.run(ScriptRunner.groovy:224)
+	at nextflow.script.ScriptRunner.execute(ScriptRunner.groovy:130)
+	at nextflow.cli.CmdRun.run(CmdRun.groovy:368)
+	at nextflow.cli.Launcher.run(Launcher.groovy:494)
+	at nextflow.cli.Launcher.main(Launcher.groovy:653)
+May-04 15:54:20.646 [main] WARN  c.a.i.InstanceMetadataServiceResourceFetcher - Fail to retrieve token 
+com.amazonaws.AmazonServiceException: Gateway Timeout (Service: null; Status Code: 504; Error Code: null; Request ID: null; Proxy: null)
+	at com.amazonaws.internal.EC2ResourceFetcher.handleErrorResponse(EC2ResourceFetcher.java:149)
+	at com.amazonaws.internal.EC2ResourceFetcher.doReadResource(EC2ResourceFetcher.java:94)
+	at com.amazonaws.internal.InstanceMetadataServiceResourceFetcher.getToken(InstanceMetadataServiceResourceFetcher.java:91)
+	at com.amazonaws.internal.InstanceMetadataServiceResourceFetcher.readResource(InstanceMetadataServiceResourceFetcher.java:69)
+	at com.amazonaws.internal.EC2ResourceFetcher.readResource(EC2ResourceFetcher.java:66)
+	at com.amazonaws.auth.InstanceMetadataServiceCredentialsFetcher.getCredentialsEndpoint(InstanceMetadataServiceCredentialsFetcher.java:60)
+	at com.amazonaws.auth.InstanceMetadataServiceCredentialsFetcher.getCredentialsResponse(InstanceMetadataServiceCredentialsFetcher.java:48)
+	at com.amazonaws.auth.BaseCredentialsFetcher.fetchCredentials(BaseCredentialsFetcher.java:124)
+	at com.amazonaws.auth.BaseCredentialsFetcher.getCredentials(BaseCredentialsFetcher.java:80)
+	at com.amazonaws.auth.InstanceProfileCredentialsProvider.getCredentials(InstanceProfileCredentialsProvider.java:166)
+	at com.amazonaws.auth.EC2ContainerCredentialsProviderWrapper.getCredentials(EC2ContainerCredentialsProviderWrapper.java:75)
+	at com.amazonaws.auth.AWSCredentialsProviderChain.getCredentials(AWSCredentialsProviderChain.java:118)
+	at com.amazonaws.services.s3.S3CredentialsProviderChain.getCredentials(S3CredentialsProviderChain.java:36)
+	at com.amazonaws.http.AmazonHttpClient$RequestExecutor.getCredentialsFromContext(AmazonHttpClient.java:1269)
+	at com.amazonaws.http.AmazonHttpClient$RequestExecutor.executeOneRequest(AmazonHttpClient.java:1290)
+	at com.amazonaws.http.AmazonHttpClient$RequestExecutor.executeHelper(AmazonHttpClient.java:1157)
+	at com.amazonaws.http.AmazonHttpClient$RequestExecutor.doExecute(AmazonHttpClient.java:814)
+	at com.amazonaws.http.AmazonHttpClient$RequestExecutor.executeWithTimer(AmazonHttpClient.java:781)
+	at com.amazonaws.http.AmazonHttpClient$RequestExecutor.execute(AmazonHttpClient.java:755)
+	at com.amazonaws.http.AmazonHttpClient$RequestExecutor.access$500(AmazonHttpClient.java:715)
+	at com.amazonaws.http.AmazonHttpClient$RequestExecutionBuilderImpl.execute(AmazonHttpClient.java:697)
+	at com.amazonaws.http.AmazonHttpClient.execute(AmazonHttpClient.java:561)
+	at com.amazonaws.http.AmazonHttpClient.execute(AmazonHttpClient.java:541)
+	at com.amazonaws.services.s3.AmazonS3Client.invoke(AmazonS3Client.java:5456)
+	at com.amazonaws.services.s3.AmazonS3Client.getBucketRegionViaHeadRequest(AmazonS3Client.java:6432)
+	at com.amazonaws.services.s3.AmazonS3Client.fetchRegionFromCache(AmazonS3Client.java:6404)
+	at com.amazonaws.services.s3.AmazonS3Client.invoke(AmazonS3Client.java:5441)
+	at com.amazonaws.services.s3.AmazonS3Client.invoke(AmazonS3Client.java:5403)
+	at com.amazonaws.services.s3.AmazonS3Client.invoke(AmazonS3Client.java:5397)
+	at com.amazonaws.services.s3.AmazonS3Client.listObjects(AmazonS3Client.java:928)
+	at com.upplication.s3fs.AmazonS3Client.listObjects(AmazonS3Client.java:167)
+	at com.upplication.s3fs.util.S3ObjectSummaryLookup.lookup(S3ObjectSummaryLookup.java:112)
+	at com.upplication.s3fs.S3FileSystemProvider.checkAccess(S3FileSystemProvider.java:668)
+	at java.base/java.nio.file.Files.exists(Files.java:2440)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:107)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:323)
+	at org.codehaus.groovy.runtime.callsite.StaticMetaMethodSite.invoke(StaticMetaMethodSite.java:44)
+	at org.codehaus.groovy.runtime.callsite.StaticMetaMethodSite.call(StaticMetaMethodSite.java:89)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCall(CallSiteArray.java:47)
+	at org.codehaus.groovy.runtime.callsite.StaticMetaMethodSite.call(StaticMetaMethodSite.java:94)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:139)
+	at nextflow.extension.FilesEx.exists(FilesEx.groovy:456)
+	at nextflow.file.FileHelper.checkIfExists(FileHelper.groovy:1064)
+	at nextflow.file.FileHelper$checkIfExists$1.call(Unknown Source)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCall(CallSiteArray.java:47)
+	at nextflow.file.FileHelper$checkIfExists$1.call(Unknown Source)
+	at nextflow.Nextflow.file(Nextflow.groovy:112)
+	at nextflow.Nextflow$file.callStatic(Unknown Source)
+	at Script_7180a78b.runScript(Script_7180a78b:15)
+	at nextflow.script.BaseScript.run0(BaseScript.groovy:145)
+	at nextflow.script.BaseScript.run(BaseScript.groovy:192)
+	at nextflow.script.ScriptParser.runScript(ScriptParser.groovy:229)
+	at nextflow.script.ScriptParser.runScript(ScriptParser.groovy:215)
+	at nextflow.script.ScriptParser.runScript(ScriptParser.groovy:205)
+	at nextflow.script.IncludeDef.memoizedMethodPriv$loadModule0PathMapSession(IncludeDef.groovy:151)
+	at nextflow.script.IncludeDef.access$0(IncludeDef.groovy)
+	at nextflow.script.IncludeDef$__clinit__closure2.doCall(IncludeDef.groovy)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:107)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:323)
+	at org.codehaus.groovy.runtime.metaclass.ClosureMetaClass.invokeMethod(ClosureMetaClass.java:274)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1035)
+	at groovy.lang.Closure.call(Closure.java:412)
+	at org.codehaus.groovy.runtime.memoize.Memoize$MemoizeFunction.lambda$call$0(Memoize.java:137)
+	at org.codehaus.groovy.runtime.memoize.ConcurrentCommonCache.getAndPut(ConcurrentCommonCache.java:137)
+	at org.codehaus.groovy.runtime.memoize.ConcurrentCommonCache.getAndPut(ConcurrentCommonCache.java:113)
+	at org.codehaus.groovy.runtime.memoize.Memoize$MemoizeFunction.call(Memoize.java:136)
+	at nextflow.script.IncludeDef.loadModule0(IncludeDef.groovy)
+	at nextflow.script.IncludeDef.load0(IncludeDef.groovy:123)
+	at nextflow.script.IncludeDef$load0$1.call(Unknown Source)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCall(CallSiteArray.java:47)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:125)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:139)
+	at Script_a1e1b6e6.runScript(Script_a1e1b6e6:37)
+	at nextflow.script.BaseScript.run0(BaseScript.groovy:145)
+	at nextflow.script.BaseScript.run(BaseScript.groovy:192)
+	at nextflow.script.ScriptParser.runScript(ScriptParser.groovy:229)
+	at nextflow.script.ScriptRunner.run(ScriptRunner.groovy:224)
+	at nextflow.script.ScriptRunner.execute(ScriptRunner.groovy:130)
+	at nextflow.cli.CmdRun.run(CmdRun.groovy:368)
+	at nextflow.cli.Launcher.run(Launcher.groovy:494)
+	at nextflow.cli.Launcher.main(Launcher.groovy:653)
+May-04 15:54:21.114 [main] WARN  c.a.i.InstanceMetadataServiceResourceFetcher - Fail to retrieve token 
+com.amazonaws.AmazonServiceException: Gateway Timeout (Service: null; Status Code: 504; Error Code: null; Request ID: null; Proxy: null)
+	at com.amazonaws.internal.EC2ResourceFetcher.handleErrorResponse(EC2ResourceFetcher.java:149)
+	at com.amazonaws.internal.EC2ResourceFetcher.doReadResource(EC2ResourceFetcher.java:94)
+	at com.amazonaws.internal.InstanceMetadataServiceResourceFetcher.getToken(InstanceMetadataServiceResourceFetcher.java:91)
+	at com.amazonaws.internal.InstanceMetadataServiceResourceFetcher.readResource(InstanceMetadataServiceResourceFetcher.java:69)
+	at com.amazonaws.internal.EC2ResourceFetcher.readResource(EC2ResourceFetcher.java:66)
+	at com.amazonaws.auth.InstanceMetadataServiceCredentialsFetcher.getCredentialsEndpoint(InstanceMetadataServiceCredentialsFetcher.java:60)
+	at com.amazonaws.auth.InstanceMetadataServiceCredentialsFetcher.getCredentialsResponse(InstanceMetadataServiceCredentialsFetcher.java:48)
+	at com.amazonaws.auth.BaseCredentialsFetcher.fetchCredentials(BaseCredentialsFetcher.java:124)
+	at com.amazonaws.auth.BaseCredentialsFetcher.getCredentials(BaseCredentialsFetcher.java:80)
+	at com.amazonaws.auth.InstanceProfileCredentialsProvider.getCredentials(InstanceProfileCredentialsProvider.java:166)
+	at com.amazonaws.auth.EC2ContainerCredentialsProviderWrapper.getCredentials(EC2ContainerCredentialsProviderWrapper.java:75)
+	at com.amazonaws.auth.AWSCredentialsProviderChain.getCredentials(AWSCredentialsProviderChain.java:118)
+	at com.amazonaws.services.s3.S3CredentialsProviderChain.getCredentials(S3CredentialsProviderChain.java:36)
+	at com.amazonaws.http.AmazonHttpClient$RequestExecutor.getCredentialsFromContext(AmazonHttpClient.java:1269)
+	at com.amazonaws.http.AmazonHttpClient$RequestExecutor.runBeforeRequestHandlers(AmazonHttpClient.java:845)
+	at com.amazonaws.http.AmazonHttpClient$RequestExecutor.doExecute(AmazonHttpClient.java:794)
+	at com.amazonaws.http.AmazonHttpClient$RequestExecutor.executeWithTimer(AmazonHttpClient.java:781)
+	at com.amazonaws.http.AmazonHttpClient$RequestExecutor.execute(AmazonHttpClient.java:755)
+	at com.amazonaws.http.AmazonHttpClient$RequestExecutor.access$500(AmazonHttpClient.java:715)
+	at com.amazonaws.http.AmazonHttpClient$RequestExecutionBuilderImpl.execute(AmazonHttpClient.java:697)
+	at com.amazonaws.http.AmazonHttpClient.execute(AmazonHttpClient.java:561)
+	at com.amazonaws.http.AmazonHttpClient.execute(AmazonHttpClient.java:541)
+	at com.amazonaws.services.s3.AmazonS3Client.invoke(AmazonS3Client.java:5456)
+	at com.amazonaws.services.s3.AmazonS3Client.invoke(AmazonS3Client.java:5403)
+	at com.amazonaws.services.s3.AmazonS3Client.invoke(AmazonS3Client.java:5397)
+	at com.amazonaws.services.s3.AmazonS3Client.listObjects(AmazonS3Client.java:928)
+	at com.upplication.s3fs.AmazonS3Client.listObjects(AmazonS3Client.java:167)
+	at com.upplication.s3fs.util.S3ObjectSummaryLookup.lookup(S3ObjectSummaryLookup.java:112)
+	at com.upplication.s3fs.S3FileSystemProvider.checkAccess(S3FileSystemProvider.java:668)
+	at java.base/java.nio.file.Files.exists(Files.java:2440)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:107)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:323)
+	at org.codehaus.groovy.runtime.callsite.StaticMetaMethodSite.invoke(StaticMetaMethodSite.java:44)
+	at org.codehaus.groovy.runtime.callsite.StaticMetaMethodSite.call(StaticMetaMethodSite.java:89)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCall(CallSiteArray.java:47)
+	at org.codehaus.groovy.runtime.callsite.StaticMetaMethodSite.call(StaticMetaMethodSite.java:94)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:139)
+	at nextflow.extension.FilesEx.exists(FilesEx.groovy:456)
+	at nextflow.file.FileHelper.checkIfExists(FileHelper.groovy:1064)
+	at nextflow.file.FileHelper$checkIfExists$1.call(Unknown Source)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCall(CallSiteArray.java:47)
+	at nextflow.file.FileHelper$checkIfExists$1.call(Unknown Source)
+	at nextflow.Nextflow.file(Nextflow.groovy:112)
+	at nextflow.Nextflow$file.callStatic(Unknown Source)
+	at Script_7180a78b.runScript(Script_7180a78b:15)
+	at nextflow.script.BaseScript.run0(BaseScript.groovy:145)
+	at nextflow.script.BaseScript.run(BaseScript.groovy:192)
+	at nextflow.script.ScriptParser.runScript(ScriptParser.groovy:229)
+	at nextflow.script.ScriptParser.runScript(ScriptParser.groovy:215)
+	at nextflow.script.ScriptParser.runScript(ScriptParser.groovy:205)
+	at nextflow.script.IncludeDef.memoizedMethodPriv$loadModule0PathMapSession(IncludeDef.groovy:151)
+	at nextflow.script.IncludeDef.access$0(IncludeDef.groovy)
+	at nextflow.script.IncludeDef$__clinit__closure2.doCall(IncludeDef.groovy)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:107)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:323)
+	at org.codehaus.groovy.runtime.metaclass.ClosureMetaClass.invokeMethod(ClosureMetaClass.java:274)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1035)
+	at groovy.lang.Closure.call(Closure.java:412)
+	at org.codehaus.groovy.runtime.memoize.Memoize$MemoizeFunction.lambda$call$0(Memoize.java:137)
+	at org.codehaus.groovy.runtime.memoize.ConcurrentCommonCache.getAndPut(ConcurrentCommonCache.java:137)
+	at org.codehaus.groovy.runtime.memoize.ConcurrentCommonCache.getAndPut(ConcurrentCommonCache.java:113)
+	at org.codehaus.groovy.runtime.memoize.Memoize$MemoizeFunction.call(Memoize.java:136)
+	at nextflow.script.IncludeDef.loadModule0(IncludeDef.groovy)
+	at nextflow.script.IncludeDef.load0(IncludeDef.groovy:123)
+	at nextflow.script.IncludeDef$load0$1.call(Unknown Source)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCall(CallSiteArray.java:47)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:125)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:139)
+	at Script_a1e1b6e6.runScript(Script_a1e1b6e6:37)
+	at nextflow.script.BaseScript.run0(BaseScript.groovy:145)
+	at nextflow.script.BaseScript.run(BaseScript.groovy:192)
+	at nextflow.script.ScriptParser.runScript(ScriptParser.groovy:229)
+	at nextflow.script.ScriptRunner.run(ScriptRunner.groovy:224)
+	at nextflow.script.ScriptRunner.execute(ScriptRunner.groovy:130)
+	at nextflow.cli.CmdRun.run(CmdRun.groovy:368)
+	at nextflow.cli.Launcher.run(Launcher.groovy:494)
+	at nextflow.cli.Launcher.main(Launcher.groovy:653)
+May-04 15:54:21.118 [main] WARN  c.a.i.InstanceMetadataServiceResourceFetcher - Fail to retrieve token 
+com.amazonaws.AmazonServiceException: Gateway Timeout (Service: null; Status Code: 504; Error Code: null; Request ID: null; Proxy: null)
+	at com.amazonaws.internal.EC2ResourceFetcher.handleErrorResponse(EC2ResourceFetcher.java:149)
+	at com.amazonaws.internal.EC2ResourceFetcher.doReadResource(EC2ResourceFetcher.java:94)
+	at com.amazonaws.internal.InstanceMetadataServiceResourceFetcher.getToken(InstanceMetadataServiceResourceFetcher.java:91)
+	at com.amazonaws.internal.InstanceMetadataServiceResourceFetcher.readResource(InstanceMetadataServiceResourceFetcher.java:69)
+	at com.amazonaws.internal.EC2ResourceFetcher.readResource(EC2ResourceFetcher.java:66)
+	at com.amazonaws.auth.InstanceMetadataServiceCredentialsFetcher.getCredentialsEndpoint(InstanceMetadataServiceCredentialsFetcher.java:60)
+	at com.amazonaws.auth.InstanceMetadataServiceCredentialsFetcher.getCredentialsResponse(InstanceMetadataServiceCredentialsFetcher.java:48)
+	at com.amazonaws.auth.BaseCredentialsFetcher.fetchCredentials(BaseCredentialsFetcher.java:124)
+	at com.amazonaws.auth.BaseCredentialsFetcher.getCredentials(BaseCredentialsFetcher.java:80)
+	at com.amazonaws.auth.InstanceProfileCredentialsProvider.getCredentials(InstanceProfileCredentialsProvider.java:166)
+	at com.amazonaws.auth.EC2ContainerCredentialsProviderWrapper.getCredentials(EC2ContainerCredentialsProviderWrapper.java:75)
+	at com.amazonaws.auth.AWSCredentialsProviderChain.getCredentials(AWSCredentialsProviderChain.java:118)
+	at com.amazonaws.services.s3.S3CredentialsProviderChain.getCredentials(S3CredentialsProviderChain.java:36)
+	at com.amazonaws.http.AmazonHttpClient$RequestExecutor.getCredentialsFromContext(AmazonHttpClient.java:1269)
+	at com.amazonaws.http.AmazonHttpClient$RequestExecutor.executeOneRequest(AmazonHttpClient.java:1290)
+	at com.amazonaws.http.AmazonHttpClient$RequestExecutor.executeHelper(AmazonHttpClient.java:1157)
+	at com.amazonaws.http.AmazonHttpClient$RequestExecutor.doExecute(AmazonHttpClient.java:814)
+	at com.amazonaws.http.AmazonHttpClient$RequestExecutor.executeWithTimer(AmazonHttpClient.java:781)
+	at com.amazonaws.http.AmazonHttpClient$RequestExecutor.execute(AmazonHttpClient.java:755)
+	at com.amazonaws.http.AmazonHttpClient$RequestExecutor.access$500(AmazonHttpClient.java:715)
+	at com.amazonaws.http.AmazonHttpClient$RequestExecutionBuilderImpl.execute(AmazonHttpClient.java:697)
+	at com.amazonaws.http.AmazonHttpClient.execute(AmazonHttpClient.java:561)
+	at com.amazonaws.http.AmazonHttpClient.execute(AmazonHttpClient.java:541)
+	at com.amazonaws.services.s3.AmazonS3Client.invoke(AmazonS3Client.java:5456)
+	at com.amazonaws.services.s3.AmazonS3Client.invoke(AmazonS3Client.java:5403)
+	at com.amazonaws.services.s3.AmazonS3Client.invoke(AmazonS3Client.java:5397)
+	at com.amazonaws.services.s3.AmazonS3Client.listObjects(AmazonS3Client.java:928)
+	at com.upplication.s3fs.AmazonS3Client.listObjects(AmazonS3Client.java:167)
+	at com.upplication.s3fs.util.S3ObjectSummaryLookup.lookup(S3ObjectSummaryLookup.java:112)
+	at com.upplication.s3fs.S3FileSystemProvider.checkAccess(S3FileSystemProvider.java:668)
+	at java.base/java.nio.file.Files.exists(Files.java:2440)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:107)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:323)
+	at org.codehaus.groovy.runtime.callsite.StaticMetaMethodSite.invoke(StaticMetaMethodSite.java:44)
+	at org.codehaus.groovy.runtime.callsite.StaticMetaMethodSite.call(StaticMetaMethodSite.java:89)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCall(CallSiteArray.java:47)
+	at org.codehaus.groovy.runtime.callsite.StaticMetaMethodSite.call(StaticMetaMethodSite.java:94)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:139)
+	at nextflow.extension.FilesEx.exists(FilesEx.groovy:456)
+	at nextflow.file.FileHelper.checkIfExists(FileHelper.groovy:1064)
+	at nextflow.file.FileHelper$checkIfExists$1.call(Unknown Source)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCall(CallSiteArray.java:47)
+	at nextflow.file.FileHelper$checkIfExists$1.call(Unknown Source)
+	at nextflow.Nextflow.file(Nextflow.groovy:112)
+	at nextflow.Nextflow$file.callStatic(Unknown Source)
+	at Script_7180a78b.runScript(Script_7180a78b:15)
+	at nextflow.script.BaseScript.run0(BaseScript.groovy:145)
+	at nextflow.script.BaseScript.run(BaseScript.groovy:192)
+	at nextflow.script.ScriptParser.runScript(ScriptParser.groovy:229)
+	at nextflow.script.ScriptParser.runScript(ScriptParser.groovy:215)
+	at nextflow.script.ScriptParser.runScript(ScriptParser.groovy:205)
+	at nextflow.script.IncludeDef.memoizedMethodPriv$loadModule0PathMapSession(IncludeDef.groovy:151)
+	at nextflow.script.IncludeDef.access$0(IncludeDef.groovy)
+	at nextflow.script.IncludeDef$__clinit__closure2.doCall(IncludeDef.groovy)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:107)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:323)
+	at org.codehaus.groovy.runtime.metaclass.ClosureMetaClass.invokeMethod(ClosureMetaClass.java:274)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1035)
+	at groovy.lang.Closure.call(Closure.java:412)
+	at org.codehaus.groovy.runtime.memoize.Memoize$MemoizeFunction.lambda$call$0(Memoize.java:137)
+	at org.codehaus.groovy.runtime.memoize.ConcurrentCommonCache.getAndPut(ConcurrentCommonCache.java:137)
+	at org.codehaus.groovy.runtime.memoize.ConcurrentCommonCache.getAndPut(ConcurrentCommonCache.java:113)
+	at org.codehaus.groovy.runtime.memoize.Memoize$MemoizeFunction.call(Memoize.java:136)
+	at nextflow.script.IncludeDef.loadModule0(IncludeDef.groovy)
+	at nextflow.script.IncludeDef.load0(IncludeDef.groovy:123)
+	at nextflow.script.IncludeDef$load0$1.call(Unknown Source)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCall(CallSiteArray.java:47)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:125)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:139)
+	at Script_a1e1b6e6.runScript(Script_a1e1b6e6:37)
+	at nextflow.script.BaseScript.run0(BaseScript.groovy:145)
+	at nextflow.script.BaseScript.run(BaseScript.groovy:192)
+	at nextflow.script.ScriptParser.runScript(ScriptParser.groovy:229)
+	at nextflow.script.ScriptRunner.run(ScriptRunner.groovy:224)
+	at nextflow.script.ScriptRunner.execute(ScriptRunner.groovy:130)
+	at nextflow.cli.CmdRun.run(CmdRun.groovy:368)
+	at nextflow.cli.Launcher.run(Launcher.groovy:494)
+	at nextflow.cli.Launcher.main(Launcher.groovy:653)
+May-04 15:54:22.168 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withLabel:process_single` matches labels `process_single` for process with name NFCORE_GMSEMU:GMSEMU:INPUT_CHECK:SAMPLESHEET_CHECK
+May-04 15:54:22.170 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:SAMPLESHEET_CHECK` matches process NFCORE_GMSEMU:GMSEMU:INPUT_CHECK:SAMPLESHEET_CHECK
+May-04 15:54:22.176 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+May-04 15:54:22.176 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+May-04 15:54:22.182 [main] DEBUG nextflow.executor.Executor - [warm up] executor > local
+May-04 15:54:22.187 [main] DEBUG n.processor.LocalPollingMonitor - Creating local task monitor for executor 'local' > cpus=4; memory=15.6 GB; capacity=4; pollInterval=100ms; dumpInterval=5m
+May-04 15:54:22.325 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withLabel:process_medium` matches labels `process_medium` for process with name NFCORE_GMSEMU:GMSEMU:FASTQC
+May-04 15:54:22.325 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:FASTQC` matches process NFCORE_GMSEMU:GMSEMU:FASTQC
+May-04 15:54:22.328 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+May-04 15:54:22.328 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+May-04 15:54:22.376 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withLabel:process_single` matches labels `process_single` for process with name NFCORE_GMSEMU:GMSEMU:CUSTOM_DUMPSOFTWAREVERSIONS
+May-04 15:54:22.376 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:CUSTOM_DUMPSOFTWAREVERSIONS` matches process NFCORE_GMSEMU:GMSEMU:CUSTOM_DUMPSOFTWAREVERSIONS
+May-04 15:54:22.377 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+May-04 15:54:22.377 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+May-04 15:54:22.425 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withLabel:process_single` matches labels `process_single` for process with name NFCORE_GMSEMU:GMSEMU:MULTIQC
+May-04 15:54:22.426 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+May-04 15:54:22.426 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+May-04 15:54:22.433 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withLabel:process_high` matches labels `process_high` for process with name NFCORE_GMSEMU:GMSEMU:EMU_ABUNDANCE
+May-04 15:54:22.433 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:EMU_ABUNDANCE` matches process NFCORE_GMSEMU:GMSEMU:EMU_ABUNDANCE
+May-04 15:54:22.434 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+May-04 15:54:22.434 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+May-04 15:54:22.437 [main] DEBUG nextflow.Session - Workflow process names [dsl2]: FASTQC, EMU_ABUNDANCE, SAMPLESHEET_CHECK, NFCORE_GMSEMU:GMSEMU:CUSTOM_DUMPSOFTWAREVERSIONS, NFCORE_GMSEMU:GMSEMU:MULTIQC, NFCORE_GMSEMU:GMSEMU:EMU_ABUNDANCE, NFCORE_GMSEMU:GMSEMU:INPUT_CHECK:SAMPLESHEET_CHECK, MULTIQC, CUSTOM_DUMPSOFTWAREVERSIONS, NFCORE_GMSEMU:GMSEMU:FASTQC
+May-04 15:54:22.439 [main] DEBUG nextflow.Session - Igniting dataflow network (12)
+May-04 15:54:22.447 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > NFCORE_GMSEMU:GMSEMU:INPUT_CHECK:SAMPLESHEET_CHECK
+May-04 15:54:22.456 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > NFCORE_GMSEMU:GMSEMU:FASTQC
+May-04 15:54:22.456 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > NFCORE_GMSEMU:GMSEMU:CUSTOM_DUMPSOFTWAREVERSIONS
+May-04 15:54:22.459 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > NFCORE_GMSEMU:GMSEMU:MULTIQC
+May-04 15:54:22.459 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > NFCORE_GMSEMU:GMSEMU:EMU_ABUNDANCE
+May-04 15:54:22.462 [main] DEBUG nextflow.script.ScriptRunner - > Awaiting termination 
+May-04 15:54:22.462 [main] DEBUG nextflow.Session - Session await
+May-04 15:54:22.588 [Actor Thread 11] DEBUG nextflow.container.SingularityCache - Singularity found local store for image=https://depot.galaxyproject.org/singularity/python:3.8.3; path=/aux/db/gms-artic/nxf_singularity_cachedir/depot.galaxyproject.org-singularity-python-3.8.3.img
+May-04 15:54:22.638 [Actor Thread 6] DEBUG nextflow.sort.BigSort - Sort completed -- entries: 1; slices: 1; internal sort time: 0.002 s; external sort time: 0.013 s; total time: 0.015 s
+May-04 15:54:22.638 [Actor Thread 3] DEBUG nextflow.sort.BigSort - Sort completed -- entries: 1; slices: 1; internal sort time: 0.002 s; external sort time: 0.013 s; total time: 0.015 s
+May-04 15:54:22.644 [Actor Thread 6] DEBUG nextflow.file.FileCollector - Saved collect-files list to: /aux/db/workdir_fwa010/emu_pipe_project/gms_16S/work/collect-file/bf88546d4a82166cbe5cad0ee92f0ea1
+May-04 15:54:22.644 [Actor Thread 3] DEBUG nextflow.file.FileCollector - Saved collect-files list to: /aux/db/workdir_fwa010/emu_pipe_project/gms_16S/work/collect-file/59b555b86a3c025002c554b07ad8524a
+May-04 15:54:22.653 [Actor Thread 6] DEBUG nextflow.file.FileCollector - Deleting file collector temp dir: /tmp/nxf-18029151596785038182
+May-04 15:54:22.653 [Actor Thread 3] DEBUG nextflow.file.FileCollector - Deleting file collector temp dir: /tmp/nxf-9673188300639914579
+May-04 15:54:22.720 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+May-04 15:54:22.724 [Task submitter] INFO  nextflow.Session - [24/d0f62e] Submitted process > NFCORE_GMSEMU:GMSEMU:INPUT_CHECK:SAMPLESHEET_CHECK (samplesheet_mod.csv)
+May-04 15:54:24.156 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 1; name: NFCORE_GMSEMU:GMSEMU:INPUT_CHECK:SAMPLESHEET_CHECK (samplesheet_mod.csv); status: COMPLETED; exit: 0; error: -; workDir: /aux/db/workdir_fwa010/emu_pipe_project/gms_16S/work/24/d0f62ed013c8f2efef477012bc9041]
+May-04 15:54:24.219 [Actor Thread 4] DEBUG nextflow.container.SingularityCache - Singularity found local store for image=https://depot.galaxyproject.org/singularity/fastqc:0.11.9--0; path=/aux/db/gms-artic/nxf_singularity_cachedir/depot.galaxyproject.org-singularity-fastqc-0.11.9--0.img
+May-04 15:54:24.220 [Actor Thread 6] DEBUG nextflow.container.SingularityCache - Singularity found local store for image=https://depot.galaxyproject.org/singularity/emu:3.4.4--hdfd78af_1; path=/aux/db/gms-artic/nxf_singularity_cachedir/depot.galaxyproject.org-singularity-emu-3.4.4--hdfd78af_1.img
+May-04 15:54:24.221 [Task monitor] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'PublishDir' minSize=10; maxSize=12; workQueue=LinkedBlockingQueue[10000]; allowCoreThreadTimeout=false
+May-04 15:54:24.241 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+May-04 15:54:24.242 [Task submitter] INFO  nextflow.Session - [2a/e0ea32] Submitted process > NFCORE_GMSEMU:GMSEMU:EMU_ABUNDANCE (SAMPLE_2_T1)
+May-04 15:54:24.261 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+May-04 15:54:24.262 [Task submitter] INFO  nextflow.Session - [d0/5332f9] Submitted process > NFCORE_GMSEMU:GMSEMU:FASTQC (SAMPLE_1_T1)
+May-04 15:54:26.349 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 5; name: NFCORE_GMSEMU:GMSEMU:EMU_ABUNDANCE (SAMPLE_2_T1); status: COMPLETED; exit: 0; error: -; workDir: /aux/db/workdir_fwa010/emu_pipe_project/gms_16S/work/2a/e0ea321e331357b9da724c94b39747]
+May-04 15:54:26.357 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+May-04 15:54:26.372 [Task submitter] INFO  nextflow.Session - [e7/fe6e86] Submitted process > NFCORE_GMSEMU:GMSEMU:EMU_ABUNDANCE (SAMPLE_1_T1)
+May-04 15:54:28.152 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 3; name: NFCORE_GMSEMU:GMSEMU:EMU_ABUNDANCE (SAMPLE_1_T1); status: COMPLETED; exit: 0; error: -; workDir: /aux/db/workdir_fwa010/emu_pipe_project/gms_16S/work/e7/fe6e8637bd7ac0f60d1c06d35c34ec]
+May-04 15:54:28.158 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+May-04 15:54:28.159 [Task submitter] INFO  nextflow.Session - [36/07f3a5] Submitted process > NFCORE_GMSEMU:GMSEMU:FASTQC (SAMPLE_2_T1)
+May-04 15:54:28.173 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 2; name: NFCORE_GMSEMU:GMSEMU:FASTQC (SAMPLE_1_T1); status: COMPLETED; exit: 0; error: -; workDir: /aux/db/workdir_fwa010/emu_pipe_project/gms_16S/work/d0/5332f9f5e9bf2e447ab70c550e8f0f]
+May-04 15:54:28.183 [Actor Thread 1] DEBUG nextflow.sort.BigSort - Sort completed -- entries: 2; slices: 1; internal sort time: 0.001 s; external sort time: 0.001 s; total time: 0.002 s
+May-04 15:54:28.186 [Actor Thread 1] DEBUG nextflow.file.FileCollector - Saved collect-files list to: /aux/db/workdir_fwa010/emu_pipe_project/gms_16S/work/collect-file/b964b2e027e4349f671bd452d5e3ee74
+May-04 15:54:28.190 [Actor Thread 1] DEBUG nextflow.file.FileCollector - Deleting file collector temp dir: /tmp/nxf-11510629147945817847
+May-04 15:54:28.232 [Actor Thread 1] DEBUG nextflow.container.SingularityCache - Singularity found local store for image=https://depot.galaxyproject.org/singularity/multiqc:1.13--pyhdfd78af_0; path=/aux/db/gms-artic/nxf_singularity_cachedir/depot.galaxyproject.org-singularity-multiqc-1.13--pyhdfd78af_0.img
+May-04 15:54:28.261 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+May-04 15:54:28.261 [Task submitter] INFO  nextflow.Session - [26/e94f59] Submitted process > NFCORE_GMSEMU:GMSEMU:CUSTOM_DUMPSOFTWAREVERSIONS (1)
+May-04 15:54:28.682 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 6; name: NFCORE_GMSEMU:GMSEMU:CUSTOM_DUMPSOFTWAREVERSIONS (1); status: COMPLETED; exit: 0; error: -; workDir: /aux/db/workdir_fwa010/emu_pipe_project/gms_16S/work/26/e94f595f9c739caf823aa720983e1e]
+May-04 15:54:32.075 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 4; name: NFCORE_GMSEMU:GMSEMU:FASTQC (SAMPLE_2_T1); status: COMPLETED; exit: 0; error: -; workDir: /aux/db/workdir_fwa010/emu_pipe_project/gms_16S/work/36/07f3a5e026427216ad3348f58bcb71]
+May-04 15:54:32.096 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+May-04 15:54:32.096 [Task submitter] INFO  nextflow.Session - [4c/2c3e90] Submitted process > NFCORE_GMSEMU:GMSEMU:MULTIQC
+May-04 15:54:40.028 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 7; name: NFCORE_GMSEMU:GMSEMU:MULTIQC; status: COMPLETED; exit: 0; error: -; workDir: /aux/db/workdir_fwa010/emu_pipe_project/gms_16S/work/4c/2c3e90afa2699ed1977bd3a0da4961]
+May-04 15:54:40.034 [main] DEBUG nextflow.Session - Session await > all processes finished
+May-04 15:54:40.037 [main] DEBUG nextflow.Session - Session await > all barriers passed
+May-04 15:54:40.045 [main] DEBUG nextflow.util.ThreadPoolManager - Thread pool 'PublishDir' shutdown completed (hard=false)
+May-04 15:54:40.046 [main] INFO  nextflow.Nextflow - -[0;35m[nf-core/gmsemu][0;32m Pipeline completed successfully[0m-
+May-04 15:54:40.051 [main] DEBUG nextflow.trace.WorkflowStatsObserver - Workflow completed > WorkflowStats[succeededCount=7; failedCount=0; ignoredCount=0; cachedCount=0; pendingCount=0; submittedCount=0; runningCount=0; retriesCount=0; abortedCount=0; succeedDuration=28.9s; failedDuration=0ms; cachedDuration=0ms;loadCpus=0; loadMemory=0; peakRunning=2; peakCpus=4; peakMemory=12 GB; ]
+May-04 15:54:40.051 [main] DEBUG nextflow.trace.TraceFileObserver - Workflow completed -- saving trace file
+May-04 15:54:40.052 [main] DEBUG nextflow.trace.ReportObserver - Workflow completed -- rendering execution report
+May-04 15:54:40.086 [main] DEBUG nextflow.trace.ReportObserver - Execution report summary data:
+  [{"cpuUsage":{"mean":61.2,"min":61.2,"q1":61.2,"q2":61.2,"q3":61.2,"max":61.2,"minLabel":"NFCORE_GMSEMU:GMSEMU:INPUT_CHECK:SAMPLESHEET_CHECK (samplesheet_mod.csv)","maxLabel":"NFCORE_GMSEMU:GMSEMU:INPUT_CHECK:SAMPLESHEET_CHECK (samplesheet_mod.csv)","q1Label":"NFCORE_GMSEMU:GMSEMU:INPUT_CHECK:SAMPLESHEET_CHECK (samplesheet_mod.csv)","q2Label":"NFCORE_GMSEMU:GMSEMU:INPUT_CHECK:SAMPLESHEET_CHECK (samplesheet_mod.csv)","q3Label":"NFCORE_GMSEMU:GMSEMU:INPUT_CHECK:SAMPLESHEET_CHECK (samplesheet_mod.csv)"},"process":"SAMPLESHEET_CHECK","mem":{"mean":4755456,"min":4755456,"q1":4755456,"q2":4755456,"q3":4755456,"max":4755456,"minLabel":"NFCORE_GMSEMU:GMSEMU:INPUT_CHECK:SAMPLESHEET_CHECK (samplesheet_mod.csv)","maxLabel":"NFCORE_GMSEMU:GMSEMU:INPUT_CHECK:SAMPLESHEET_CHECK (samplesheet_mod.csv)","q1Label":"NFCORE_GMSEMU:GMSEMU:INPUT_CHECK:SAMPLESHEET_CHECK (samplesheet_mod.csv)","q2Label":"NFCORE_GMSEMU:GMSEMU:INPUT_CHECK:SAMPLESHEET_CHECK (samplesheet_mod.csv)","q3Label":"NFCORE_GMSEMU:GMSEMU:INPUT_CHECK:SAMPLESHEET_CHECK (samplesheet_mod.csv)"},"memUsage":{"mean":0.07,"min":0.07,"q1":0.07,"q2":0.07,"q3":0.07,"max":0.07,"minLabel":"NFCORE_GMSEMU:GMSEMU:INPUT_CHECK:SAMPLESHEET_CHECK (samplesheet_mod.csv)","maxLabel":"NFCORE_GMSEMU:GMSEMU:INPUT_CHECK:SAMPLESHEET_CHECK (samplesheet_mod.csv)","q1Label":"NFCORE_GMSEMU:GMSEMU:INPUT_CHECK:SAMPLESHEET_CHECK (samplesheet_mod.csv)","q2Label":"NFCORE_GMSEMU:GMSEMU:INPUT_CHECK:SAMPLESHEET_CHECK (samplesheet_mod.csv)","q3Label":"NFCORE_GMSEMU:GMSEMU:INPUT_CHECK:SAMPLESHEET_CHECK (samplesheet_mod.csv)"},"timeUsage":{"mean":0.01,"min":0.01,"q1":0.01,"q2":0.01,"q3":0.01,"max":0.01,"minLabel":"NFCORE_GMSEMU:GMSEMU:INPUT_CHECK:SAMPLESHEET_CHECK (samplesheet_mod.csv)","maxLabel":"NFCORE_GMSEMU:GMSEMU:INPUT_CHECK:SAMPLESHEET_CHECK (samplesheet_mod.csv)","q1Label":"NFCORE_GMSEMU:GMSEMU:INPUT_CHECK:SAMPLESHEET_CHECK (samplesheet_mod.csv)","q2Label":"NFCORE_GMSEMU:GMSEMU:INPUT_CHECK:SAMPLESHEET_CHECK (samplesheet_mod.csv)","q3Label":"NFCORE_GMSEMU:GMSEMU:INPUT_CHECK:SAMPLESHEET_CHECK (samplesheet_mod.csv)"},"vmem":{"mean":31371264,"min":31371264,"q1":31371264,"q2":31371264,"q3":31371264,"max":31371264,"minLabel":"NFCORE_GMSEMU:GMSEMU:INPUT_CHECK:SAMPLESHEET_CHECK (samplesheet_mod.csv)","maxLabel":"NFCORE_GMSEMU:GMSEMU:INPUT_CHECK:SAMPLESHEET_CHECK (samplesheet_mod.csv)","q1Label":"NFCORE_GMSEMU:GMSEMU:INPUT_CHECK:SAMPLESHEET_CHECK (samplesheet_mod.csv)","q2Label":"NFCORE_GMSEMU:GMSEMU:INPUT_CHECK:SAMPLESHEET_CHECK (samplesheet_mod.csv)","q3Label":"NFCORE_GMSEMU:GMSEMU:INPUT_CHECK:SAMPLESHEET_CHECK (samplesheet_mod.csv)"},"reads":{"mean":2045972,"min":2045972,"q1":2045972,"q2":2045972,"q3":2045972,"max":2045972,"minLabel":"NFCORE_GMSEMU:GMSEMU:INPUT_CHECK:SAMPLESHEET_CHECK (samplesheet_mod.csv)","maxLabel":"NFCORE_GMSEMU:GMSEMU:INPUT_CHECK:SAMPLESHEET_CHECK (samplesheet_mod.csv)","q1Label":"NFCORE_GMSEMU:GMSEMU:INPUT_CHECK:SAMPLESHEET_CHECK (samplesheet_mod.csv)","q2Label":"NFCORE_GMSEMU:GMSEMU:INPUT_CHECK:SAMPLESHEET_CHECK (samplesheet_mod.csv)","q3Label":"NFCORE_GMSEMU:GMSEMU:INPUT_CHECK:SAMPLESHEET_CHECK (samplesheet_mod.csv)"},"cpu":{"mean":61.2,"min":61.2,"q1":61.2,"q2":61.2,"q3":61.2,"max":61.2,"minLabel":"NFCORE_GMSEMU:GMSEMU:INPUT_CHECK:SAMPLESHEET_CHECK (samplesheet_mod.csv)","maxLabel":"NFCORE_GMSEMU:GMSEMU:INPUT_CHECK:SAMPLESHEET_CHECK (samplesheet_mod.csv)","q1Label":"NFCORE_GMSEMU:GMSEMU:INPUT_CHECK:SAMPLESHEET_CHECK (samplesheet_mod.csv)","q2Label":"NFCORE_GMSEMU:GMSEMU:INPUT_CHECK:SAMPLESHEET_CHECK (samplesheet_mod.csv)","q3Label":"NFCORE_GMSEMU:GMSEMU:INPUT_CHECK:SAMPLESHEET_CHECK (samplesheet_mod.csv)"},"time":{"mean":1000,"min":1000,"q1":1000,"q2":1000,"q3":1000,"max":1000,"minLabel":"NFCORE_GMSEMU:GMSEMU:INPUT_CHECK:SAMPLESHEET_CHECK (samplesheet_mod.csv)","maxLabel":"NFCORE_GMSEMU:GMSEMU:INPUT_CHECK:SAMPLESHEET_CHECK (samplesheet_mod.csv)","q1Label":"NFCORE_GMSEMU:GMSEMU:INPUT_CHECK:SAMPLESHEET_CHECK (samplesheet_mod.csv)","q2Label":"NFCORE_GMSEMU:GMSEMU:INPUT_CHECK:SAMPLESHEET_CHECK (samplesheet_mod.csv)","q3Label":"NFCORE_GMSEMU:GMSEMU:INPUT_CHECK:SAMPLESHEET_CHECK (samplesheet_mod.csv)"},"writes":{"mean":644,"min":644,"q1":644,"q2":644,"q3":644,"max":644,"minLabel":"NFCORE_GMSEMU:GMSEMU:INPUT_CHECK:SAMPLESHEET_CHECK (samplesheet_mod.csv)","maxLabel":"NFCORE_GMSEMU:GMSEMU:INPUT_CHECK:SAMPLESHEET_CHECK (samplesheet_mod.csv)","q1Label":"NFCORE_GMSEMU:GMSEMU:INPUT_CHECK:SAMPLESHEET_CHECK (samplesheet_mod.csv)","q2Label":"NFCORE_GMSEMU:GMSEMU:INPUT_CHECK:SAMPLESHEET_CHECK (samplesheet_mod.csv)","q3Label":"NFCORE_GMSEMU:GMSEMU:INPUT_CHECK:SAMPLESHEET_CHECK (samplesheet_mod.csv)"}},{"cpuUsage":{"mean":49.9,"min":43.15,"q1":46.53,"q2":49.9,"q3":53.28,"max":56.65,"minLabel":"NFCORE_GMSEMU:GMSEMU:EMU_ABUNDANCE (SAMPLE_2_T1)","maxLabel":"NFCORE_GMSEMU:GMSEMU:EMU_ABUNDANCE (SAMPLE_1_T1)","q1Label":"NFCORE_GMSEMU:GMSEMU:EMU_ABUNDANCE (SAMPLE_2_T1)","q2Label":"NFCORE_GMSEMU:GMSEMU:EMU_ABUNDANCE (SAMPLE_2_T1)","q3Label":"NFCORE_GMSEMU:GMSEMU:EMU_ABUNDANCE (SAMPLE_2_T1)"},"process":"EMU_ABUNDANCE","mem":{"mean":66795520,"min":51994624,"q1":59395072,"q2":66795520,"q3":74195968,"max":81596416,"minLabel":"NFCORE_GMSEMU:GMSEMU:EMU_ABUNDANCE (SAMPLE_1_T1)","maxLabel":"NFCORE_GMSEMU:GMSEMU:EMU_ABUNDANCE (SAMPLE_2_T1)","q1Label":"NFCORE_GMSEMU:GMSEMU:EMU_ABUNDANCE (SAMPLE_1_T1)","q2Label":"NFCORE_GMSEMU:GMSEMU:EMU_ABUNDANCE (SAMPLE_1_T1)","q3Label":"NFCORE_GMSEMU:GMSEMU:EMU_ABUNDANCE (SAMPLE_1_T1)"},"memUsage":{"mean":1.04,"min":0.81,"q1":0.92,"q2":1.04,"q3":1.15,"max":1.27,"minLabel":"NFCORE_GMSEMU:GMSEMU:EMU_ABUNDANCE (SAMPLE_1_T1)","maxLabel":"NFCORE_GMSEMU:GMSEMU:EMU_ABUNDANCE (SAMPLE_2_T1)","q1Label":"NFCORE_GMSEMU:GMSEMU:EMU_ABUNDANCE (SAMPLE_1_T1)","q2Label":"NFCORE_GMSEMU:GMSEMU:EMU_ABUNDANCE (SAMPLE_1_T1)","q3Label":"NFCORE_GMSEMU:GMSEMU:EMU_ABUNDANCE (SAMPLE_1_T1)"},"timeUsage":{"mean":0.01,"min":0.01,"q1":0.01,"q2":0.01,"q3":0.01,"max":0.01,"minLabel":"NFCORE_GMSEMU:GMSEMU:EMU_ABUNDANCE (SAMPLE_2_T1)","maxLabel":"NFCORE_GMSEMU:GMSEMU:EMU_ABUNDANCE (SAMPLE_1_T1)","q1Label":"NFCORE_GMSEMU:GMSEMU:EMU_ABUNDANCE (SAMPLE_2_T1)","q2Label":"NFCORE_GMSEMU:GMSEMU:EMU_ABUNDANCE (SAMPLE_2_T1)","q3Label":"NFCORE_GMSEMU:GMSEMU:EMU_ABUNDANCE (SAMPLE_2_T1)"},"vmem":{"mean":564248576,"min":554868736,"q1":559558656,"q2":564248576,"q3":568938496,"max":573628416,"minLabel":"NFCORE_GMSEMU:GMSEMU:EMU_ABUNDANCE (SAMPLE_1_T1)","maxLabel":"NFCORE_GMSEMU:GMSEMU:EMU_ABUNDANCE (SAMPLE_2_T1)","q1Label":"NFCORE_GMSEMU:GMSEMU:EMU_ABUNDANCE (SAMPLE_1_T1)","q2Label":"NFCORE_GMSEMU:GMSEMU:EMU_ABUNDANCE (SAMPLE_1_T1)","q3Label":"NFCORE_GMSEMU:GMSEMU:EMU_ABUNDANCE (SAMPLE_1_T1)"},"reads":{"mean":22661332.5,"min":22661332,"q1":22661332.25,"q2":22661332.5,"q3":22661332.75,"max":22661333,"minLabel":"NFCORE_GMSEMU:GMSEMU:EMU_ABUNDANCE (SAMPLE_2_T1)","maxLabel":"NFCORE_GMSEMU:GMSEMU:EMU_ABUNDANCE (SAMPLE_1_T1)","q1Label":"NFCORE_GMSEMU:GMSEMU:EMU_ABUNDANCE (SAMPLE_2_T1)","q2Label":"NFCORE_GMSEMU:GMSEMU:EMU_ABUNDANCE (SAMPLE_2_T1)","q3Label":"NFCORE_GMSEMU:GMSEMU:EMU_ABUNDANCE (SAMPLE_2_T1)"},"cpu":{"mean":99.8,"min":86.3,"q1":93.05,"q2":99.8,"q3":106.55,"max":113.3,"minLabel":"NFCORE_GMSEMU:GMSEMU:EMU_ABUNDANCE (SAMPLE_2_T1)","maxLabel":"NFCORE_GMSEMU:GMSEMU:EMU_ABUNDANCE (SAMPLE_1_T1)","q1Label":"NFCORE_GMSEMU:GMSEMU:EMU_ABUNDANCE (SAMPLE_2_T1)","q2Label":"NFCORE_GMSEMU:GMSEMU:EMU_ABUNDANCE (SAMPLE_2_T1)","q3Label":"NFCORE_GMSEMU:GMSEMU:EMU_ABUNDANCE (SAMPLE_2_T1)"},"time":{"mean":2000,"min":2000,"q1":2000,"q2":2000,"q3":2000,"max":2000,"minLabel":"NFCORE_GMSEMU:GMSEMU:EMU_ABUNDANCE (SAMPLE_2_T1)","maxLabel":"NFCORE_GMSEMU:GMSEMU:EMU_ABUNDANCE (SAMPLE_1_T1)","q1Label":"NFCORE_GMSEMU:GMSEMU:EMU_ABUNDANCE (SAMPLE_2_T1)","q2Label":"NFCORE_GMSEMU:GMSEMU:EMU_ABUNDANCE (SAMPLE_2_T1)","q3Label":"NFCORE_GMSEMU:GMSEMU:EMU_ABUNDANCE (SAMPLE_2_T1)"},"writes":{"mean":4732.5,"min":4732,"q1":4732.25,"q2":4732.5,"q3":4732.75,"max":4733,"minLabel":"NFCORE_GMSEMU:GMSEMU:EMU_ABUNDANCE (SAMPLE_2_T1)","maxLabel":"NFCORE_GMSEMU:GMSEMU:EMU_ABUNDANCE (SAMPLE_1_T1)","q1Label":"NFCORE_GMSEMU:GMSEMU:EMU_ABUNDANCE (SAMPLE_2_T1)","q2Label":"NFCORE_GMSEMU:GMSEMU:EMU_ABUNDANCE (SAMPLE_2_T1)","q3Label":"NFCORE_GMSEMU:GMSEMU:EMU_ABUNDANCE (SAMPLE_2_T1)"}},{"cpuUsage":{"mean":67.38,"min":62.85,"q1":65.11,"q2":67.38,"q3":69.64,"max":71.9,"minLabel":"NFCORE_GMSEMU:GMSEMU:FASTQC (SAMPLE_2_T1)","maxLabel":"NFCORE_GMSEMU:GMSEMU:FASTQC (SAMPLE_1_T1)","q1Label":"NFCORE_GMSEMU:GMSEMU:FASTQC (SAMPLE_2_T1)","q2Label":"NFCORE_GMSEMU:GMSEMU:FASTQC (SAMPLE_2_T1)","q3Label":"NFCORE_GMSEMU:GMSEMU:FASTQC (SAMPLE_2_T1)"},"process":"FASTQC","mem":{"mean":167004160,"min":164442112,"q1":165723136,"q2":167004160,"q3":168285184,"max":169566208,"minLabel":"NFCORE_GMSEMU:GMSEMU:FASTQC (SAMPLE_1_T1)","maxLabel":"NFCORE_GMSEMU:GMSEMU:FASTQC (SAMPLE_2_T1)","q1Label":"NFCORE_GMSEMU:GMSEMU:FASTQC (SAMPLE_1_T1)","q2Label":"NFCORE_GMSEMU:GMSEMU:FASTQC (SAMPLE_1_T1)","q3Label":"NFCORE_GMSEMU:GMSEMU:FASTQC (SAMPLE_1_T1)"},"memUsage":{"mean":2.59,"min":2.55,"q1":2.57,"q2":2.59,"q3":2.61,"max":2.63,"minLabel":"NFCORE_GMSEMU:GMSEMU:FASTQC (SAMPLE_1_T1)","maxLabel":"NFCORE_GMSEMU:GMSEMU:FASTQC (SAMPLE_2_T1)","q1Label":"NFCORE_GMSEMU:GMSEMU:FASTQC (SAMPLE_1_T1)","q2Label":"NFCORE_GMSEMU:GMSEMU:FASTQC (SAMPLE_1_T1)","q3Label":"NFCORE_GMSEMU:GMSEMU:FASTQC (SAMPLE_1_T1)"},"timeUsage":{"mean":0.01,"min":0.01,"q1":0.01,"q2":0.01,"q3":0.01,"max":0.01,"minLabel":"NFCORE_GMSEMU:GMSEMU:FASTQC (SAMPLE_1_T1)","maxLabel":"NFCORE_GMSEMU:GMSEMU:FASTQC (SAMPLE_2_T1)","q1Label":"NFCORE_GMSEMU:GMSEMU:FASTQC (SAMPLE_1_T1)","q2Label":"NFCORE_GMSEMU:GMSEMU:FASTQC (SAMPLE_1_T1)","q3Label":"NFCORE_GMSEMU:GMSEMU:FASTQC (SAMPLE_1_T1)"},"vmem":{"mean":3545108480,"min":3545108480,"q1":3545108480,"q2":3545108480,"q3":3545108480,"max":3545108480,"minLabel":"NFCORE_GMSEMU:GMSEMU:FASTQC (SAMPLE_1_T1)","maxLabel":"NFCORE_GMSEMU:GMSEMU:FASTQC (SAMPLE_2_T1)","q1Label":"NFCORE_GMSEMU:GMSEMU:FASTQC (SAMPLE_1_T1)","q2Label":"NFCORE_GMSEMU:GMSEMU:FASTQC (SAMPLE_1_T1)","q3Label":"NFCORE_GMSEMU:GMSEMU:FASTQC (SAMPLE_1_T1)"},"reads":{"mean":23442195,"min":23442067,"q1":23442131,"q2":23442195,"q3":23442259,"max":23442323,"minLabel":"NFCORE_GMSEMU:GMSEMU:FASTQC (SAMPLE_2_T1)","maxLabel":"NFCORE_GMSEMU:GMSEMU:FASTQC (SAMPLE_1_T1)","q1Label":"NFCORE_GMSEMU:GMSEMU:FASTQC (SAMPLE_2_T1)","q2Label":"NFCORE_GMSEMU:GMSEMU:FASTQC (SAMPLE_2_T1)","q3Label":"NFCORE_GMSEMU:GMSEMU:FASTQC (SAMPLE_2_T1)"},"cpu":{"mean":134.75,"min":125.7,"q1":130.23,"q2":134.75,"q3":139.28,"max":143.8,"minLabel":"NFCORE_GMSEMU:GMSEMU:FASTQC (SAMPLE_2_T1)","maxLabel":"NFCORE_GMSEMU:GMSEMU:FASTQC (SAMPLE_1_T1)","q1Label":"NFCORE_GMSEMU:GMSEMU:FASTQC (SAMPLE_2_T1)","q2Label":"NFCORE_GMSEMU:GMSEMU:FASTQC (SAMPLE_2_T1)","q3Label":"NFCORE_GMSEMU:GMSEMU:FASTQC (SAMPLE_2_T1)"},"time":{"mean":3000,"min":3000,"q1":3000,"q2":3000,"q3":3000,"max":3000,"minLabel":"NFCORE_GMSEMU:GMSEMU:FASTQC (SAMPLE_1_T1)","maxLabel":"NFCORE_GMSEMU:GMSEMU:FASTQC (SAMPLE_2_T1)","q1Label":"NFCORE_GMSEMU:GMSEMU:FASTQC (SAMPLE_1_T1)","q2Label":"NFCORE_GMSEMU:GMSEMU:FASTQC (SAMPLE_1_T1)","q3Label":"NFCORE_GMSEMU:GMSEMU:FASTQC (SAMPLE_1_T1)"},"writes":{"mean":2025245.5,"min":2025245,"q1":2025245.25,"q2":2025245.5,"q3":2025245.75,"max":2025246,"minLabel":"NFCORE_GMSEMU:GMSEMU:FASTQC (SAMPLE_1_T1)","maxLabel":"NFCORE_GMSEMU:GMSEMU:FASTQC (SAMPLE_2_T1)","q1Label":"NFCORE_GMSEMU:GMSEMU:FASTQC (SAMPLE_1_T1)","q2Label":"NFCORE_GMSEMU:GMSEMU:FASTQC (SAMPLE_1_T1)","q3Label":"NFCORE_GMSEMU:GMSEMU:FASTQC (SAMPLE_1_T1)"}},{"cpuUsage":{"mean":36.9,"min":36.9,"q1":36.9,"q2":36.9,"q3":36.9,"max":36.9,"minLabel":"NFCORE_GMSEMU:GMSEMU:CUSTOM_DUMPSOFTWAREVERSIONS (1)","maxLabel":"NFCORE_GMSEMU:GMSEMU:CUSTOM_DUMPSOFTWAREVERSIONS (1)","q1Label":"NFCORE_GMSEMU:GMSEMU:CUSTOM_DUMPSOFTWAREVERSIONS (1)","q2Label":"NFCORE_GMSEMU:GMSEMU:CUSTOM_DUMPSOFTWAREVERSIONS (1)","q3Label":"NFCORE_GMSEMU:GMSEMU:CUSTOM_DUMPSOFTWAREVERSIONS (1)"},"process":"CUSTOM_DUMPSOFTWAREVERSIONS","mem":{"mean":5439488,"min":5439488,"q1":5439488,"q2":5439488,"q3":5439488,"max":5439488,"minLabel":"NFCORE_GMSEMU:GMSEMU:CUSTOM_DUMPSOFTWAREVERSIONS (1)","maxLabel":"NFCORE_GMSEMU:GMSEMU:CUSTOM_DUMPSOFTWAREVERSIONS (1)","q1Label":"NFCORE_GMSEMU:GMSEMU:CUSTOM_DUMPSOFTWAREVERSIONS (1)","q2Label":"NFCORE_GMSEMU:GMSEMU:CUSTOM_DUMPSOFTWAREVERSIONS (1)","q3Label":"NFCORE_GMSEMU:GMSEMU:CUSTOM_DUMPSOFTWAREVERSIONS (1)"},"memUsage":{"mean":0.08,"min":0.08,"q1":0.08,"q2":0.08,"q3":0.08,"max":0.08,"minLabel":"NFCORE_GMSEMU:GMSEMU:CUSTOM_DUMPSOFTWAREVERSIONS (1)","maxLabel":"NFCORE_GMSEMU:GMSEMU:CUSTOM_DUMPSOFTWAREVERSIONS (1)","q1Label":"NFCORE_GMSEMU:GMSEMU:CUSTOM_DUMPSOFTWAREVERSIONS (1)","q2Label":"NFCORE_GMSEMU:GMSEMU:CUSTOM_DUMPSOFTWAREVERSIONS (1)","q3Label":"NFCORE_GMSEMU:GMSEMU:CUSTOM_DUMPSOFTWAREVERSIONS (1)"},"timeUsage":null,"vmem":{"mean":13901824,"min":13901824,"q1":13901824,"q2":13901824,"q3":13901824,"max":13901824,"minLabel":"NFCORE_GMSEMU:GMSEMU:CUSTOM_DUMPSOFTWAREVERSIONS (1)","maxLabel":"NFCORE_GMSEMU:GMSEMU:CUSTOM_DUMPSOFTWAREVERSIONS (1)","q1Label":"NFCORE_GMSEMU:GMSEMU:CUSTOM_DUMPSOFTWAREVERSIONS (1)","q2Label":"NFCORE_GMSEMU:GMSEMU:CUSTOM_DUMPSOFTWAREVERSIONS (1)","q3Label":"NFCORE_GMSEMU:GMSEMU:CUSTOM_DUMPSOFTWAREVERSIONS (1)"},"reads":{"mean":868287,"min":868287,"q1":868287,"q2":868287,"q3":868287,"max":868287,"minLabel":"NFCORE_GMSEMU:GMSEMU:CUSTOM_DUMPSOFTWAREVERSIONS (1)","maxLabel":"NFCORE_GMSEMU:GMSEMU:CUSTOM_DUMPSOFTWAREVERSIONS (1)","q1Label":"NFCORE_GMSEMU:GMSEMU:CUSTOM_DUMPSOFTWAREVERSIONS (1)","q2Label":"NFCORE_GMSEMU:GMSEMU:CUSTOM_DUMPSOFTWAREVERSIONS (1)","q3Label":"NFCORE_GMSEMU:GMSEMU:CUSTOM_DUMPSOFTWAREVERSIONS (1)"},"cpu":{"mean":36.9,"min":36.9,"q1":36.9,"q2":36.9,"q3":36.9,"max":36.9,"minLabel":"NFCORE_GMSEMU:GMSEMU:CUSTOM_DUMPSOFTWAREVERSIONS (1)","maxLabel":"NFCORE_GMSEMU:GMSEMU:CUSTOM_DUMPSOFTWAREVERSIONS (1)","q1Label":"NFCORE_GMSEMU:GMSEMU:CUSTOM_DUMPSOFTWAREVERSIONS (1)","q2Label":"NFCORE_GMSEMU:GMSEMU:CUSTOM_DUMPSOFTWAREVERSIONS (1)","q3Label":"NFCORE_GMSEMU:GMSEMU:CUSTOM_DUMPSOFTWAREVERSIONS (1)"},"time":{"mean":130,"min":130,"q1":130,"q2":130,"q3":130,"max":130,"minLabel":"NFCORE_GMSEMU:GMSEMU:CUSTOM_DUMPSOFTWAREVERSIONS (1)","maxLabel":"NFCORE_GMSEMU:GMSEMU:CUSTOM_DUMPSOFTWAREVERSIONS (1)","q1Label":"NFCORE_GMSEMU:GMSEMU:CUSTOM_DUMPSOFTWAREVERSIONS (1)","q2Label":"NFCORE_GMSEMU:GMSEMU:CUSTOM_DUMPSOFTWAREVERSIONS (1)","q3Label":"NFCORE_GMSEMU:GMSEMU:CUSTOM_DUMPSOFTWAREVERSIONS (1)"},"writes":{"mean":1870,"min":1870,"q1":1870,"q2":1870,"q3":1870,"max":1870,"minLabel":"NFCORE_GMSEMU:GMSEMU:CUSTOM_DUMPSOFTWAREVERSIONS (1)","maxLabel":"NFCORE_GMSEMU:GMSEMU:CUSTOM_DUMPSOFTWAREVERSIONS (1)","q1Label":"NFCORE_GMSEMU:GMSEMU:CUSTOM_DUMPSOFTWAREVERSIONS (1)","q2Label":"NFCORE_GMSEMU:GMSEMU:CUSTOM_DUMPSOFTWAREVERSIONS (1)","q3Label":"NFCORE_GMSEMU:GMSEMU:CUSTOM_DUMPSOFTWAREVERSIONS (1)"}},{"cpuUsage":{"mean":201.3,"min":201.3,"q1":201.3,"q2":201.3,"q3":201.3,"max":201.3,"minLabel":"NFCORE_GMSEMU:GMSEMU:MULTIQC","maxLabel":"NFCORE_GMSEMU:GMSEMU:MULTIQC","q1Label":"NFCORE_GMSEMU:GMSEMU:MULTIQC","q2Label":"NFCORE_GMSEMU:GMSEMU:MULTIQC","q3Label":"NFCORE_GMSEMU:GMSEMU:MULTIQC"},"process":"MULTIQC","mem":{"mean":143142912,"min":143142912,"q1":143142912,"q2":143142912,"q3":143142912,"max":143142912,"minLabel":"NFCORE_GMSEMU:GMSEMU:MULTIQC","maxLabel":"NFCORE_GMSEMU:GMSEMU:MULTIQC","q1Label":"NFCORE_GMSEMU:GMSEMU:MULTIQC","q2Label":"NFCORE_GMSEMU:GMSEMU:MULTIQC","q3Label":"NFCORE_GMSEMU:GMSEMU:MULTIQC"},"memUsage":{"mean":2.22,"min":2.22,"q1":2.22,"q2":2.22,"q3":2.22,"max":2.22,"minLabel":"NFCORE_GMSEMU:GMSEMU:MULTIQC","maxLabel":"NFCORE_GMSEMU:GMSEMU:MULTIQC","q1Label":"NFCORE_GMSEMU:GMSEMU:MULTIQC","q2Label":"NFCORE_GMSEMU:GMSEMU:MULTIQC","q3Label":"NFCORE_GMSEMU:GMSEMU:MULTIQC"},"timeUsage":{"mean":0.05,"min":0.05,"q1":0.05,"q2":0.05,"q3":0.05,"max":0.05,"minLabel":"NFCORE_GMSEMU:GMSEMU:MULTIQC","maxLabel":"NFCORE_GMSEMU:GMSEMU:MULTIQC","q1Label":"NFCORE_GMSEMU:GMSEMU:MULTIQC","q2Label":"NFCORE_GMSEMU:GMSEMU:MULTIQC","q3Label":"NFCORE_GMSEMU:GMSEMU:MULTIQC"},"vmem":{"mean":838000640,"min":838000640,"q1":838000640,"q2":838000640,"q3":838000640,"max":838000640,"minLabel":"NFCORE_GMSEMU:GMSEMU:MULTIQC","maxLabel":"NFCORE_GMSEMU:GMSEMU:MULTIQC","q1Label":"NFCORE_GMSEMU:GMSEMU:MULTIQC","q2Label":"NFCORE_GMSEMU:GMSEMU:MULTIQC","q3Label":"NFCORE_GMSEMU:GMSEMU:MULTIQC"},"reads":{"mean":6955506199,"min":6955506199,"q1":6955506199,"q2":6955506199,"q3":6955506199,"max":6955506199,"minLabel":"NFCORE_GMSEMU:GMSEMU:MULTIQC","maxLabel":"NFCORE_GMSEMU:GMSEMU:MULTIQC","q1Label":"NFCORE_GMSEMU:GMSEMU:MULTIQC","q2Label":"NFCORE_GMSEMU:GMSEMU:MULTIQC","q3Label":"NFCORE_GMSEMU:GMSEMU:MULTIQC"},"cpu":{"mean":201.3,"min":201.3,"q1":201.3,"q2":201.3,"q3":201.3,"max":201.3,"minLabel":"NFCORE_GMSEMU:GMSEMU:MULTIQC","maxLabel":"NFCORE_GMSEMU:GMSEMU:MULTIQC","q1Label":"NFCORE_GMSEMU:GMSEMU:MULTIQC","q2Label":"NFCORE_GMSEMU:GMSEMU:MULTIQC","q3Label":"NFCORE_GMSEMU:GMSEMU:MULTIQC"},"time":{"mean":7729,"min":7729,"q1":7729,"q2":7729,"q3":7729,"max":7729,"minLabel":"NFCORE_GMSEMU:GMSEMU:MULTIQC","maxLabel":"NFCORE_GMSEMU:GMSEMU:MULTIQC","q1Label":"NFCORE_GMSEMU:GMSEMU:MULTIQC","q2Label":"NFCORE_GMSEMU:GMSEMU:MULTIQC","q3Label":"NFCORE_GMSEMU:GMSEMU:MULTIQC"},"writes":{"mean":3600450,"min":3600450,"q1":3600450,"q2":3600450,"q3":3600450,"max":3600450,"minLabel":"NFCORE_GMSEMU:GMSEMU:MULTIQC","maxLabel":"NFCORE_GMSEMU:GMSEMU:MULTIQC","q1Label":"NFCORE_GMSEMU:GMSEMU:MULTIQC","q2Label":"NFCORE_GMSEMU:GMSEMU:MULTIQC","q3Label":"NFCORE_GMSEMU:GMSEMU:MULTIQC"}}]
+May-04 15:54:40.543 [main] DEBUG nextflow.trace.TimelineObserver - Workflow completed -- rendering execution timeline
+May-04 15:54:40.690 [main] DEBUG nextflow.cache.CacheDB - Closing CacheDB done
+May-04 15:54:40.691 [main] INFO  org.pf4j.AbstractPluginManager - Stop plugin 'nf-amazon@1.16.2'
+May-04 15:54:40.691 [main] DEBUG nextflow.plugin.BasePlugin - Plugin stopped nf-amazon
+May-04 15:54:40.701 [main] DEBUG nextflow.util.ThreadPoolManager - Thread pool 'FileTransfer' shutdown completed (hard=false)
+May-04 15:54:40.703 [main] DEBUG nextflow.script.ScriptRunner - > Execution complete -- Goodbye

@@ -1,0 +1,44 @@
+id: 'nf-core-gmsemu-summary'
+description: ' - this information is collected when the pipeline is started.'
+section_name: 'nf-core/gmsemu Workflow Summary'
+section_href: 'https://github.com/nf-core/gmsemu'
+plot_type: 'html'
+data: |
+    <p style="font-size:110%"><b>Core Nextflow options</b></p>
+    <dl class="dl-horizontal">
+        <dt>runName</dt><dd><samp>curious_goodall</samp></dd>
+        <dt>containerEngine</dt><dd><samp>singularity</samp></dd>
+        <dt>launchDir</dt><dd><samp>/aux/db/workdir_fwa010/emu_pipe_project/gms_16S</samp></dd>
+        <dt>workDir</dt><dd><samp>/aux/db/workdir_fwa010/emu_pipe_project/gms_16S/work</samp></dd>
+        <dt>projectDir</dt><dd><samp>/aux/db/workdir_fwa010/emu_pipe_project/gms_16S</samp></dd>
+        <dt>userName</dt><dd><samp>fwa010</samp></dd>
+        <dt>profile</dt><dd><samp>singularity,test</samp></dd>
+        <dt>configFiles</dt><dd><samp>/aux/db/workdir_fwa010/emu_pipe_project/gms_16S/nextflow.config</samp></dd>
+    </dl>
+    <p style="font-size:110%"><b>Input/output options</b></p>
+    <dl class="dl-horizontal">
+        <dt>input</dt><dd><samp>assets/samplesheet_mod.csv</samp></dd>
+        <dt>outdir</dt><dd><samp>results_idag</samp></dd>
+    </dl>
+    <p style="font-size:110%"><b>Reference genome options</b></p>
+    <dl class="dl-horizontal">
+        <dt>genome</dt><dd><samp>R64-1-1</samp></dd>
+        <dt>fasta</dt><dd><samp>s3://ngi-igenomes/igenomes/Saccharomyces_cerevisiae/Ensembl/R64-1-1/Sequence/WholeGenomeFasta/genome.fa</samp></dd>
+    </dl>
+    <p style="font-size:110%"><b>Institutional config options</b></p>
+    <dl class="dl-horizontal">
+        <dt>config_profile_name</dt><dd><samp>Test profile</samp></dd>
+        <dt>config_profile_description</dt><dd><samp>Minimal test dataset to check pipeline function</samp></dd>
+    </dl>
+    <p style="font-size:110%"><b>Max job request options</b></p>
+    <dl class="dl-horizontal">
+        <dt>max_cpus</dt><dd><samp>2</samp></dd>
+        <dt>max_memory</dt><dd><samp>6.GB</samp></dd>
+        <dt>max_time</dt><dd><samp>6.h</samp></dd>
+    </dl>
+    <p style="font-size:110%"><b>Other parameters</b></p>
+    <dl class="dl-horizontal">
+        <dt>reads</dt><dd><samp><span style="color:#999999;">N/A</a></samp></dd>
+        <dt>db</dt><dd><samp>/aux/db/workdir_fwa010/emu_pipe_project/nf-core-gmsemu/assets/test_assets/database/</samp></dd>
+        <dt>seqtype</dt><dd><samp>map-ont</samp></dd>
+    </dl>

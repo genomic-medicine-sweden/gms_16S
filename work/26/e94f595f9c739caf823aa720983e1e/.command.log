@@ -1,0 +1,1 @@
+WARNING: DEPRECATED USAGE: Forwarding SINGULARITYENV_NXF_DEBUG as environment variable will not be supported in the future, use APPTAINERENV_NXF_DEBUG instead

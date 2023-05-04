@@ -1,0 +1,11 @@
+WARNING: DEPRECATED USAGE: Forwarding SINGULARITYENV_NXF_DEBUG as environment variable will not be supported in the future, use APPTAINERENV_NXF_DEBUG instead
+[M::mm_idx_gen::0.001*4.07] collected minimizers
+[M::mm_idx_gen::0.001*3.32] sorted minimizers
+[M::main::0.001*3.29] loaded/built the index for 1 target sequence(s)
+[M::mm_mapopt_update::0.001*3.20] mid_occ = 10
+[M::mm_idx_stat] kmer size: 15; skip: 10; is_hpc: 0; #seq: 1
+[M::mm_idx_stat::0.001*3.13] distinct minimizers: 294 (100.00% are singletons); average occurrences: 1.000; average spacing: 5.286; total length: 1554
+[M::worker_pipeline::0.002*2.65] mapped 3 sequences
+[M::main] Version: 2.24-r1122
+[M::main] CMD: minimap2 -ax map-ont -t 2 -N 50 -p .9 -K 500000000 -o ./small_test_data2.fastq_emu_alignments.sam /aux/db/workdir_fwa010/emu_pipe_project/nf-core-gmsemu/assets/test_assets/database/species_taxid.fasta small_test_data2.fastq.gz
+[M::main] Real time: 0.002 sec; CPU: 0.005 sec; Peak RSS: 0.071 GB
