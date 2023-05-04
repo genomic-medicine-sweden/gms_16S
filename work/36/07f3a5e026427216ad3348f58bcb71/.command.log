@@ -1,2 +1,0 @@
-WARNING: DEPRECATED USAGE: Forwarding SINGULARITYENV_NXF_DEBUG as environment variable will not be supported in the future, use APPTAINERENV_NXF_DEBUG instead
-WARNING: Skipping mount /var/apptainer/mnt/session/etc/resolv.conf [files]: /etc/resolv.conf doesn't exist in container

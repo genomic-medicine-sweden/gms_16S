@@ -1,1 +1,0 @@
-2023-05-04 15:54:18	22.7s	curious_goodall	OK	a35b9a734cb60112119361577de6abe3	273965f1-5ce7-4ce9-922d-9f0566ea1d9b	nextflow run main.nf --input assets/samplesheet_mod.csv --outdir results_idag --db /aux/db/workdir_fwa010/emu_pipe_project/nf-core-gmsemu/assets/test_assets/database/ --seqtype map-ont -profile singularity,test

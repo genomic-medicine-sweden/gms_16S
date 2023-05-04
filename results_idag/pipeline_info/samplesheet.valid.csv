@@ -1,3 +1,0 @@
-sample,single_end,fastq_1,fastq_2
-SAMPLE_1_T1,True,/aux/db/workdir_fwa010/emu_pipe_project/nf-core-gmsemu/assets/test_assets/small_test_data2.fastq.gz,
-SAMPLE_2_T1,True,/aux/db/workdir_fwa010/emu_pipe_project/nf-core-gmsemu/assets/test_assets/small_test_data3.fastq.gz,

@@ -1,3 +1,0 @@
-Module	Section	Sample Name	Source
-FastQC	all_sections	SAMPLE_1_T1	/aux/db/workdir_fwa010/emu_pipe_project/gms_16S/work/4c/2c3e90afa2699ed1977bd3a0da4961/4/SAMPLE_1_T1_fastqc.zip
-FastQC	all_sections	SAMPLE_2_T1	/aux/db/workdir_fwa010/emu_pipe_project/gms_16S/work/4c/2c3e90afa2699ed1977bd3a0da4961/5/SAMPLE_2_T1_fastqc.zip
