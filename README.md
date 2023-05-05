@@ -1,7 +1,10 @@
 # gms-emu.
-A taxonomic profiler optimized for long 16S rRNA reads.
+EMU is a taxonomic profiler optimized for long 16S rRNA reads.
 https://gitlab.com/treangenlab/emu
-Under construction.
+This nextflow-pipeline is under construction.
+
+## Rough plan
+![emu_workflow](https://user-images.githubusercontent.com/115690981/236446422-f37d2937-1490-4a52-8b49-e668e193001f.png)
 
 
 #### Quick start
