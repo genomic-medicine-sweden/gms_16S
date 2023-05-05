@@ -4,8 +4,7 @@ https://gitlab.com/treangenlab/emu
 This nextflow-pipeline is under construction.
 
 ## Rough plan
-![emu_workflow](https://user-images.githubusercontent.com/115690981/236446422-f37d2937-1490-4a52-8b49-e668e193001f.png)
-
+![emu_workflow](https://user-images.githubusercontent.com/115690981/236446648-c93dded5-1d51-4987-afad-5b0eedc01574.png)
 
 #### Quick start
 1. Add you samples to a sample_sheet.csv
