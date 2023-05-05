@@ -48,7 +48,10 @@ include { INPUT_CHECK } from '../subworkflows/local/input_check'
 //
 // MODULE: Installed directly from nf-core/modules
 //
-
+include { FALCO                       } from '../modules/nf-core/falco/main.nf'
+include { NANOPLOT                    } from '../modules/nf-core/nanoplot/main.nf'
+include { FILTLONG                    } from '../modules/nf-core/filtlong/main.nf'
+include { PORECHOP_ABI                } from '../modules/nf-core/porechop/abi/main.nf'
 include { EMU_ABUNDANCE               } from '../modules/local/emu/abundance/main.nf'
 include { MULTIQC                     } from '../modules/nf-core/multiqc/main'
 include { CUSTOM_DUMPSOFTWAREVERSIONS } from '../modules/nf-core/custom/dumpsoftwareversions/main'
@@ -66,6 +69,8 @@ workflow GMSEMU {
 
     ch_versions = Channel.empty()
 
+
+
     //
     // SUBWORKFLOW: Read in samplesheet, validate and stage input files
     //
@@ -73,6 +78,25 @@ workflow GMSEMU {
         ch_input
     )
     ch_versions = ch_versions.mix(INPUT_CHECK.out.versions)
+
+
+
+    //
+    // MODULE: Run Falco
+    FALCO (
+        INPUT_CHECK.out.reads
+    )
+
+
+
+    //
+    // MODULE: Run Nanoplot
+    NANOPLOT (
+        INPUT_CHECK.out.reads
+    )
+
+
+
 
     //
     // MODULE: Run FastQC
@@ -85,6 +109,8 @@ workflow GMSEMU {
     CUSTOM_DUMPSOFTWAREVERSIONS (
         ch_versions.unique().collectFile(name: 'collated_versions.yml')
     )
+
+
 
     //
     // MODULE: MultiQC
@@ -109,7 +135,9 @@ workflow GMSEMU {
     )
     multiqc_report = MULTIQC.out.report.toList()
     
-    // MODULE: EMU_ABUNDANCE
+
+
+    // MODULE: Run EMU_ABUNDANCE
     EMU_ABUNDANCE (
         INPUT_CHECK.out.reads
     )
