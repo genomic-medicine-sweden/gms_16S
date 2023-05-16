@@ -50,11 +50,11 @@ include { INPUT_CHECK } from '../subworkflows/local/input_check'
 //
 include { FALCO                       } from '../modules/nf-core/falco/main.nf'
 include { NANOPLOT                    } from '../modules/nf-core/nanoplot/main.nf'
-include { FILTLONG                    } from '../modules/nf-core/filtlong/main.nf'
 include { PORECHOP_ABI                } from '../modules/nf-core/porechop/abi/main.nf'
+include { FILTLONG                    } from '../modules/nf-core/filtlong/main.nf'
 include { EMU_ABUNDANCE               } from '../modules/local/emu/abundance/main.nf'
-include { MULTIQC                     } from '../modules/nf-core/multiqc/main'
 include { CUSTOM_DUMPSOFTWAREVERSIONS } from '../modules/nf-core/custom/dumpsoftwareversions/main'
+include { MULTIQC                     } from '../modules/nf-core/multiqc/main'
 include { FASTQC                      } from '../modules/nf-core/fastqc/main'
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -111,6 +111,23 @@ workflow GMSEMU {
     )
 
 
+    //
+    // MODULE: Run PORECHOP_ABI
+    //
+    PORECHOP_ABI (INPUT_CHECK.out.reads)
+        ch_processed_reads = PORECHOP_ABI.out.reads
+            .map { meta, reads -> [ meta + [single_end: 1], reads ]}
+    
+    ch_versions = ch_versions.mix(FASTQC.out.versions.first())
+
+//    CUSTOM_DUMPSOFTWAREVERSIONS (
+//        ch_versions.unique().collectFile(name: 'collated_versions.yml')
+//    )
+
+
+
+
+
 
     //
     // MODULE: MultiQC
@@ -139,7 +156,7 @@ workflow GMSEMU {
 
     // MODULE: Run EMU_ABUNDANCE
     EMU_ABUNDANCE (
-        INPUT_CHECK.out.reads
+        ch_processed_reads
     )
 }
 
