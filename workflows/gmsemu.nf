@@ -68,6 +68,7 @@ def multiqc_report = []
 workflow GMSEMU {
 
     ch_versions = Channel.empty()
+    ch_multiqc_files = Channel.empty()
 
 
 
@@ -111,14 +112,47 @@ workflow GMSEMU {
     )
 
 
+
+    // MODULE: Run PORECHOP_ABI and filtering
     //
-    // MODULE: Run PORECHOP_ABI
-    //
-    PORECHOP_ABI (INPUT_CHECK.out.reads)
+    if ( params.adapter_trimming && !params.quality_filtering) {
+        PORECHOP_ABI ( INPUT_CHECK.out.reads )
+
         ch_processed_reads = PORECHOP_ABI.out.reads
-            .map { meta, reads -> [ meta + [single_end: 1], reads ]}
-    
-    ch_versions = ch_versions.mix(FASTQC.out.versions.first())
+            .map { meta, reads -> [ meta + [single_end: 1], reads ] }
+
+        ch_versions = ch_versions.mix(PORECHOP_ABI.out.versions.first())
+        ch_multiqc_files = ch_multiqc_files.mix( PORECHOP_ABI.out.log )
+
+    } else if ( !params.adapter_trimming && params.quality_filtering) {
+
+        ch_processed_reads = FILTLONG ( INPUT_CHECK.out.reads.map { meta, reads -> [meta, [], reads ] } ).reads
+        ch_versions = ch_versions.mix(FILTLONG.out.versions.first())
+        ch_multiqc_files = ch_multiqc_files.mix( FILTLONG.out.log )
+
+    } else if ( !params.adapter_trimming && !params.quality_filtering) {
+
+        ch_processed_reads = INPUT_CHECK.out.reads
+
+    } else {
+        PORECHOP_ABI ( INPUT_CHECK.out.reads )
+        ch_clipped_reads = PORECHOP_ABI.out.reads
+            .map { meta, reads -> [ meta + [single_end: 1], reads ] }
+
+        ch_processed_reads = FILTLONG ( ch_clipped_reads.map { meta, reads -> [ meta, [], reads ] } ).reads
+
+        ch_versions = ch_versions.mix(PORECHOP_ABI.out.versions.first())
+        ch_versions = ch_versions.mix(FILTLONG.out.versions.first())
+        ch_multiqc_files = ch_multiqc_files.mix( PORECHOP_ABI.out.log )
+        ch_multiqc_files = ch_multiqc_files.mix( FILTLONG.out.log )
+    }
+
+
+//    PORECHOP_ABI (INPUT_CHECK.out.reads)
+//        ch_processed_reads = PORECHOP_ABI.out.reads
+//            .map { meta, reads -> [ meta + [single_end: 1], reads ]}
+
+//    ch_versions = ch_versions.mix(FASTQC.out.versions.first())
 
 //    CUSTOM_DUMPSOFTWAREVERSIONS (
 //        ch_versions.unique().collectFile(name: 'collated_versions.yml')
@@ -151,7 +185,7 @@ workflow GMSEMU {
         ch_multiqc_logo.toList()
     )
     multiqc_report = MULTIQC.out.report.toList()
-    
+
 
 
     // MODULE: Run EMU_ABUNDANCE
