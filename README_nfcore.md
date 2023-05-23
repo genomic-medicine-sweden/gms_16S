@@ -11,20 +11,13 @@
 
 <!-- TODO nf-core: Write a 1-2 sentence summary of what data the pipeline is for and what it does -->
 
-**nf-core/gmsemu** is a bioinformatics best-practice analysis pipeline for A pipeline for paralellization for the EMU tool from treangelab. The pipeline will also inclide trimming of reads and qc-reports..
+**nf-core/gmsemu** is a bioinformatics best-practice analysis pipeline for A pipeline for paralellization for the EMU tool from treangelab. The pipeline will also inclide trimming of reads and qc-reports.
+
+This Nextflow pipeline utilizes Falco, Porechop_ABI, Longfilt, and EMU for taxonomic profiling of 16S rRNA gene sequences. Built with Nextflow, it ensures portability and reproducibility across different computational infrastructures. Falco performs quality control, Porechop_ABI trims adapters and demultiplexes data, Longfilt filters the fastq-files such that only reads that are close to 1500 bp are used, and EMU assigns taxonomic classifications. The pipeline enables microbial community analysis, offering insights into the diversity in samples.
 
 The pipeline is built using [Nextflow](https://www.nextflow.io), a workflow tool to run tasks across multiple compute infrastructures in a very portable manner. It uses Docker/Singularity containers making installation trivial and results highly reproducible. The [Nextflow DSL2](https://www.nextflow.io/docs/latest/dsl2.html) implementation of this pipeline uses one container per process which makes it much easier to maintain and update software dependencies. Where possible, these processes have been submitted to and installed from [nf-core/modules](https://github.com/nf-core/modules) in order to make them available to all nf-core pipelines, and to everyone within the Nextflow community!
 
-<!-- TODO nf-core: Add full-sized test dataset and amend the paragraph below if applicable -->
-
-On release, automated continuous integration tests run the pipeline on a full-sized dataset on the AWS cloud infrastructure. This ensures that the pipeline runs on AWS, has sensible resource allocation defaults set to run on real-world datasets, and permits the persistent storage of results to benchmark between pipeline releases and other analysis sources.The results obtained from the full-sized test can be viewed on the [nf-core website](https://nf-co.re/gmsemu/results).
-
 ## Pipeline summary
-
-<!-- TODO nf-core: Fill in short bullet-pointed list of the default steps in the pipeline -->
-
-1. Read QC ([`FastQC`](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/))
-2. Present QC for raw reads ([`MultiQC`](http://multiqc.info/))
 
 ## Quick Start
 
