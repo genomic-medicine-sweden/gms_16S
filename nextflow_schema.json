@@ -295,31 +295,58 @@
     "db": {
       "type": "string",
       "default": "None",
-      "format": "directory-path"
+      "format": "directory-path",
+      "description": "path to the database used by emu"
     },
     "seqtype": {
       "type": "string",
-      "default": "\"map-ont\""
+      "default": "map-ont",
+      "description": "short-read: sr, Pac-Bio:map-pb, ONT:map-ont"
     },
     "adapter_trimming": {
       "type": "boolean",
-      "default": true
+      "default": true,
+      "description": "Trim adapters with porechop_abi"
     },
     "quality_filtering": {
       "type": "boolean",
-      "default": true
+      "default": true,
+      "description": "Filter reads by quality and length"
     },
     "longread_qc_qualityfilter_minlength": {
       "type": "integer",
-      "default": 900
+      "default": 900,
+      "description": "Minimum length for reads"
     },
     "longread_qc_qualityfilter_maxlength": {
       "type": "integer",
-      "default": 1600
+      "default": 1600,
+      "description": "Maximum length for reads"
     },
     "longread_qc_qualityfilter_min_mean_q": {
       "type": "integer",
-      "default": 12
+      "default": 12,
+      "description": "minimum mean quality threshold"
+    },
+    "min_abundance": {
+      "type": "number",
+      "default": 0.0001,
+      "description": "min species abundance in results"
+    },
+    "minimap_max_alignments": {
+      "type": "integer",
+      "default": 50,
+      "description": "miminimap max number of secondary alignments per read"
+    },
+    "minibatch_size": {
+      "type": "integer",
+      "default": 500000000,
+      "description": "minibatch size for minimap2 mapping"
+    },
+    "save_preprocessed_reads": {
+      "type": "string",
+      "default": "false",
+      "description": "save preprocessed reads"
     }
   },
   "required": ["seqtype", "db"]
