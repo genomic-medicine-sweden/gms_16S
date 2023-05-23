@@ -1,12 +1,10 @@
 #!/usr/bin/env nextflow
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    nf-core/gmsemu
+    gms_16S
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Github : https://github.com/nf-core/gmsemu
+    Github : https://github.com/genomic-medicine-sweden/gms_16S
 
-    Website: https://nf-co.re/gmsemu
-    Slack  : https://nfcore.slack.com/channels/gmsemu
 ----------------------------------------------------------------------------------------
 */
 
@@ -37,9 +35,9 @@ WorkflowMain.initialise(workflow, params, log)
 include { GMSEMU } from './workflows/gmsemu'
 
 //
-// WORKFLOW: Run main nf-core/gmsemu analysis pipeline
+// WORKFLOW: Run main gms_16S  analysis pipeline
 //
-workflow NFCORE_GMSEMU {
+workflow GMS_EMU {
     GMSEMU ()
 }
 
@@ -51,10 +49,9 @@ workflow NFCORE_GMSEMU {
 
 //
 // WORKFLOW: Execute a single named workflow for the pipeline
-// See: https://github.com/nf-core/rnaseq/issues/619
 //
 workflow {
-    NFCORE_GMSEMU ()
+    GMS_EMU ()
 }
 
 /*
