@@ -27,10 +27,9 @@ The pipeline is built using [Nextflow](https://www.nextflow.io), a workflow tool
 
 3. Download the pipeline and test it on a minimal dataset
 
-   ```bash
+```bash
 nextflow run main.nf --input assets/samplesheet_medium.csv     --outdir results_emu     --db /aux/db/workdir_fwa010/emu_pipe_project/gms_16S/assets/databases/emu_database/     --seqtype map-ont     -profile singularity,test   
 ```
-
 
 ## Credits
 
@@ -90,4 +89,3 @@ This pipeline uses code and infrastructure developed and maintained by the [nf-c
 <!-- TODO nf-core: Add bibliography of tools and data used in your pipeline -->
 
 An extensive list of references for the tools used by the pipeline can be found in the [`CITATIONS.md`](CITATIONS.md) file.
-
