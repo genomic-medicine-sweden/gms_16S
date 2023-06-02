@@ -11,7 +11,7 @@
 
 <!-- TODO nf-core: Write a 1-2 sentence summary of what data the pipeline is for and what it does -->
 
-**nf-core/gmsemu** is a bioinformatics analysis pipeline for the EMU tool (https://gitlab.com/treangenlab/emu). 
+gms_16S bioinformatics analysis pipeline for the EMU tool (https://gitlab.com/treangenlab/emu). 
 
 This Nextflow pipeline utilizes Falco, Porechop_ABI, Longfilt, and EMU for taxonomic profiling of 16S rRNA gene sequences. Built with Nextflow, it ensures portability and reproducibility across different computational infrastructures. Falco performs quality control, Porechop_ABI trims adapters and demultiplexes data, Longfilt filters the fastq-files such that only reads that are close to 1500 bp are used, and EMU assigns taxonomic classifications. The pipeline enables microbial community analysis, offering insights into the diversity in samples.
 
