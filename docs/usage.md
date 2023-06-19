@@ -130,7 +130,7 @@ The custom config below can  be provided to the pipeline via the [`-c`](#-c) par
 
 ```nextflow
 process {
-    withName: 'NFCORE_GMSEMU:GMSEMU:EMU_ABUNDANCE' {
+    withName: 'GMS_EMU:GMSEMU:EMU_ABUNDANCE' {
         memory = 50.GB
     }
 }
