@@ -331,10 +331,10 @@
       "default": true,
       "description": "Run krona, true or false"
     },
-    "krona_taxonomy_directory": {
+    "krona_taxonomy_tab": {
       "type": "string",
-      "default": "assets/databases/krona",
-      "description": "path to the krona database"
+      "description": "the path to the taxonomy.tab used by Krona",
+      "default": "assets/databases/krona/taxonomy/taxonomy.tab"
     }
   },
   "required": ["seqtype", "db"]

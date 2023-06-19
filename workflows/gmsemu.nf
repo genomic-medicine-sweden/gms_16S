@@ -196,7 +196,7 @@ workflow GMSEMU {
 
     if ( params.run_krona ) {
         // MODULE: Run KRONA_KTIMPORTTAXONOMY
-        KRONA_KTIMPORTTAXONOMY (EMU_ABUNDANCE.out.report , file(params.krona_taxonomy_directory, checkExists: true) )
+        KRONA_KTIMPORTTAXONOMY (EMU_ABUNDANCE.out.report , file(params.krona_taxonomy_tab, checkExists: true) )
           ch_versions = ch_versions.mix( KRONA_KTIMPORTTAXONOMY.out.versions.first() )
     }
 
