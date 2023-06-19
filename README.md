@@ -13,14 +13,18 @@
 
 gms_16S bioinformatics analysis pipeline for the EMU tool (https://gitlab.com/treangenlab/emu). 
 
-This Nextflow pipeline utilizes Falco, Porechop_ABI, Longfilt, and EMU for taxonomic profiling of 16S rRNA gene sequences. Built with Nextflow, it ensures portability and reproducibility across different computational infrastructures. Falco performs quality control, Porechop_ABI trims adapters and demultiplexes data, Longfilt filters the fastq-files such that only reads that are close to 1500 bp are used, and EMU assigns taxonomic classifications. The pipeline enables microbial community analysis, offering insights into the diversity in samples.
+This Nextflow pipeline utilizes Falco, Porechop_ABI, Longfilt, and EMU for taxonomic profiling of 16S rRNA gene sequences. The results are displayed with Krona. Built with Nextflow, it ensures portability and reproducibility across different computational infrastructures. Falco performs quality control, Porechop_ABI trims adapters (optional)), Longfilt filters the fastq-files such that only reads that are close to 1500 bp are used (optional), EMU assigns taxonomic classifications, and Krona visualises the result table from EMU. The pipeline enables microbial community analysis, offering insights into the diversity in samples.
 
 The pipeline is built using [Nextflow](https://www.nextflow.io), a workflow tool to run tasks across multiple compute infrastructures in a very portable manner. It uses Docker/Singularity containers making installation trivial and results highly reproducible. The [Nextflow DSL2](https://www.nextflow.io/docs/latest/dsl2.html) implementation of this pipeline uses one container per process which makes it much easier to maintain and update software dependencies. 
 
 ## Pipeline summary
-![236446648-c93dded5-1d51-4987-afad-5b0eedc01574](https://github.com/genomic-medicine-sweden/gms_16S/assets/115690981/5017bac9-a5a4-4bb2-a5e4-34c15cc37b22)
-![gms_16S_krona](https://github.com/genomic-medicine-sweden/gms_16S/assets/115690981/3dd8dfc3-2951-48fe-80dc-dd855139fccf)
 
+![236446648-c93dded5-1d51-4987-afad-5b0eedc01574](https://github.com/genomic-medicine-sweden/gms_16S/assets/115690981/5017bac9-a5a4-4bb2-a5e4-34c15cc37b22)
+Only the nanopore flow has been tested.
+![image140](https://github.com/genomic-medicine-sweden/gms_16S/assets/115690981/dcdd5da4-135c-48c4-b64f-82f0452b5520)
+
+
+Krona plot
 ## Quick Start
 
 1. Install [`Nextflow`](https://www.nextflow.io/docs/latest/getstarted.html#installation) (`>=22.10.1`)
@@ -28,11 +32,11 @@ The pipeline is built using [Nextflow](https://www.nextflow.io), a workflow tool
 2. Install any of [`Docker`](https://docs.docker.com/engine/installation/), [`Singularity`](https://www.sylabs.io/guides/3.0/user-guide/) (you can follow [this tutorial](https://singularity-tutorial.github.io/01-installation/)), [`Podman`](https://podman.io/), [`Shifter`](https://nersc.gitlab.io/development/shifter/how-to-use/) or [`Charliecloud`](https://hpc.github.io/charliecloud/) for full pipeline reproducibility _(you can use [`Conda`](https://conda.io/miniconda.html) both to install Nextflow itself and also to manage software within pipelines. Please only use it within pipelines as a last resort; see [docs](https://nf-co.re/usage/configuration#basic-configuration-profiles))_.
 
 3. Add you samples to a sample_sheet.csv
-4. gunzip the files in the database directory (if they are gzipped).
+4. gunzip all gzipped files in the database directory.
 5. Run your command
 
 ```bash
-nextflow run main.nf --input assets/samplesheet_medium.csv     --outdir results_emu     --db /aux/db/workdir_fwa010/emu_pipe_project/gms_16S/assets/databases/emu_database/     --seqtype map-ont     -profile singularity,test   
+nextflow run main.nf --input assets/samplesheet_medium.csv     --outdir results_emu     --db assets/databases/emu_database/     --seqtype map-ont     -profile singularity,test   
 ```
 
 ## Credits
