@@ -19,6 +19,7 @@ The pipeline is built using [Nextflow](https://www.nextflow.io), a workflow tool
 
 ## Pipeline summary
 ![236446648-c93dded5-1d51-4987-afad-5b0eedc01574](https://github.com/genomic-medicine-sweden/gms_16S/assets/115690981/5017bac9-a5a4-4bb2-a5e4-34c15cc37b22)
+![gms_16S_krona](https://github.com/genomic-medicine-sweden/gms_16S/assets/115690981/3dd8dfc3-2951-48fe-80dc-dd855139fccf)
 
 ## Quick Start
 
