@@ -325,6 +325,16 @@
     "save_preprocessed_reads": {
       "type": "boolean",
       "description": "save preprocessed reads"
+    },
+    "run_krona": {
+      "type": "boolean",
+      "default": true,
+      "description": "Run krona, true or false"
+    },
+    "krona_taxonomy_directory": {
+      "type": "string",
+      "default": "assets/databases/krona",
+      "description": "path to the krona database"
     }
   },
   "required": ["seqtype", "db"]

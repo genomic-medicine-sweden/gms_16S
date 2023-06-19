@@ -53,6 +53,7 @@ include { NANOPLOT                    } from '../modules/nf-core/nanoplot/main.n
 include { PORECHOP_ABI                } from '../modules/nf-core/porechop/abi/main.nf'
 include { FILTLONG                    } from '../modules/nf-core/filtlong/main.nf'
 include { EMU_ABUNDANCE               } from '../modules/local/emu/abundance/main.nf'
+include { KRONA_KTIMPORTTAXONOMY      } from '../modules/nf-core/krona/ktimporttaxonomy/main.nf'
 include { CUSTOM_DUMPSOFTWAREVERSIONS } from '../modules/nf-core/custom/dumpsoftwareversions/main'
 include { MULTIQC                     } from '../modules/nf-core/multiqc/main'
 include { FASTQC                      } from '../modules/nf-core/fastqc/main'
@@ -161,8 +162,6 @@ workflow GMSEMU {
 
 
 
-
-
     //
     // MODULE: MultiQC
     //
@@ -192,7 +191,19 @@ workflow GMSEMU {
     EMU_ABUNDANCE (
         ch_processed_reads
     )
+
+
+
+    if ( params.run_krona ) {
+        // MODULE: Run KRONA_KTIMPORTTAXONOMY
+        KRONA_KTIMPORTTAXONOMY (EMU_ABUNDANCE.out.report , file(params.krona_taxonomy_directory, checkExists: true) )
+          ch_versions = ch_versions.mix( KRONA_KTIMPORTTAXONOMY.out.versions.first() )
+    }
+
+
 }
+
+
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
