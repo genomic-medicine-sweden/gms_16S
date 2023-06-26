@@ -36,7 +36,7 @@ Krona plot
 5. Run your command
 
 ```bash
-nextflow run main.nf --input assets/samplesheet_medium.csv     --outdir results_emu     --db assets/databases/emu_database/     --seqtype map-ont     -profile singularity,test   
+nextflow run main.nf --input assets/samplesheet_medium.csv     --outdir results_emu     --db [absolute path to assets/databases/emu_database/]     --seqtype map-ont     -profile singularity,test   
 ```
 
 ## Credits
