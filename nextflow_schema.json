@@ -284,7 +284,6 @@
     },
     "adapter_trimming": {
       "type": "boolean",
-      "default": true,
       "description": "Trim adapters with porechop_abi"
     },
     "quality_filtering": {
@@ -335,6 +334,17 @@
       "type": "string",
       "description": "the path to the taxonomy.tab used by Krona",
       "default": "assets/databases/krona/taxonomy/taxonomy.tab"
+    },
+    "merge_fastq_pass": {
+      "type": "string",
+      "default": "None",
+      "description": "Path to a directory containing barcode folders named barcodexx. For nanopore data. This option concatenates the fastq-files in the barcode folders  for each barcode folder. Us the flag in combination with \"--barcodes_samplesheet\" to get correct sample ids for each result file. If  merge_barcodes_samplesheet is not defined, the result files will have the prefix according to respective barcode folder.",
+      "format": "directory-path"
+    },
+    "barcodes_samplesheet": {
+      "type": "string",
+      "default": null,
+      "format": "file-path"
     }
   },
   "required": ["seqtype", "db"]

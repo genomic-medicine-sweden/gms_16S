@@ -48,6 +48,9 @@ include { INPUT_CHECK } from '../subworkflows/local/input_check'
 //
 // MODULE: Installed directly from nf-core/modules
 //
+include { MERGE_BARCODES              } from '../modules/local/merge_barcodes/main.nf'
+include { MERGE_BARCODES_SAMPLESHEET  } from '../modules/local/merge_barcodes_samplesheet/main.nf'
+include { GENERATE_INPUT              } from '../modules/local/generate_input/main.nf'
 include { FALCO                       } from '../modules/nf-core/falco/main.nf'
 include { NANOPLOT                    } from '../modules/nf-core/nanoplot/main.nf'
 include { PORECHOP_ABI                } from '../modules/nf-core/porechop/abi/main.nf'
@@ -71,7 +74,18 @@ workflow GMSEMU {
     ch_versions = Channel.empty()
     ch_multiqc_files = Channel.empty()
 
+   
+    if ( params.merge_fastq_pass && !params.barcodes_samplesheet) { 
+        MERGE_BARCODES (params.merge_fastq_pass)
+    } else if ( params.merge_fastq_pass && params.barcodes_samplesheet) { 
+        MERGE_BARCODES_SAMPLESHEET (params.barcodes_samplesheet, params.merge_fastq_pass)
+//        merged_files = (params.outdir + '/fastq_pass_merged')
+//        GENERATE_INPUT (merged_files)
+//        ch_input = GENERATE_INPUT.out.sample_sheet  
+    }    
 
+    
+    
 
     //
     // SUBWORKFLOW: Read in samplesheet, validate and stage input files
