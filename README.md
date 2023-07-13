@@ -31,13 +31,61 @@ Krona plot
 
 2. Install any of [`Docker`](https://docs.docker.com/engine/installation/), [`Singularity`](https://www.sylabs.io/guides/3.0/user-guide/) (you can follow [this tutorial](https://singularity-tutorial.github.io/01-installation/)), [`Podman`](https://podman.io/), [`Shifter`](https://nersc.gitlab.io/development/shifter/how-to-use/) or [`Charliecloud`](https://hpc.github.io/charliecloud/) for full pipeline reproducibility _(you can use [`Conda`](https://conda.io/miniconda.html) both to install Nextflow itself and also to manage software within pipelines. Please only use it within pipelines as a last resort; see [docs](https://nf-co.re/usage/configuration#basic-configuration-profiles))_.
 
-3. Add you samples to a sample_sheet.csv
+3. Add you samples to an input file e.g., sample_sheet.csv. See examples. 
 4. gunzip all gzipped files in the database directory.
 5. Run your command
 
 ```bash
-nextflow run main.nf --input assets/samplesheet_medium.csv     --outdir results_emu     --db [absolute path to assets/databases/emu_database/]     --seqtype map-ont     -profile singularity,test   
+nextflow run main.nf    \
+--input sample_sheet.csv
+ --outdir [absolute path]/gms_16S/results   \
+ --db /[absolute path]/gms_16S/assets/databases/emu_database  \
+ --seqtype map-ont   \
+  -profile singularity,test   \
+ --quality_filtering \
+ --longread_qc_qualityfilter_minlength 1200 \
+ --longread_qc_qualityfilter_maxlength 1800 \
 ```
+## Runs with Nanopore barcode directories
+You can run with or without a sample sheet. If no sample_sheet is used, the results will be named according to the barcode. If a samplesheet is used the results will be named after whats in the second column of the samplesheet. Note that the "--input" flag is not needed when "--merge_fastq_pass" is defined.
+
+Run without barcode sample sheet
+```bash
+nextflow run main.nf    \
+ --outdir [absolute path]/gms_16S/results   \
+ --db /[absolute path]/gms_16S/assets/databases/emu_database  \
+ --seqtype map-ont   \
+  -profile singularity,test   \
+ --quality_filtering \
+ --longread_qc_qualityfilter_minlength 1200 \
+ --longread_qc_qualityfilter_maxlength 1800 \
+ --merge_fastq_pass /[absolute path]/gms_16S/fastq_pass/ 
+```
+Run with barcode samplesheet. 
+```bash
+nextflow run main.nf      --outdir /[absolute path to]/gms_16S/resultat   \
+  --db /[absolute path to database]/gms_16S/assets/databases/emu_database  \
+  --seqtype map-ont  \
+   -profile singularity,test \
+  --quality_filtering \
+  --longread_qc_qualityfilter_minlength 1200 \
+ --longread_qc_qualityfilter_maxlength 1800 \
+ --merge_fastq_pass /[absolute path to fastq_pass]/fastq_pass/ \
+  --barcodes_samplesheet /[absolute path to barcode samplesheet]/sample_sheet_merge.csv 
+```
+## Sample sheets
+There are two types of sample sheets that can be used: 1) If the fastq files are already concatanated/merged i.e., the fastq-files in nanopore barcode directories have been concataned already, the "--input" can be used. "--input"expects a .csv sample sheet with 3 columns (note the header names). It looks like this (See the "examples" directory fo examples.).  
+sample,fastq_1,fastq_2
+SAMPLE_1,/absolute_path/gms_16S/assets/test_assets/medium_Mock_dil_1_2_BC1.fastq.gz,
+SAMPLE_2,/absolute_path/gms_16S/assets/test_assets/medium_Mock_dil_1_2_BC3.fastq.gz,
+
+2) If the fastq files are separeted in their respecive barcode folder i.e., you have several fastq files for each sample and they are organized in barcode drectories in a fastq_pass dir. 
+a)
+   If you do not want to create a sample sheet for the barcodes, then the results will be named according to the barcode folders. flag --merge_fastq_pass  
+b)  
+   If you want your own sample names on the results, then use --merge_fastq_pass in combination with --barcodes_samplesheet. This requires a barcode sample sheet which is tab  
+ separated. Se example file "sample_sheet_merge.csv" in "examples" for a demonstration.
+
 
 ## Credits
 
