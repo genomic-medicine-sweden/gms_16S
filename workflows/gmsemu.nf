@@ -66,8 +66,9 @@ include { INPUT_CHECK } from '../subworkflows/local/input_check'
 include { MERGE_BARCODES              } from '../modules/local/merge_barcodes/main.nf'
 include { MERGE_BARCODES_SAMPLESHEET  } from '../modules/local/merge_barcodes_samplesheet/main.nf'
 include { GENERATE_INPUT              } from '../modules/local/generate_input/main.nf'
-include { FALCO                       } from '../modules/nf-core/falco/main.nf'
-include { NANOPLOT                    } from '../modules/nf-core/nanoplot/main.nf'
+//include { FALCO                     } from '../modules/nf-core/falco/main.nf'
+include { NANOPLOT as NANOPLOT1       } from '../modules/nf-core/nanoplot/main.nf'
+include { NANOPLOT  as NANOPLOT2      } from '../modules/nf-core/nanoplot/main.nf'
 include { PORECHOP_ABI                } from '../modules/nf-core/porechop/abi/main.nf'
 include { FILTLONG                    } from '../modules/nf-core/filtlong/main.nf'
 include { EMU_ABUNDANCE               } from '../modules/local/emu/abundance/main.nf'
@@ -119,18 +120,21 @@ workflow GMSEMU {
 
     //
     // MODULE: Run Falco
-    FALCO (
-        INPUT_CHECK.out.reads
-    )
+  //  FALCO (
+  //      INPUT_CHECK.out.reads
+  //  )
 
 
 
     //
-    // MODULE: Run Nanoplot
-    NANOPLOT (
+    // MODULE: Run Nanoplot1
+    NANOPLOT1 (
         INPUT_CHECK.out.reads
     )
 
+  //  NANOPLOT2 (
+  //      INPUT_CHECK.out.reads
+  //  )
 
 
 
@@ -195,7 +199,11 @@ workflow GMSEMU {
 
 
 
+       NANOPLOT2 (
+        ch_processed_reads 
+      )
 
+    
     //
     // MODULE: MultiQC
     //
