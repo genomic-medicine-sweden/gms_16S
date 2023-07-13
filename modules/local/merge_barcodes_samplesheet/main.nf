@@ -8,11 +8,13 @@ process MERGE_BARCODES_SAMPLESHEET {
    
 
     output:
-    publishDir 'fastq_pass_merged', mode: 'move'
-      path('*.fastq.gz')    
+    // publishDir 'fastq_pass_merged', mode: 'move'
+    path('fastq_pass_merged/*fastq.gz') , emit : fastq_files_merged
+    path('fastq_pass_merged') , emit : fastq_dir_merged
+    
     script:
     """
-    merge_barcodes_samplesheet.py $barcodes_samplesheet ./ $fastq_pass 
+    merge_barcodes_samplesheet.py $barcodes_samplesheet fastq_pass_merged $fastq_pass 
     """
 }
 

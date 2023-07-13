@@ -11,11 +11,26 @@ WorkflowGmsemu.initialise(params, log)
 
 // TODO nf-core: Add all file path parameters for the pipeline to the list below
 // Check input path parameters to see if they exist
-def checkPathParamList = [ params.input, params.multiqc_config, params.fasta ]
+
+// def checkPathParamList = [ params.input, params.multiqc_config, params.fasta ]
+// for (param in checkPathParamList) { if (param) { file(param, checkIfExists: true) } }
+
+def checkPathParamList = []
+if (!params.merge_fastq_pass) {
+    checkPathParamList += params.input
+}
+checkPathParamList += [params.multiqc_config, params.fasta]
 for (param in checkPathParamList) { if (param) { file(param, checkIfExists: true) } }
 
 // Check mandatory parameters
-if (params.input) { ch_input = file(params.input) } else { exit 1, 'Input samplesheet not specified!' }
+// if (params.input) { ch_input = file(params.input) } else { exit 1, 'Input samplesheet not specified!' }
+if (params.input) {
+  ch_input = file(params.input)  
+  } else if (params.merge_fastq_pass) {
+      // do nothing.    
+  } else { 
+  exit 1, 'Input samplesheet not specified. Unless '--merge_fastq_pass' is used, a sample_sheet.csv must be defined!' 
+ }
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -70,6 +85,7 @@ include { FASTQC                      } from '../modules/nf-core/fastqc/main'
 def multiqc_report = []
 
 workflow GMSEMU {
+    
 
     ch_versions = Channel.empty()
     ch_multiqc_files = Channel.empty()
@@ -77,11 +93,15 @@ workflow GMSEMU {
    
     if ( params.merge_fastq_pass && !params.barcodes_samplesheet) { 
         MERGE_BARCODES (params.merge_fastq_pass)
+        //GENERATE_INPUT(file("${params.outdir}/fastq_pass_merged"))
+        GENERATE_INPUT(MERGE_BARCODES.out.fastq_dir_merged)
+        //  ch_input = file(params.outdir + 'samplesheet_merged.csv')
+        ch_input = GENERATE_INPUT.out.sample_sheet_merged
     } else if ( params.merge_fastq_pass && params.barcodes_samplesheet) { 
         MERGE_BARCODES_SAMPLESHEET (params.barcodes_samplesheet, params.merge_fastq_pass)
 //        merged_files = (params.outdir + '/fastq_pass_merged')
-//        GENERATE_INPUT (merged_files)
-//        ch_input = GENERATE_INPUT.out.sample_sheet  
+        GENERATE_INPUT (MERGE_BARCODES_SAMPLESHEET.out.fastq_dir_merged)
+        ch_input = GENERATE_INPUT.out.sample_sheet_merged
     }    
 
     

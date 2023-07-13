@@ -1,4 +1,5 @@
 process MULTIQC {
+    debug true
     label 'process_single'
 
     conda "bioconda::multiqc=1.13"

@@ -16,6 +16,7 @@
 //               list (`[]`) instead of a file can be used to work around this issue.
 
 process EMU_ABUNDANCE {
+    debug true
     tag "$meta.id"
     label 'process_high'
 

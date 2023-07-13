@@ -16,9 +16,9 @@ directory="$1"
 directory=$(realpath "$directory")
 
 # Make an input samplesheet
-mkdir -p sample_sheets
+#mkdir -p sample_sheets
 ls -1 "$directory"/*fastq.gz > "reads.txt"
-echo "sample,fastq_1,fastq_2" > "samplesheet.csv"
+echo "sample,fastq_1,fastq_2" > "samplesheet_merged.csv"
 while IFS= read -r line; do
   # Get the filename 
   read1_n=$(basename "$line")
@@ -27,13 +27,13 @@ while IFS= read -r line; do
   # Entry name (everything in the filename before ".fastq.gz")
   sample_n=$(echo "$read1_n" | sed  's/\.fastq\.gz//')
   # Append to the sample_sheet.csv file
-  echo -e "${sample_n},${read1_n_path}," >> "samplesheet.csv"
+  echo -e "${sample_n},${read1_n_path}," >> "samplesheet_merged.csv"
   echo
 done < "reads.txt"
 
-cat "./samplesheet.csv"
+cat "./samplesheet_merged.csv"
 echo
-echo " file saved here ./samplesheet.csv"
+echo " file saved as samplesheet_merged.csv"
 echo
 rm -f ./reads.txt
 echo "Script finished"

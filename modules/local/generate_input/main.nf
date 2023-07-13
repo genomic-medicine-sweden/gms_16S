@@ -7,10 +7,10 @@ process GENERATE_INPUT {
 
     output:
 //    publishDir 'fastq_pass_merged', mode: 'move'
-      path '*amplesheet.csv' , emit : sample_sheet
+      path '*amplesheet_merged.csv' , emit : sample_sheet_merged
     script:
     """
-    ./generate_input.sh $merged_files
+    generate_input.sh $merged_files
     """
 }
 

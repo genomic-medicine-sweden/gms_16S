@@ -4,7 +4,7 @@
 Author: Frans Wallin
 Date: 20230707
 
-Description: merge fastq.gz files present in barcode folders. Typically for nanopore. 
+Description: merge fastq.gz files present in barcode folders. Typically for nanopore.
 
 A samplesheet is needed.
 
@@ -61,11 +61,11 @@ if __name__ == "__main__":
         captures = pattern.finditer(str(file_1))
 
         # # create the folder for appended files
-        #command1 = 'mkdir -p ./%s || exit $?' % (mapp,)
-        #out = subprocess.run(command1, shell=True).returncode
-        #if out != 0:
-        #    print("command did not work ", command1)
-        #    sys.exit()
+        command1 = 'mkdir -p ./%s || exit $?' % (mapp,)
+        out = subprocess.run(command1, shell=True).returncode
+        if out != 0:
+            print("command did not work ", command1)
+            sys.exit()
 
         # counter for number of samples
         counter = 0
@@ -95,5 +95,4 @@ else:
     print("Error. Script is not main.")
     exit
 print("end")
-
 
