@@ -79,12 +79,11 @@ sample,fastq_1,fastq_2
 SAMPLE_1,/absolute_path/gms_16S/assets/test_assets/medium_Mock_dil_1_2_BC1.fastq.gz,
 SAMPLE_2,/absolute_path/gms_16S/assets/test_assets/medium_Mock_dil_1_2_BC3.fastq.gz,
 
-2) If the fastq files are separeted in their respecive barcode folder i.e., you have several fastq files for each sample and they are organized in barcode drectories in a fastq_pass dir. 
-a)
+2) If the fastq files are separeted in their respecive barcode folder i.e., you have several fastq files for each sample and they are organized in barcode drectories in a fastq_pass dir.  
+a)  
    If you do not want to create a sample sheet for the barcodes, then the results will be named according to the barcode folders. flag --merge_fastq_pass  
 b)  
-   If you want your own sample names on the results, then use --merge_fastq_pass in combination with --barcodes_samplesheet. This requires a barcode sample sheet which is tab  
- separated. Se example file "sample_sheet_merge.csv" in "examples" for a demonstration.
+   If you want your own sample names on the results, then use --merge_fastq_pass in combination with --barcodes_samplesheet. This requires a barcode sample sheet which is tab separated. Se example file "sample_sheet_merge.csv" in "examples" for a demonstration.
 
 
 ## Credits
