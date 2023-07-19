@@ -86,6 +86,12 @@ b)
    If you want your own sample names on the results, then use --merge_fastq_pass in combination with --barcodes_samplesheet. This requires a barcode sample sheet which is tab separated. Se example file "sample_sheet_merge.csv" in "examples" for a demonstration.
 
 
+## Usefule env variables
+NXF_WORK = working directory. If the work is spread out on different nodes, set this to a shared place. export NXF_WORK=/path/to/your/working/dir  
+APPTAINER_TMPDIR  
+NXF_SINGULARITY_CACHEDIR  
+APPTAINER_CACHEDIR  
+
 ## Credits
 
 gms16S was originally written by @fwaa93.
