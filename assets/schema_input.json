@@ -1,7 +1,7 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema",
-    "$id": "https://raw.githubusercontent.com/nf-core/gmsemu/master/assets/schema_input.json",
-    "title": "nf-core/gmsemu pipeline - params.input schema",
+    "$id": "https://github.com/genomic-medicine-sweden/gms_16S/main/assets/schema_input.json",
+    "title": "GMS_16S pipeline - params.input schema",
     "description": "Schema for the file provided with params.input",
     "type": "array",
     "items": {

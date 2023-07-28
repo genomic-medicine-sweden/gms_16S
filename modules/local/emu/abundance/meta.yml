@@ -1,5 +1,5 @@
 name: "emu_abundance"
-## TODO nf-core: Add a description of the module and list keywords
+##  Add a description of the module and list keywords
 description: A taxonomic profiler for metagenomic 16S data optimized for error prone long reads.
 keywords:
   - Metagenomics
@@ -49,6 +49,12 @@ output:
       type: file
       description: Report (tsv file) over detected species and estimated number of reads and relative abundance
       pattern: "*{.tsv}"
+  # emu log. Put on ice.
+ // - emulog
+ //     type: file
+ //     description: File containing emu stdou & stderror
+ //     pattern: "emu_log*{.txt}"
+
 
 authors:
   - "@fwa93"

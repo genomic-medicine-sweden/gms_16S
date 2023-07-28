@@ -1,6 +1,6 @@
 {
-    "name": "nf-core/gmsemu",
-    "homePage": "https://github.com/nf-core/gmsemu",
+    "name": "GMS_16S",
+    "homePage": "https://github.com/genomic-medicine-sweden/gms_16S",
     "repos": {
         "https://github.com/nf-core/modules.git": {
             "modules": {
