@@ -10,8 +10,6 @@ A samplesheet is needed.
 
 """
 
-# Rest of your code goes here
-
 
 if __name__ == "__main__":
     # Import regex package

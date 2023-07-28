@@ -11,7 +11,7 @@ if [ "$#" -ne 1 ]; then
 fi
 
 
-# Set the directory to the first command line argument and convert it to an absolute path
+# Set the directory to the first command line argument and extract absolute path
 directory="$1"
 directory=$(realpath "$directory")
 
@@ -27,13 +27,13 @@ while IFS= read -r line; do
   # Entry name (everything in the filename before ".fastq.gz")
   sample_n=$(echo "$read1_n" | sed  's/\.fastq\.gz//')
   # Append to the sample_sheet.csv file
-  echo -e "${sample_n},${read1_n_path}," >> "samplesheet_merged.csv"
+  echo  "${sample_n},${read1_n_path}," >> "samplesheet_merged.csv"
   echo
 done < "reads.txt"
 
 cat "./samplesheet_merged.csv"
 echo
-echo " file saved as samplesheet_merged.csv"
+echo "file saved as samplesheet_merged.csv"
 echo
 rm -f ./reads.txt
 echo "Script finished"
