@@ -22,7 +22,8 @@ class WorkflowMain {
     // Generate help string
     //
     public static String help(workflow, params, log) {
-        def command = "nextflow run ${workflow.manifest.name} --input samplesheet.csv --genome GRCh37 -profile docker"
+        def command = "nextflow run ${workflow.manifest.name} --input sample_sheet.csv --outdir [absolute path]/gms_16S/results --db /[absolute path]/gms_16S/assets/databases/emu_database  --seqtype map-ont -profile singularity,test  --quality_filtering --longread_qc_qualityfilter_minlength 1200 --longread_qc_qualityfilter_maxlength 1800 "
+
         def help_string = ''
         help_string += NfcoreTemplate.logo(workflow, params.monochrome_logs)
         help_string += NfcoreSchema.paramsHelp(workflow, params, command)

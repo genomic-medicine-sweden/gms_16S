@@ -324,7 +324,8 @@
     "barcodes_samplesheet": {
       "type": "string",
       "default": "None",
-      "format": "file-path"
+      "format": "file-path",
+      "description": "Path to barcode samplesheet. Tab separated samplesheet where column1 hold the barcode folder e.g., barcode01, and column2 holds the sample name. Headers: barcode\tsample_id.  Flag is used in combination with \"merge_fastq_pass\".  With this flag , the results files are named after sample name and not barcode folder. Only works with ONT barcode folder structure."
     }
   },
   "required": ["seqtype", "db"]
