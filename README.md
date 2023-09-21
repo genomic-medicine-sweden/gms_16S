@@ -13,14 +13,14 @@
 
 gms_16S bioinformatics analysis pipeline for the EMU tool (https://gitlab.com/treangenlab/emu). 
 
-This Nextflow pipeline utilizes Falco, Porechop_ABI, Longfilt, and EMU for taxonomic profiling of 16S rRNA gene sequences. The results are displayed with Krona. Built with Nextflow, it ensures portability and reproducibility across different computational infrastructures. Falco performs quality control, Porechop_ABI trims adapters (optional)), Longfilt filters the fastq-files such that only reads that are close to 1500 bp are used (optional), EMU assigns taxonomic classifications, and Krona visualises the result table from EMU. The pipeline enables microbial community analysis, offering insights into the diversity in samples.
+This Nextflow pipeline utilizes fastqc, nanoplot, multiqc, Porechop_ABI, Longfilt, EMU, and Krona. EMU is the tool that does the taxonomic profiling of 16S rRNA reads. The results are displayed with Krona. Built with Nextflow, it ensures portability and reproducibility across different computational infrastructures. It has been tested on linux and on mac M1 (not recomended, quite slow). fastqc and Nanoplot performs quality control, Porechop_ABI trims adapters (optional)), Longfilt filters the fastq-files such that only reads that are close to 1500 bp are used (optional), EMU assigns taxonomic classifications, and Krona visualises the result table from EMU. The pipeline enables microbial community analysis, offering insights into the diversity in samples.
 
 The pipeline is built using [Nextflow](https://www.nextflow.io), a workflow tool to run tasks across multiple compute infrastructures in a very portable manner. It uses Docker/Singularity containers making installation trivial and results highly reproducible. The [Nextflow DSL2](https://www.nextflow.io/docs/latest/dsl2.html) implementation of this pipeline uses one container per process which makes it much easier to maintain and update software dependencies. 
 
 ## Pipeline summary
 
 ![236446648-c93dded5-1d51-4987-afad-5b0eedc01574](https://github.com/genomic-medicine-sweden/gms_16S/assets/115690981/5017bac9-a5a4-4bb2-a5e4-34c15cc37b22)
-Only the nanopore flow has been tested.
+Only the nanopore flow has been tested. Minor testing has been done for pacbio and it seems to work. short read has no support yet.
 ![image140](https://github.com/genomic-medicine-sweden/gms_16S/assets/115690981/dcdd5da4-135c-48c4-b64f-82f0452b5520)
 
 
@@ -94,10 +94,10 @@ APPTAINER_CACHEDIR
 
 ## Credits
 
-gms16S was originally written by @fwaa93.
+gms_16S was originally written by @fwaa93.
 
 
-This pipeline uses code and infrastructure developed and maintained by the [nf-core](https://nf-co.re) community, reused here under the [MIT license](https://github.com/nf-core/tools/blob/master/LICENSE).
+This pipeline is not a formal nf-core pipeline but it partly uses code and infrastructure developed and maintained by the [nf-core](https://nf-co.re) community, reused here under the [MIT license](https://github.com/nf-core/tools/blob/master/LICENSE).
 
 > The nf-core framework for community-curated bioinformatics pipelines.
 >
