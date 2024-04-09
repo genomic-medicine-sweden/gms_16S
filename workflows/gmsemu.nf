@@ -131,6 +131,9 @@ workflow GMSEMU {
     NANOPLOT1 (
         INPUT_CHECK.out.reads
     )
+    ch_versions = ch_versions.mix(NANOPLOT1.out.versions.first())
+
+
 
   //  NANOPLOT2 (
   //      INPUT_CHECK.out.reads
@@ -146,9 +149,6 @@ workflow GMSEMU {
     )
     ch_versions = ch_versions.mix(FASTQC.out.versions.first())
 
-    CUSTOM_DUMPSOFTWAREVERSIONS (
-        ch_versions.unique().collectFile(name: 'collated_versions.yml')
-    )
 
 
 
@@ -203,6 +203,25 @@ workflow GMSEMU {
         ch_processed_reads 
       )
 
+
+    // MODULE: Run EMU_ABUNDANCE
+    EMU_ABUNDANCE (
+        ch_processed_reads
+    )
+    ch_versions = ch_versions.mix(EMU_ABUNDANCE.out.versions.first())
+
+
+
+    if ( params.run_krona ) {
+        // MODULE: Run KRONA_KTIMPORTTAXONOMY
+        KRONA_KTIMPORTTAXONOMY (EMU_ABUNDANCE.out.report , file(params.krona_taxonomy_tab, checkExists: true) )
+          ch_versions = ch_versions.mix( KRONA_KTIMPORTTAXONOMY.out.versions.first() )
+    }
+
+
+    CUSTOM_DUMPSOFTWAREVERSIONS (
+        ch_versions.unique().collectFile(name: 'collated_versions.yml')
+    )
     
     //
     // MODULE: MultiQC
@@ -226,21 +245,6 @@ workflow GMSEMU {
         ch_multiqc_logo.toList()
     )
     multiqc_report = MULTIQC.out.report.toList()
-
-
-
-    // MODULE: Run EMU_ABUNDANCE
-    EMU_ABUNDANCE (
-        ch_processed_reads
-    )
-
-
-
-    if ( params.run_krona ) {
-        // MODULE: Run KRONA_KTIMPORTTAXONOMY
-        KRONA_KTIMPORTTAXONOMY (EMU_ABUNDANCE.out.report , file(params.krona_taxonomy_tab, checkExists: true) )
-          ch_versions = ch_versions.mix( KRONA_KTIMPORTTAXONOMY.out.versions.first() )
-    }
 
 
 }
