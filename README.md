@@ -94,7 +94,7 @@ APPTAINER_CACHEDIR
 
 ## Credits
 
-gms_16S was originally written by @fwaa93.
+gms_16S was originally written by @fwa93.
 
 
 This pipeline is not a formal nf-core pipeline but it partly uses code and infrastructure developed and maintained by the [nf-core](https://nf-co.re) community, reused here under the [MIT license](https://github.com/nf-core/tools/blob/master/LICENSE).
