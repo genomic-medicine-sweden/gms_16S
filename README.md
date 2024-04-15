@@ -19,8 +19,8 @@ The pipeline is built using [Nextflow](https://www.nextflow.io), a workflow tool
 
 ## Pipeline summary
 
-![236446648-c93dded5-1d51-4987-afad-5b0eedc01574](https://github.com/genomic-medicine-sweden/gms_16S/assets/115690981/5017bac9-a5a4-4bb2-a5e4-34c15cc37b22)
-Only the nanopore flow has been tested. Minor testing has been done for pacbio and it seems to work. short read has no support yet.
+![](docs/images/gms_16s_20240415.png)
+Roadmap/workflow. Only the nanopore flow is available. Minor testing has been done for pacbio and it seems to work. short read has no support yet. Multiqc collects only info from fastqc and some information about software versions and pipeline info.
 ![image140](https://github.com/genomic-medicine-sweden/gms_16S/assets/115690981/dcdd5da4-135c-48c4-b64f-82f0452b5520)
 
 
