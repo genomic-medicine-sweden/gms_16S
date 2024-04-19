@@ -1,3 +1,6 @@
+// This module has been modified. Added     "def prefix = task.ext.prefix ?: "${meta.id}""
+// and         "-p $prefix" meaning that the output files get the sample prefix. 
+
 process NANOPLOT {
     tag "$meta.id"
     label 'process_low'
@@ -24,11 +27,13 @@ process NANOPLOT {
     def args = task.ext.args ?: ''
     def input_file = ("$ontfile".endsWith(".fastq.gz")) ? "--fastq ${ontfile}" :
         ("$ontfile".endsWith(".txt")) ? "--summary ${ontfile}" : ''
+    def prefix = task.ext.prefix ?: "${meta.id}"
     """
     NanoPlot \\
         $args \\
         -t $task.cpus \\
-        $input_file
+        $input_file \\
+        -p $prefix
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
         nanoplot: \$(echo \$(NanoPlot --version 2>&1) | sed 's/^.*NanoPlot //; s/ .*\$//')
