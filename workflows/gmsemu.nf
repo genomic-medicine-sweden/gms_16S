@@ -25,11 +25,11 @@ for (param in checkPathParamList) { if (param) { file(param, checkIfExists: true
 // Check mandatory parameters
 // if (params.input) { ch_input = file(params.input) } else { exit 1, 'Input samplesheet not specified!' }
 if (params.input) {
-  ch_input = file(params.input)  
+  ch_input = file(params.input)
   } else if (params.merge_fastq_pass) {
-      // do nothing.    
-  } else { 
-  exit 1, 'Input samplesheet not specified. Unless '--merge_fastq_pass' is used, a sample_sheet.csv must be defined!' 
+      // do nothing.
+  } else {
+  exit 1, 'Input samplesheet not specified. Unless '--merge_fastq_pass' is used, a sample_sheet.csv must be defined!'
  }
 
 /*
@@ -86,27 +86,27 @@ include { FASTQC                      } from '../modules/nf-core/fastqc/main'
 def multiqc_report = []
 
 workflow GMSEMU {
-    
+
 
     ch_versions = Channel.empty()
     ch_multiqc_files = Channel.empty()
 
-   
-    if ( params.merge_fastq_pass && !params.barcodes_samplesheet) { 
+
+    if ( params.merge_fastq_pass && !params.barcodes_samplesheet) {
         MERGE_BARCODES (params.merge_fastq_pass)
         //GENERATE_INPUT(file("${params.outdir}/fastq_pass_merged"))
         GENERATE_INPUT(MERGE_BARCODES.out.fastq_dir_merged)
         //  ch_input = file(params.outdir + 'samplesheet_merged.csv')
         ch_input = GENERATE_INPUT.out.sample_sheet_merged
-    } else if ( params.merge_fastq_pass && params.barcodes_samplesheet) { 
+    } else if ( params.merge_fastq_pass && params.barcodes_samplesheet) {
         MERGE_BARCODES_SAMPLESHEET (params.barcodes_samplesheet, params.merge_fastq_pass)
 //        merged_files = (params.outdir + '/fastq_pass_merged')
         GENERATE_INPUT (MERGE_BARCODES_SAMPLESHEET.out.fastq_dir_merged)
         ch_input = GENERATE_INPUT.out.sample_sheet_merged
-    }    
+    }
 
-    
-    
+
+
 
     //
     // SUBWORKFLOW: Read in samplesheet, validate and stage input files
@@ -200,7 +200,7 @@ workflow GMSEMU {
 
 
        NANOPLOT2 (
-        ch_processed_reads 
+        ch_processed_reads
       )
 
 
@@ -222,9 +222,9 @@ workflow GMSEMU {
     CUSTOM_DUMPSOFTWAREVERSIONS (
         ch_versions.unique().collectFile(name: 'collated_versions.yml')
     )
-    
+
     //
-    // MODULE: MultiQC
+    // MODULE: MultiQC Preproccessed
     //
     workflow_summary    = WorkflowGmsemu.paramsSummaryMultiqc(workflow, summary_params)
     ch_workflow_summary = Channel.value(workflow_summary)
@@ -237,6 +237,9 @@ workflow GMSEMU {
     ch_multiqc_files = ch_multiqc_files.mix(ch_methods_description.collectFile(name: 'methods_description_mqc.yaml'))
     ch_multiqc_files = ch_multiqc_files.mix(CUSTOM_DUMPSOFTWAREVERSIONS.out.mqc_yml.collect())
     ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip.collect{it[1]}.ifEmpty([]))
+    // testing other tools
+    ch_multiqc_files = ch_multiqc_files.mix(NANOPLOT1.out.txt.collect{it[1]}.ifEmpty([]))
+    // ch_multiqc_files = ch_multiqc_files.mix(NANOPLOT2.out.txt.collect{it[1]}.ifEmpty([]))
 
     MULTIQC (
         ch_multiqc_files.collect(),
