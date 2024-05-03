@@ -282,8 +282,8 @@
       "description": "Maximum length for reads"
     },
     "longread_qc_qualityfilter_min_mean_q": {
-      "type": "integer",
-      "default": 12,
+      "type": "number",
+      "default": 94,
       "description": "minimum mean quality threshold"
     },
     "min_abundance": {
