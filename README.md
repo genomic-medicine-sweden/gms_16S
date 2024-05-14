@@ -59,7 +59,9 @@ Krona plot
 4. Add you samples to an input file e.g., `sample_sheet.csv`. See examples.
 5. gunzip all gzipped files in the database directory
    (`assets/databases/emu_database`)
-6. Run your command:
+6. gunzip all gzipped files in the krona/taxonomy directory
+   (`assets/databases/krona/taxonomy`)
+7. Run your command:
 
 ```bash
 nextflow run main.nf \
