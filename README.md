@@ -10,7 +10,7 @@
 <!-- TODO nf-core: Write a 1-2 sentence summary of what data the pipeline is
 for and what it does -->
 
-gms_16S bioinformatics analysis pipeline for the [EMU tool](https://gitlab.com/treangenlab/emu).
+gms_16S bioinformatics analysis pipeline for the [EMU tool](https://github.com/treangenlab/emu).
 
 This Nextflow pipeline utilizes FastQC, Nanoplot, MultiQC, Porechop_ABI,
 Longfilt, EMU, and Krona. EMU is the tool that does the taxonomic profiling of
@@ -199,7 +199,7 @@ community, reused here under the [MIT license](https://github.com/nf-core/tools/
   > mobility of compute. PLoS One. 2017 May 11;12(5):e0177459. doi:
   > 10.1371/journal.pone.0177459. eCollection 2017. PubMed PMID: 28494014; >
 
-- [EMU](https://gitlab.com/treangenlab/emu)
+- [EMU](https://github.com/treangenlab/emu)
   >  Kristen D. Curry et al., “Emu: Species-Level Microbial Community Profiling
   >  of Full-Length 16S RRNA Oxford Nanopore Sequencing Data,” Nature Methods,
   >  June 30, 2022, 1–9, https://doi.org/10.1038/s41592-022-015>
