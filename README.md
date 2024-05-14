@@ -57,8 +57,9 @@ Krona plot
    Please only use it within pipelines as a last resort. See
    [docs](https://nf-co.re/usage/configuration#basic-configuration-profiles)).
 4. Add you samples to an input file e.g., `sample_sheet.csv`. See examples.
-5. gunzip all gzipped files in the database directory.
-6. Run your command:
+5. gunzip all gzipped files in the database directory
+   (`assets/databases/emu_database`).
+7. Run your command:
 
 ```bash
 nextflow run main.nf \
