@@ -58,19 +58,19 @@ Krona plot
    [docs](https://nf-co.re/usage/configuration#basic-configuration-profiles)).
 4. Add you samples to an input file e.g., `sample_sheet.csv`. See examples.
 5. gunzip all gzipped files in the database directory
-   (`assets/databases/emu_database`).
-7. Run your command:
+   (`assets/databases/emu_database`)
+6. Run your command:
 
 ```bash
 nextflow run main.nf \
---input sample_sheet.csv
- --outdir [absolute path]/gms_16S/results \
- --db /[absolute path]/gms_16S/assets/databases/emu_database \
- --seqtype map-ont \
-  -profile singularity,test \
- --quality_filtering \
- --longread_qc_qualityfilter_minlength 1200 \
- --longread_qc_qualityfilter_maxlength 1800
+  --input sample_sheet.csv
+  --outdir [absolute path]/gms_16S/results \
+  --db /[absolute path]/gms_16S/assets/databases/emu_database \
+  --seqtype map-ont \
+   -profile singularity,test \
+  --quality_filtering \
+  --longread_qc_qualityfilter_minlength 1200 \
+  --longread_qc_qualityfilter_maxlength 1800
 ```
 
 ## Runs with Nanopore barcode directories
