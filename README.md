@@ -69,7 +69,7 @@ nextflow run main.nf \
   -profile singularity,test \
  --quality_filtering \
  --longread_qc_qualityfilter_minlength 1200 \
- --longread_qc_qualityfilter_maxlength 1800 \
+ --longread_qc_qualityfilter_maxlength 1800
 ```
 
 ## Runs with Nanopore barcode directories
@@ -96,7 +96,8 @@ nextflow run main.nf \
 Run with barcode sample sheet:
 
 ```bash
-nextflow run main.nf --outdir /[absolute path to]/gms_16S/resultat \
+nextflow run main.nf \
+  --outdir /[absolute path to]/gms_16S/results \
   --db /[absolute path to database]/gms_16S/assets/databases/emu_database \
   --seqtype map-ont \
    -profile singularity,test \
