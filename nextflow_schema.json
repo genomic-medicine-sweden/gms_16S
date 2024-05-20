@@ -12,6 +12,18 @@
       "description": "Define where the pipeline should find input data and save output data.",
       "required": ["outdir"],
       "properties": {
+        "merge_fastq_pass": {
+          "type": "string",
+          "default": "None",
+          "description": "Path to a directory containing barcode folders named barcodexx. For nanopore data. This option concatenates the fastq-files in the barcode folders  for each barcode folder. Us the flag in combination with \"--barcodes_samplesheet\" to get correct sample ids for each result file. If  merge_barcodes_samplesheet is not defined, the result files will have the prefix according to respective barcode folder.",
+          "format": "directory-path"
+        },
+        "barcodes_samplesheet": {
+          "type": "string",
+          "default": "None",
+          "format": "file-path",
+          "description": "Path to barcode samplesheet. Tab separated samplesheet where column1 hold the barcode folder e.g., barcode01, and column2 holds the sample name. Headers: barcode\tsample_id.  Flag is used in combination with \"merge_fastq_pass\".  With this flag , the results files are named after sample name and not barcode folder. Only works with ONT barcode folder structure."
+        },
         "input": {
           "type": "string",
           "format": "file-path",
@@ -39,6 +51,117 @@
           "type": "string",
           "description": "MultiQC report title. Printed as page header, used for filename if not otherwise specified.",
           "fa_icon": "fas fa-file-signature"
+        }
+      }
+    },
+    "emu_options": {
+      "title": "emu_options",
+      "type": "object",
+      "description": "Options concerning emu",
+      "default": "",
+      "properties": {
+        "seqtype": {
+          "type": "string",
+          "default": "map-ont",
+          "description": "short-read: sr, Pac-Bio:map-pb, ONT:map-ont"
+        },
+        "min_abundance": {
+          "type": "number",
+          "default": 0.0001,
+          "description": "min species abundance in results"
+        },
+        "minimap_max_alignments": {
+          "type": "integer",
+          "default": 50,
+          "description": "miminimap max number of secondary alignments per read"
+        },
+        "db": {
+          "type": "string",
+          "default": "None",
+          "format": "directory-path",
+          "description": "path to the database used by emu"
+        },
+        "minibatch_size": {
+          "type": "integer",
+          "default": 500000000,
+          "description": "minibatch size for minimap2 mapping"
+        },
+        "keep_read_assignments": {
+          "type": "boolean",
+          "description": "Output file with likelihoods",
+          "default": true
+        },
+        "keep_files": {
+          "type": "boolean",
+          "description": "Keep sam file"
+        },
+        "output_unclassified": {
+          "type": "boolean",
+          "description": "Output fasta with unclassified reads",
+          "default": true
+        }
+      },
+      "required": ["seqtype", "db"]
+    },
+    "filtlong_options": {
+      "title": "FiltLong_options",
+      "type": "object",
+      "description": "Options concerning FiltLong which is used for filtering reads by length and quality",
+      "default": "",
+      "properties": {
+        "longread_qc_qualityfilter_minlength": {
+          "type": "integer",
+          "default": 1200,
+          "description": "Minimum length for reads"
+        },
+        "quality_filtering": {
+          "type": "boolean",
+          "default": true,
+          "description": "Filter reads by quality and length"
+        },
+        "longread_qc_qualityfilter_maxlength": {
+          "type": "integer",
+          "default": 1800,
+          "description": "Maximum length for reads"
+        },
+        "save_preprocessed_reads": {
+          "type": "boolean",
+          "description": "save preprocessed reads"
+        },
+        "longread_qc_qualityfilter_min_mean_q": {
+          "type": "number",
+          "default": 94,
+          "description": "minimum mean quality threshold"
+        }
+      }
+    },
+    "krona_options": {
+      "title": "krona_options",
+      "type": "object",
+      "description": "Options concerning krona which is used for krona plot generation",
+      "default": "",
+      "properties": {
+        "run_krona": {
+          "type": "boolean",
+          "default": true,
+          "description": "Run krona, true or false"
+        },
+        "krona_taxonomy_tab": {
+          "type": "string",
+          "description": "the path to the taxonomy.tab used by Krona",
+          "default": "assets/databases/krona/taxonomy/taxonomy.tab"
+        }
+      }
+    },
+    "porechop_abi": {
+      "title": "porechop_abi",
+      "type": "object",
+      "description": "options concerning porechop_abi which is used for adapter removal",
+      "default": "",
+      "properties": {
+        "adapter_trimming": {
+          "type": "boolean",
+          "description": "Trim adapters with porechop_abi"
         }
       }
     },
@@ -241,6 +364,18 @@
       "$ref": "#/definitions/input_output_options"
     },
     {
+      "$ref": "#/definitions/emu_options"
+    },
+    {
+      "$ref": "#/definitions/filtlong_options"
+    },
+    {
+      "$ref": "#/definitions/krona_options"
+    },
+    {
+      "$ref": "#/definitions/porechop_abi"
+    },
+    {
       "$ref": "#/definitions/institutional_config_options"
     },
     {
@@ -249,84 +384,5 @@
     {
       "$ref": "#/definitions/generic_options"
     }
-  ],
-  "properties": {
-    "db": {
-      "type": "string",
-      "default": "None",
-      "format": "directory-path",
-      "description": "path to the database used by emu"
-    },
-    "seqtype": {
-      "type": "string",
-      "default": "map-ont",
-      "description": "short-read: sr, Pac-Bio:map-pb, ONT:map-ont"
-    },
-    "adapter_trimming": {
-      "type": "boolean",
-      "description": "Trim adapters with porechop_abi"
-    },
-    "quality_filtering": {
-      "type": "boolean",
-      "default": true,
-      "description": "Filter reads by quality and length"
-    },
-    "longread_qc_qualityfilter_minlength": {
-      "type": "integer",
-      "default": 900,
-      "description": "Minimum length for reads"
-    },
-    "longread_qc_qualityfilter_maxlength": {
-      "type": "integer",
-      "default": 1600,
-      "description": "Maximum length for reads"
-    },
-    "longread_qc_qualityfilter_min_mean_q": {
-      "type": "number",
-      "default": 94,
-      "description": "minimum mean quality threshold"
-    },
-    "min_abundance": {
-      "type": "number",
-      "default": 0.0001,
-      "description": "min species abundance in results"
-    },
-    "minimap_max_alignments": {
-      "type": "integer",
-      "default": 50,
-      "description": "miminimap max number of secondary alignments per read"
-    },
-    "minibatch_size": {
-      "type": "integer",
-      "default": 500000000,
-      "description": "minibatch size for minimap2 mapping"
-    },
-    "save_preprocessed_reads": {
-      "type": "boolean",
-      "description": "save preprocessed reads"
-    },
-    "run_krona": {
-      "type": "boolean",
-      "default": true,
-      "description": "Run krona, true or false"
-    },
-    "krona_taxonomy_tab": {
-      "type": "string",
-      "description": "the path to the taxonomy.tab used by Krona",
-      "default": "assets/databases/krona/taxonomy/taxonomy.tab"
-    },
-    "merge_fastq_pass": {
-      "type": "string",
-      "default": "None",
-      "description": "Path to a directory containing barcode folders named barcodexx. For nanopore data. This option concatenates the fastq-files in the barcode folders  for each barcode folder. Us the flag in combination with \"--barcodes_samplesheet\" to get correct sample ids for each result file. If  merge_barcodes_samplesheet is not defined, the result files will have the prefix according to respective barcode folder.",
-      "format": "directory-path"
-    },
-    "barcodes_samplesheet": {
-      "type": "string",
-      "default": "None",
-      "format": "file-path",
-      "description": "Path to barcode samplesheet. Tab separated samplesheet where column1 hold the barcode folder e.g., barcode01, and column2 holds the sample name. Headers: barcode\tsample_id.  Flag is used in combination with \"merge_fastq_pass\".  With this flag , the results files are named after sample name and not barcode folder. Only works with ONT barcode folder structure."
-    }
-  },
-  "required": ["seqtype", "db"]
+  ]
 }
