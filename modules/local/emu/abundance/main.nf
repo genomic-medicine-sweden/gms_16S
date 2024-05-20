@@ -35,7 +35,8 @@ process EMU_ABUNDANCE {
     output:
     tuple val(meta), path("*.tsv"), emit: report
     path "versions.yml"           , emit: versions
-    tuple val(meta), path("*.sam"), emit: samfile
+    tuple val(meta), path("*.sam"), emit: samfile, optional:true
+
 
 
     when:
