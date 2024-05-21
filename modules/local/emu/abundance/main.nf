@@ -33,9 +33,11 @@ process EMU_ABUNDANCE {
     tuple val(meta), path(reads)
 
     output:
-    tuple val(meta), path("*.tsv"), emit: report
+    tuple val(meta), path("*abundance.tsv"), emit: report
+    tuple val(meta), path("*read-assignment-distributions.tsv"), emit: assignment_report, optional:true
     path "versions.yml"           , emit: versions
     tuple val(meta), path("*.sam"), emit: samfile, optional:true
+    tuple val(meta), path("*.fa"), emit: unclassified_fa , optional:true
 
 
 
