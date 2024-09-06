@@ -46,7 +46,7 @@ Krona plot
 
 ## Quick Start
 
-1. Install [Nextflow](https://www.nextflow.io/docs/latest/getstarted.html#installation) (`>=22.10.1`)
+1. Install [Nextflow](https://www.nextflow.io/docs/latest/getstarted.html#installation) (`>=23.04.0`)
 2. Install any of [Docker](https://docs.docker.com/engine/installation/),
    [Singularity](https://www.sylabs.io/guides/3.0/user-guide/) (you can follow
    [this tutorial](https://singularity-tutorial.github.io/01-installation/)),
