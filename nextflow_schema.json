@@ -135,6 +135,50 @@
         }
       }
     },
+     "cutadapt_options": {
+      "title": "Cutadapt options",
+      "type": "object",
+      "description": "Options for cutadapt which is used for removing adapter sequences",
+      "default": "",
+      "properties": {
+        "FW_primer": {
+          "type": "string",
+          "description": "Forward primer"
+        },
+     "RV_primer": {
+          "type": "string",
+          "description": "Reverse primer"
+        },
+     "cutadapt_max_error_rate": {
+          "type": "number",
+          "default": 0.1,
+          "description": "Sets the maximum error rate for valid matches of primer sequences with reads for cutadapt (-e)."
+        },
+
+       "cutadapt_min_overlap": {
+           "type": "integer",
+            "default": 3,
+            "description": "Minimum overlap for valid matches of primer sequences with reads for cutadapt (-O)."
+         },
+
+      	"retain_untrimmed": {
+           "type": "boolean",
+           "description": "Cutadapt will retain untrimmed reads, choose only if input reads are not expected to contain primer sequences.",
+ 	   "default": true
+         },
+       "save_intermediates": {
+          "type": "boolean",
+          "default": false,
+          "description": "Save trimmed files from cutadapt "
+        },
+
+        "skip_cutadapt": {
+          "type": "boolean",
+          "default": false,
+          "description": "Skip primer trimming with cutadapt"
+        }
+      }
+    },
     "krona_options": {
       "title": "krona_options",
       "type": "object",
