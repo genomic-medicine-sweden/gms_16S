@@ -65,6 +65,7 @@ jobs:
       # want to run a test pipeline without nf-test
       - name: Run pipeline with test data
         run: |
+          export NXF_FILE_ROOT=$(pwd) &&
           nextflow  \
             -log ./nextflow.log \
             run ./main.nf \
