@@ -40,8 +40,8 @@ jobs:
         with:
           version: "${{ matrix.NXF_VER }}"
 
-      - name: Install nf-test
-        uses: nf-core/setup-nf-test@v1
+      #- name: Install nf-test
+      #  uses: nf-core/setup-nf-test@v1
 
       - name: Install Singularity
         # For running (locally) with ACT, we use a docker image with Singularity already installed
