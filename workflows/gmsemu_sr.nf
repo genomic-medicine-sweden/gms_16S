@@ -169,6 +169,11 @@ if (!params.skip_cutadapt) {
     ch_multiqc_files = ch_multiqc_files.mix(CUSTOM_DUMPSOFTWAREVERSIONS.out.mqc_yml.collect())
     ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip.collect{it[1]}.ifEmpty([]))
 
+   if (!params.skip_cutadapt) {
+    ch_multiqc_files = ch_multiqc_files.mix(CUTADAPT.out.log.collect { it[1] })
+    }
+
+
     MULTIQC (
         ch_multiqc_files.collect(),
         ch_multiqc_config.toList(),
