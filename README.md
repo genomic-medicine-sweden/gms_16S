@@ -56,7 +56,7 @@ Krona plot
    to install Nextflow itself and also to manage software within pipelines.
    Please only use it within pipelines as a last resort. See
    [docs](https://nf-co.re/usage/configuration#basic-configuration-profiles)).
-4. Add you samples to an input file e.g., `sample_sheet.csv`. See examples.
+4. Add your samples to an input file e.g., `sample_sheet.csv`. See examples.
 5. gunzip all gzipped files in the database directory
    (`assets/databases/emu_database`)
 6. gunzip all gzipped files in the krona/taxonomy directory
