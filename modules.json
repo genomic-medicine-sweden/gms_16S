@@ -1,27 +1,57 @@
 {
-    "name": "GMS_16S",
-    "homePage": "https://github.com/genomic-medicine-sweden/gms_16S",
-    "repos": {
-        "https://github.com/nf-core/modules.git": {
-            "modules": {
-                "nf-core": {
-                    "custom/dumpsoftwareversions": {
-                        "branch": "master",
-                        "git_sha": "c8e35eb2055c099720a75538d1b8adb3fb5a464c",
-                        "installed_by": ["modules"]
-                    },
-                    "fastqc": {
-                        "branch": "master",
-                        "git_sha": "c8e35eb2055c099720a75538d1b8adb3fb5a464c",
-                        "installed_by": ["modules"]
-                    },
-                    "multiqc": {
-                        "branch": "master",
-                        "git_sha": "c8e35eb2055c099720a75538d1b8adb3fb5a464c",
-                        "installed_by": ["modules"]
-                    }
-                }
-            }
+  "name": "GMS_16S",
+  "homePage": "https://github.com/genomic-medicine-sweden/gms_16S",
+  "repos": {
+    "https://github.com/nf-core/modules.git": {
+      "modules": {
+        "nf-core": {
+          "custom/dumpsoftwareversions": {
+            "branch": "master",
+            "git_sha": "c8e35eb2055c099720a75538d1b8adb3fb5a464c",
+            "installed_by": ["modules"]
+          },
+          "falco": {
+            "branch": "master",
+            "git_sha": "0f8a77ff00e65eaeebc509b8156eaa983192474b",
+            "installed_by": ["modules"]
+          },
+          "fastqc": {
+            "branch": "master",
+            "git_sha": "c8e35eb2055c099720a75538d1b8adb3fb5a464c",
+            "installed_by": ["modules"]
+          },
+          "filtlong": {
+            "branch": "master",
+            "git_sha": "0f8a77ff00e65eaeebc509b8156eaa983192474b",
+            "installed_by": ["modules"]
+          },
+          "krona/ktimporttaxonomy": {
+            "branch": "master",
+            "git_sha": "0f8a77ff00e65eaeebc509b8156eaa983192474b",
+            "installed_by": ["modules"]
+          },
+          "multiqc": {
+            "branch": "master",
+            "git_sha": "c8e35eb2055c099720a75538d1b8adb3fb5a464c",
+            "installed_by": ["modules"]
+          },
+          "nanoplot": {
+            "branch": "master",
+            "git_sha": "682f789f93070bd047868300dd018faf3d434e7c",
+            "installed_by": ["modules"]
+          },
+          "porechop/abi": {
+            "branch": "master",
+            "git_sha": "c8e35eb2055c099720a75538d1b8adb3fb5a464c",
+            "installed_by": ["modules"]
+          },
+          "porechop/porechop": {
+            "branch": "master",
+            "git_sha": "c8e35eb2055c099720a75538d1b8adb3fb5a464c",
+            "installed_by": ["modules"]
+          }
         }
+      }
     }
+  }
 }
