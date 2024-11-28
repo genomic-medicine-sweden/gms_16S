@@ -1,6 +1,15 @@
 # TODO: if not installed, install
+if (!require(phyloseq)){
+  install.packages("phyloseq")
+  # library(phyloseq)
+}
+
 library(phyloseq)
 
+
+# # # # # # # # # # # # # # # # #
+##### FUNCTIONS USED BELOW ######
+# # # # # # # # # # # # # # # # #
 gms16s_to_phyloseq <- function(counts_file, taxonomy_file, sep_file_sample = "_", n_parts_filename_to_sample = 1) {
   if (endsWith(counts_file, ".xlsx")) {
     gms_counts <- openxlsx::read.xlsx(counts_file)
@@ -75,4 +84,27 @@ remove_genus_prefix_from_species <- function(tax_tab, i_genus, i_species) {
   
   return(new_tax_table)
 }
+
+
+# # # # # # # # # #
+###### MAIN #######
+# # # # # # # # # #
+args = commandArgs(trailingOnly = TRUE)
+
+### EMU IllV3V4
+phy_obj <- gms16s_to_phyloseq(counts_file = args[1], # e.g. gms_16s_Samples.xlsx or tsv 
+                                        taxonomy_file = args[2]) 
+
+tax_table(phy_obj) <- remove_genus_prefix_from_species(
+  tax_table(phy_obj), 
+  i_genus = 7, 
+  i_species = 8)
+
+
+saveRDS(phy_obj, "./physoseq_output.RDS")
+
+
+
+
+
 
