@@ -25,12 +25,12 @@ for (param in checkPathParamList) { if (param) { file(param, checkIfExists: true
 // Check mandatory parameters
 // if (params.input) { ch_input = file(params.input) } else { exit 1, 'Input samplesheet not specified!' }
 if (params.input) {
-  ch_input = file(params.input)
-  } else if (params.merge_fastq_pass) {
-      // do nothing.
-  } else {
-  exit 1, 'Input samplesheet not specified. Unless '--merge_fastq_pass' is used, a sample_sheet.csv must be defined!'
- }
+    ch_input = file(params.input)
+} else if (params.merge_fastq_pass) {
+    // do nothing.
+} else {
+    exit 1, 'Input samplesheet not specified. Unless '--merge_fastq_pass' is used, a sample_sheet.csv must be defined!'
+}
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -120,9 +120,9 @@ workflow GMSEMU {
 
     //
     // MODULE: Run Falco
-  //  FALCO (
-  //      INPUT_CHECK.out.reads
-  //  )
+    //  FALCO (
+    //      INPUT_CHECK.out.reads
+    //  )
 
 
 
@@ -135,9 +135,9 @@ workflow GMSEMU {
 
 
 
-  //  NANOPLOT2 (
-  //      INPUT_CHECK.out.reads
-  //  )
+    //  NANOPLOT2 (
+    //      INPUT_CHECK.out.reads
+    //  )
 
 
 
@@ -187,21 +187,20 @@ workflow GMSEMU {
     }
 
 
-//    PORECHOP_ABI (INPUT_CHECK.out.reads)
-//        ch_processed_reads = PORECHOP_ABI.out.reads
-//            .map { meta, reads -> [ meta + [single_end: 1], reads ]}
+    // ORECHOP_ABI (INPUT_CHECK.out.reads)
+    // ch_processed_reads = PORECHOP_ABI.out.reads
+    //     .map { meta, reads -> [ meta + [single_end: 1], reads ]}
 
-//    ch_versions = ch_versions.mix(FASTQC.out.versions.first())
+    // h_versions = ch_versions.mix(FASTQC.out.versions.first())
 
-//    CUSTOM_DUMPSOFTWAREVERSIONS (
-//        ch_versions.unique().collectFile(name: 'collated_versions.yml')
-//    )
+    // CUSTOM_DUMPSOFTWAREVERSIONS (
+    //     ch_versions.unique().collectFile(name: 'collated_versions.yml')
+    // )
 
 
-
-       NANOPLOT2 (
+    NANOPLOT2 (
         ch_processed_reads
-      )
+    )
 
 
     // MODULE: Run EMU_ABUNDANCE
@@ -215,7 +214,7 @@ workflow GMSEMU {
     if ( params.run_krona ) {
         // MODULE: Run KRONA_KTIMPORTTAXONOMY
         KRONA_KTIMPORTTAXONOMY (EMU_ABUNDANCE.out.report , file(params.krona_taxonomy_tab, checkExists: true) )
-          ch_versions = ch_versions.mix( KRONA_KTIMPORTTAXONOMY.out.versions.first() )
+        ch_versions = ch_versions.mix( KRONA_KTIMPORTTAXONOMY.out.versions.first() )
     }
 
 
