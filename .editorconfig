@@ -34,3 +34,6 @@ indent_style = unset
 
 [LICENSE]
 indent_style = unset
+
+[Makefile]
+indent_style = unset
