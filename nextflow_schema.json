@@ -1,10 +1,10 @@
 {
-    "$schema": "http://json-schema.org/draft-07/schema",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
     "$id": "genomic-medicine-sweden/gms_16S",
     "title": "genomic-medicine-sweden/gms_16S pipeline parameters",
     "description": "A pipeline for paralellization for the EMU tool from treangelab. The pipeline will also inclide trimming of reads and qc-reports.",
     "type": "object",
-    "definitions": {
+    "$defs": {
         "input_output_options": {
             "title": "Input/output options",
             "type": "object",
@@ -354,28 +354,28 @@
     },
     "allOf": [
         {
-            "$ref": "#/definitions/input_output_options"
+            "$ref": "#/$defs/input_output_options"
         },
         {
-            "$ref": "#/definitions/emu_options"
+            "$ref": "#/$defs/emu_options"
         },
         {
-            "$ref": "#/definitions/filtlong_options"
+            "$ref": "#/$defs/filtlong_options"
         },
         {
-            "$ref": "#/definitions/krona_options"
+            "$ref": "#/$defs/krona_options"
         },
         {
-            "$ref": "#/definitions/porechop_abi"
+            "$ref": "#/$defs/porechop_abi"
         },
         {
-            "$ref": "#/definitions/institutional_config_options"
+            "$ref": "#/$defs/institutional_config_options"
         },
         {
-            "$ref": "#/definitions/max_job_request_options"
+            "$ref": "#/$defs/max_job_request_options"
         },
         {
-            "$ref": "#/definitions/generic_options"
+            "$ref": "#/$defs/generic_options"
         }
     ]
 }
