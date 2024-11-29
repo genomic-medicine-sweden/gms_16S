@@ -1,6 +1,6 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema",
-    "$id": "genomic-medicine-sweden/gms_16S",
+    "$id": "https://raw.githubusercontent.com/genomic-medicine-sweden/gms_16s/main/nextflow_schema.json",
     "title": "genomic-medicine-sweden/gms_16S pipeline parameters",
     "description": "A pipeline for paralellization for the EMU tool from treangelab. The pipeline will also inclide trimming of reads and qc-reports.",
     "type": "object",
