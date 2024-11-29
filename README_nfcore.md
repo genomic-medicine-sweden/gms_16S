@@ -1,11 +1,9 @@
 # gms_16S
 
-
 [![Nextflow](https://img.shields.io/badge/nextflow%20DSL2-%E2%89%A522.10.1-23aa62.svg)](https://www.nextflow.io/)
 [![run with conda](http://img.shields.io/badge/run%20with-conda-3EB049?labelColor=000000&logo=anaconda)](https://docs.conda.io/en/latest/)
 [![run with docker](https://img.shields.io/badge/run%20with-docker-0db7ed?labelColor=000000&logo=docker)](https://www.docker.com/)
 [![run with singularity](https://img.shields.io/badge/run%20with-singularity-1d355c.svg?labelColor=000000)](https://sylabs.io/docs/)
-
 
 ## Introduction
 
@@ -18,6 +16,7 @@ This Nextflow pipeline utilizes Falco, Porechop_ABI, Longfilt, and EMU for taxon
 The pipeline is built using [Nextflow](https://www.nextflow.io), a workflow tool to run tasks across multiple compute infrastructures in a very portable manner. It uses Docker/Singularity containers making installation trivial and results highly reproducible. The [Nextflow DSL2](https://www.nextflow.io/docs/latest/dsl2.html) implementation of this pipeline uses one container per process which makes it much easier to maintain and update software dependencies.
 
 ## Pipeline summary
+
 ![236446648-c93dded5-1d51-4987-afad-5b0eedc01574](https://github.com/genomic-medicine-sweden/gms_16S/assets/115690981/5017bac9-a5a4-4bb2-a5e4-34c15cc37b22)
 
 ## Quick Start
@@ -37,7 +36,6 @@ nextflow run main.nf --input assets/samplesheet_medium.csv     --outdir results_
 ## Credits
 
 gms16S was originally written by @fwaa93.
-
 
 This pipeline uses code and infrastructure developed and maintained by the [nf-core](https://nf-co.re) community, reused here under the [MIT license](https://github.com/nf-core/tools/blob/master/LICENSE).
 
@@ -76,14 +74,11 @@ This pipeline uses code and infrastructure developed and maintained by the [nf-c
 - [Docker](https://dl.acm.org/doi/10.5555/2600239.2600241)
 
 - [Singularity](https://pubmed.ncbi.nlm.nih.gov/28494014/)
+
   > Kurtzer GM, Sochat V, Bauer MW. Singularity: Scientific containers for mobility of compute. PLoS One. 2017 May 11;12(5):e0177459. doi: 10.1371/journal.pone.0177459. eCollection 2017. PubMed PMID: 28494014; >
 
 - [EMU](https://gitlab.com/treangenlab/emu)
->  Kristen D. Curry et al., “Emu: Species-Level Microbial Community Profiling of Full-Length 16S RRNA Oxford Nanopore Sequencing Data,” Nature Methods, June 30, 2022, 1–9, https://doi.org/10.1038/s41592-022-015>
-
-
-
-
+  > Kristen D. Curry et al., “Emu: Species-Level Microbial Community Profiling of Full-Length 16S RRNA Oxford Nanopore Sequencing Data,” Nature Methods, June 30, 2022, 1–9, https://doi.org/10.1038/s41592-022-015>
 
 ## Citations
 
