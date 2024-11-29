@@ -7,10 +7,9 @@ on:
       - main
       - dev
   pull_request:
-    branches:
-      - main
-      - dev
-    draft: false
+  release:
+    types: [published]
+  workflow_dispatch:
 
 env:
   NXF_ANSI_LOG: false
