@@ -1,9 +1,15 @@
 # TODO: if not installed, install
 if (!require(phyloseq)){
   install.packages("phyloseq")
-  # library(phyloseq)
+  # library(phyloseq)  # to check that it works
 }
 
+# TODO: if not installed, install
+if (!require(stringr)){
+  install.packages("stringr")
+}
+
+library(stringr)
 library(phyloseq)
 
 
@@ -69,7 +75,7 @@ remove_genus_prefix_from_species <- function(tax_tab, i_genus, i_species) {
       if (grepl(ext_pattern, species)) { 
         genus_pattern <- ext_pattern
       }
-      tax_row[i_species] <- str_replace(species, pattern = genus_pattern, replacement = "")
+      tax_row[i_species] <- stringr::str_replace(species, pattern = genus_pattern, replacement = "")
     }
     return(tax_row)
   }
@@ -83,6 +89,17 @@ remove_genus_prefix_from_species <- function(tax_tab, i_genus, i_species) {
   colnames(new_tax_table) <- rank_nam
   
   return(new_tax_table)
+}
+
+
+## HELPER FUNCTIONS
+str_first_n_elements <- function(string, n = 2, sep = "-") {
+  return(paste(stringr::str_split(string, sep)[[1]][1:n], collapse = sep))
+}
+
+is_numeric <- function(n) {
+  is_num <- suppressWarnings(!is.na(as.numeric(n)))
+  return(is_num)
 }
 
 
