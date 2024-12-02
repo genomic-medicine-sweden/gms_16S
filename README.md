@@ -35,9 +35,9 @@ and update software dependencies.
 
 ![Pipeline overview image](docs/images/gms_16s_20240415.png)
 
-Roadmap/workflow. Only the NanoPore flow is available. Minor testing has been
-done for PacBio and it seems to work. short read has no support yet. MultiQC
-collects only info from FastQC and some information about software versions and
+ The Nanopore and shortread workflow is available. 
+Minor testing has been done for PacBio and it seems to work.
+MultiQC collects only info from FastQC and some information about software versions and
 pipeline info.
 
 ![Krona plot](https://github.com/genomic-medicine-sweden/gms_16S/assets/115690981/dcdd5da4-135c-48c4-b64f-82f0452b5520)
@@ -111,18 +111,46 @@ nextflow run main.nf \
   --barcodes_samplesheet /[absolute path to barcode sample sheet]/sample_sheet_merge.csv
 ```
 
+## Runs with shortreads
+
+When running gms_16s with short reads, the primer sequences are trimmed using cutadapt by default using the provided primer sequences. 
+The primer sequences can be provided in the samplesheet or passed as arguments (FW_primer, RV_primer). Primer trimming with cutadapt can be skipped with --skip_cutadapt.
+
+
+```bash
+nextflow run main.nf \
+  --input sample_sheet.csv
+  --outdir [absolute path]/gms_16S/results \
+  --db /[absolute path]/gms_16S/assets/databases/emu_database \
+  --seqtype sr \
+   -profile singularity \
+  --quality_filtering \
+```
+
+```bash
+nextflow run main.nf \
+  --input sample_sheet.csv
+  --outdir [absolute path]/gms_16S/results \
+  --db /[absolute path]/gms_16S/assets/databases/emu_database \
+  --seqtype sr \
+   -profile singularity \
+  --quality_filtering \
+  --FW_primer AGCTGNCCTG\
+  --RV_primer TGCATNCTGA
+```
+
 ## Sample sheets
 
 There are two types of sample sheets that can be used: 1) If the fastq files
 are already concatenated/merged i.e., the fastq-files in Nanopore barcode
 directories have been concataned already, the `--input` can be used.
-`--input` expects a `.csv` sample sheet with 3 columns (note the header
+`--input` expects a `.csv` sample sheet with 4 columns (note the header
 names). It looks like this (See also the `examples` directory):
 
 ```csv
-sample,fastq_1,fastq_2
-SAMPLE_1,/absolute_path/gms_16S/assets/test_assets/medium_Mock_dil_1_2_BC1.fastq.gz,
-SAMPLE_2,/absolute_path/gms_16S/assets/test_assets/medium_Mock_dil_1_2_BC3.fastq.gz,
+sample,instrument_platform,fastq_1,fastq_2
+SAMPLE_1,NANOPORE,/absolute_path/gms_16S/assets/test_assets/medium_Mock_dil_1_2_BC1.fastq.gz,
+SAMPLE_2,NANOPORE,/absolute_path/gms_16S/assets/test_assets/medium_Mock_dil_1_2_BC3.fastq.gz,
 ```
 
 2) If the fastq files are separated in their respective barcode folder i.e., you
