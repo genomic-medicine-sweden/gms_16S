@@ -76,6 +76,7 @@ include { KRONA_KTIMPORTTAXONOMY      } from '../modules/nf-core/krona/ktimportt
 include { CUSTOM_DUMPSOFTWAREVERSIONS } from '../modules/nf-core/custom/dumpsoftwareversions/main'
 include { MULTIQC                     } from '../modules/nf-core/multiqc/main'
 include { FASTQC                      } from '../modules/nf-core/fastqc/main'
+include { PHYLOSEQ_OBJECT 			  } from '../modules/local/phyloseq/main.nf'   // todo: add below!
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     RUN MAIN WORKFLOW
@@ -251,6 +252,20 @@ workflow GMSEMU {
 
 
 }
+
+
+  	//
+  	// PHYLOSEQ
+    //
+
+    ch_tax_file          = Channel.fromPath("$projectDir/assets/databases/emu_database/taxonomy.tsv", checkIfExists: true)
+
+    PHYLOSEQ_OBJECT (
+        EMU_ABUNDANCE.out.report,
+        ch_tax_file
+    )
+    ch_versions = ch_versions.mix(PHYLOSEQ.out.versions)
+
 
 
 
