@@ -2,9 +2,11 @@
 
 """Generate a master html template."""
 
+import re
 import argparse
 import pandas as pd
 from jinja2 import Template
+from datetime import datetime
 
 description = '''
 ------------------------
@@ -63,13 +65,6 @@ parser.add_argument(
     dest='html',
     required=True
     )
-parser.add_argument(
-    '-i',
-    help='input directory',
-    metavar='INPUT_DIRECTORY',
-    dest='input',
-    required=True
-    )
 
 args = parser.parse_args()
 
@@ -78,17 +73,28 @@ def get_sample_ids(samplesheet_csv):
     sample_ids = df['sample'].tolist()
     return sample_ids
 
-def generate_master_html(template_html_fpath, sample_ids):
+def get_seqrun_date(samplesheet_csv):
+    date = ""
+    match = re.search(r'/(\d{8})_', samplesheet_csv)
+    if match:
+        date_regex = match.group(1)
+        date = datetime.strptime(date_regex, "%Y%m%d").strftime("%d-%m-%Y")
+    else:
+        date = "(No date found)"
+    return date
+
+def generate_master_html(template_html_fpath, sample_ids, seqrun_date):
     # Read the template from an HTML file
     with open(template_html_fpath, "r") as file:
         master_template = file.read()
     template = Template(master_template)
-    rendered_html = template.render(sample_ids=sample_ids)
+    rendered_html = template.render(sample_ids=sample_ids, seqrun_date=seqrun_date)
     return rendered_html
 
 def main():
     sample_ids = get_sample_ids(args.csv)
-    rendered_html = generate_master_html(args.html, sample_ids)
+    seqrun_date = get_seqrun_date(args.csv)
+    rendered_html = generate_master_html(args.html, sample_ids, seqrun_date)
     with open("master.html", "w") as fout:
         fout.write(rendered_html)
 

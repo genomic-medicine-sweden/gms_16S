@@ -3,55 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sample Report</title>
+    <title>16S Samples Report</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
     <div class="container my-5">
-        <h1 class="text-center mb-4">Sample Report</h1>
-        <div class="table-responsive">
-            <table class="table table-bordered table-striped table-hover">
-                <thead class="table-dark">
-                    <tr>
-                        <th>Sample ID</th>
-                        <th>FastQC</th>
-                        <th>Krona</th>
-                        <th>NanoPlot Length vs Quality Scatter (Dot)</th>
-                        <th>NanoPlot Length vs Quality Scatter (KDE)</th>
-                        <th>NanoPlot Report</th>
-                        <th>NanoPlot Non-weighted Histogram (Read Length)</th>
-                        <th>NanoPlot Non-weighted Log-transformed Histogram</th>
-                        <th>NanoPlot Weighted Histogram</th>
-                        <th>NanoPlot Weighted Log-transformed Histogram</th>
-                        <th>NanoPlot Yield by Length</th>
-                        <th>MultiQC Report</th>
-                        <th>Pipeline Execution Report</th>
-                        <th>Pipeline Execution Timeline</th>
-                        <th>Pipeline DAG</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for sample_id in sample_ids %}
-                    <tr>
-                        <td>{{ sample_id }}</td>
-                        <td><a href="./fastqc/{{ sample_id }}_T1_fastqc.html">FastQC</a></td>
-                        <td><a href="./krona/{{ sample_id }}_T1_krona.html">Krona</a></td>
-                        <td><a href="./nanoplot/{{ sample_id }}_T1_nanoplot_unprocessedLengthvsQualityScatterPlot_dot.html">Dot Scatter Plot</a></td>
-                        <td><a href="./nanoplot/{{ sample_id }}_T1_nanoplot_unprocessedLengthvsQualityScatterPlot_kde.html">KDE Scatter Plot</a></td>
-                        <td><a href="./nanoplot/{{ sample_id }}_T1_nanoplot_unprocessedNanoPlot-report.html">NanoPlot Report</a></td>
-                        <td><a href="./nanoplot/{{ sample_id }}_T1_nanoplot_unprocessedNon_weightedHistogramReadlength.html">Non-weighted Histogram</a></td>
-                        <td><a href="./nanoplot/{{ sample_id }}_T1_nanoplot_unprocessedNon_weightedLogTransformed_HistogramReadlength.html">Non-weighted Log-transformed Histogram</a></td>
-                        <td><a href="./nanoplot/{{ sample_id }}_T1_nanoplot_unprocessedWeightedHistogramReadlength.html">Weighted Histogram</a></td>
-                        <td><a href="./nanoplot/{{ sample_id }}_T1_nanoplot_unprocessedWeightedLogTransformed_HistogramReadlength.html">Weighted Log-transformed Histogram</a></td>
-                        <td><a href="./nanoplot/{{ sample_id }}_T1_nanoplot_unprocessedYield_By_Length.html">Yield by Length</a></td>
-                        <td><a href="./multiqc/multiqc_report.html">MultiQC</a></td>
-                        <td><a href="./pipeline_info/execution_report_2024-12-09_15-47-49.html">Execution Report</a></td>
-                        <td><a href="./pipeline_info/execution_timeline_2024-12-09_15-47-49.html">Execution Timeline</a></td>
-                        <td><a href="./pipeline_info/pipeline_dag_2024-12-09_15-47-49.html">Pipeline DAG</a></td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+        <div class="card">
+            <div class="card-header text-white bg-primary">
+                <h2 class="card-title mb-0">Sample Report</h2>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped table-hover">
+                        <thead class="table-success">
+                            <tr>
+                                <th>Sample ID</th>
+                                <th>FastQC</th>
+                                <th>Krona</th>
+                                <th>NanoPlot Length vs Quality Scatter (Dot)</th>
+                                <th>NanoPlot Length vs Quality Scatter (KDE)</th>
+                                <th>NanoPlot Report</th>
+                                <th>NanoPlot Non-weighted Histogram (Read Length)</th>
+                                <th>NanoPlot Non-weighted Log-transformed Histogram</th>
+                                <th>NanoPlot Weighted Histogram</th>
+                                <th>NanoPlot Weighted Log-transformed Histogram</th>
+                                <th>NanoPlot Yield by Length</th>
+                                <th>MultiQC Report</th>
+                                <th>Pipeline Execution Report</th>
+                                <th>Pipeline Execution Timeline</th>
+                                <th>Pipeline DAG</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for sample_id in sample_ids %}
+                            <tr>
+                                <td>{{ sample_id }}</td>
+                                <td><a href="./fastqc/{{ sample_id }}_T1_fastqc.html">FastQC</a></td>
+                                <td><a href="./krona/{{ sample_id }}_T1_krona.html">Krona</a></td>
+                                <td><a href="./nanoplot/{{ sample_id }}_T1_nanoplot_unprocessedLengthvsQualityScatterPlot_dot.html">Dot Scatter Plot</a></td>
+                                <td><a href="./nanoplot/{{ sample_id }}_T1_nanoplot_unprocessedLengthvsQualityScatterPlot_kde.html">KDE Scatter Plot</a></td>
+                                <td><a href="./nanoplot/{{ sample_id }}_T1_nanoplot_unprocessedNanoPlot-report.html">NanoPlot Report</a></td>
+                                <td><a href="./nanoplot/{{ sample_id }}_T1_nanoplot_unprocessedNon_weightedHistogramReadlength.html">Non-weighted Histogram</a></td>
+                                <td><a href="./nanoplot/{{ sample_id }}_T1_nanoplot_unprocessedNon_weightedLogTransformed_HistogramReadlength.html">Non-weighted Log-transformed Histogram</a></td>
+                                <td><a href="./nanoplot/{{ sample_id }}_T1_nanoplot_unprocessedWeightedHistogramReadlength.html">Weighted Histogram</a></td>
+                                <td><a href="./nanoplot/{{ sample_id }}_T1_nanoplot_unprocessedWeightedLogTransformed_HistogramReadlength.html">Weighted Log-transformed Histogram</a></td>
+                                <td><a href="./nanoplot/{{ sample_id }}_T1_nanoplot_unprocessedYield_By_Length.html">Yield by Length</a></td>
+                                <td><a href="./multiqc/multiqc_report.html">MultiQC</a></td>
+                                <td><a href="./pipeline_info/execution_report_2024-12-09_15-47-49.html">Execution Report</a></td>
+                                <td><a href="./pipeline_info/execution_timeline_2024-12-09_15-47-49.html">Execution Timeline</a></td>
+                                <td><a href="./pipeline_info/pipeline_dag_2024-12-09_15-47-49.html">Pipeline DAG</a></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card-footer text-muted">
+                Sequenced on {{ seqrun_date }}
+            </div>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
