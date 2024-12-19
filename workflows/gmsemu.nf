@@ -55,7 +55,6 @@ include { MERGE_BARCODES              } from '../modules/local/merge_barcodes/ma
 include { MERGE_BARCODES_SAMPLESHEET  } from '../modules/local/merge_barcodes_samplesheet/main.nf'
 include { GENERATE_INPUT              } from '../modules/local/generate_input/main.nf'
 include { GENERATE_MASTER_HTML        } from '../modules/local/generate_master_html/main.nf'
-//include { FALCO                     } from '../modules/nf-core/falco/main.nf'
 include { NANOPLOT as NANOPLOT1       } from '../modules/nf-core/nanoplot/main.nf'
 include { NANOPLOT  as NANOPLOT2      } from '../modules/nf-core/nanoplot/main.nf'
 include { PORECHOP_ABI                } from '../modules/nf-core/porechop/abi/main.nf'
@@ -95,8 +94,15 @@ workflow GMSEMU {
         ch_input = GENERATE_INPUT.out.sample_sheet_merged
     }
 
-    // Validate and stage input files
-    INPUT_CHECK(ch_input)
+    GENERATE_MASTER_HTML(GENERATE_INPUT.out.sample_sheet_merged)
+
+
+    //
+    // SUBWORKFLOW: Read in samplesheet, validate and stage input files
+    //
+    INPUT_CHECK (
+        ch_input
+    )
     ch_versions = ch_versions.mix(INPUT_CHECK.out.versions)
 
     //
