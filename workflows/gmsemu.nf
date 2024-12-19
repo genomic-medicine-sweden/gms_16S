@@ -54,6 +54,12 @@ include { INPUT_CHECK } from '../subworkflows/local/input_check'
 include { MERGE_BARCODES              } from '../modules/local/merge_barcodes/main.nf'
 include { MERGE_BARCODES_SAMPLESHEET  } from '../modules/local/merge_barcodes_samplesheet/main.nf'
 include { GENERATE_INPUT              } from '../modules/local/generate_input/main.nf'
+include { GENERATE_MASTER_HTML        } from '../modules/local/generate_master_html/main.nf'
+//include { FALCO                     } from '../modules/nf-core/falco/main.nf'
+include { NANOPLOT as NANOPLOT1       } from '../modules/nf-core/nanoplot/main.nf'
+include { NANOPLOT  as NANOPLOT2      } from '../modules/nf-core/nanoplot/main.nf'
+include { PORECHOP_ABI                } from '../modules/nf-core/porechop/abi/main.nf'
+include { FILTLONG                    } from '../modules/nf-core/filtlong/main.nf'
 include { EMU_ABUNDANCE               } from '../modules/local/emu/abundance/main.nf'
 include { KRONA_KTIMPORTTAXONOMY      } from '../modules/nf-core/krona/ktimporttaxonomy/main.nf'
 include { CUSTOM_DUMPSOFTWAREVERSIONS } from '../modules/nf-core/custom/dumpsoftwareversions/main'
@@ -76,19 +82,28 @@ workflow GMSEMU {
     ch_versions = Channel.empty()
     ch_multiqc_files = Channel.empty()
 
-    // Merge fastq and generate input based on seqtype
-    if (params.merge_fastq_pass && !params.barcodes_samplesheet) {
+
+    if ( params.merge_fastq_pass && !params.barcodes_samplesheet) {
         MERGE_BARCODES(params.merge_fastq_pass)
+        //GENERATE_INPUT(file("${params.outdir}/fastq_pass_merged"))
         GENERATE_INPUT(MERGE_BARCODES.out.fastq_dir_merged)
         ch_input = GENERATE_INPUT.out.sample_sheet_merged
-    } else if (params.merge_fastq_pass && params.barcodes_samplesheet) {
+    } else if ( params.merge_fastq_pass && params.barcodes_samplesheet) {
         MERGE_BARCODES_SAMPLESHEET(params.barcodes_samplesheet, params.merge_fastq_pass)
+//        merged_files = (params.outdir + '/fastq_pass_merged')
         GENERATE_INPUT(MERGE_BARCODES_SAMPLESHEET.out.fastq_dir_merged)
         ch_input = GENERATE_INPUT.out.sample_sheet_merged
     }
 
-    // Validate and stage input files
-    INPUT_CHECK(ch_input)
+    GENERATE_MASTER_HTML(GENERATE_INPUT.out.sample_sheet_merged)
+
+
+    //
+    // SUBWORKFLOW: Read in samplesheet, validate and stage input files
+    //
+    INPUT_CHECK (
+        ch_input
+    )
     ch_versions = ch_versions.mix(INPUT_CHECK.out.versions)
 
     //
