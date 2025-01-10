@@ -33,19 +33,12 @@ WorkflowMain.initialise(workflow, params, log)
 */
 
 include { GMSEMU } from './workflows/gmsemu'
-include { GMSEMU_sr } from './workflows/gmsemu_sr'
+
 //
 // WORKFLOW: Run main gms_16S  analysis pipeline
 //
-
 workflow GMS_EMU {
-    if (params.seqtype == "map-ont") {
-        GMSEMU()
-    } else if (params.seqtype == "sr") {
-        GMSEMU_sr()
-    } else {
-        error "Invalid seqtype. Please specify either 'map-ont' or 'sr'."
-    }
+    GMSEMU ()
 }
 
 /*
@@ -66,4 +59,3 @@ workflow {
     THE END
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
-

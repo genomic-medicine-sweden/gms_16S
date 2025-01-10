@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 
+
 """Provide a command line tool to validate and transform tabular samplesheets."""
+
 
 import argparse
 import csv
@@ -22,13 +24,14 @@ class RowChecker:
 
     """
 
-    VALID_FORMATS = (".fq.gz", ".fastq.gz")
-    ALLOWED_PLATFORMS = {"ILLUMINA", "NANOPORE","MAP-ONT"}
+    VALID_FORMATS = (
+        ".fq.gz",
+        ".fastq.gz",
+    )
 
     def __init__(
         self,
         sample_col="sample",
-        platform_col="instrument_platform",
         first_col="fastq_1",
         second_col="fastq_2",
         single_col="single_end",
@@ -40,8 +43,6 @@ class RowChecker:
         Args:
             sample_col (str): The name of the column that contains the sample name
                 (default "sample").
-            platform_col (str): The name of the column that contains the sequencing
-                platform (default "instrument_platform").
             first_col (str): The name of the column that contains the first (or only)
                 FASTQ file path (default "fastq_1").
             second_col (str): The name of the column that contains the second (if any)
@@ -53,7 +54,6 @@ class RowChecker:
         """
         super().__init__(**kwargs)
         self._sample_col = sample_col
-        self._platform_col = platform_col
         self._first_col = first_col
         self._second_col = second_col
         self._single_col = single_col
@@ -67,9 +67,9 @@ class RowChecker:
         Args:
             row (dict): A mapping from column headers (keys) to elements of that row
                 (values).
+
         """
         self._validate_sample(row)
-        self._validate_platform(row)
         self._validate_first(row)
         self._validate_second(row)
         self._validate_pair(row)
@@ -82,15 +82,6 @@ class RowChecker:
             raise AssertionError("Sample input is required.")
         # Sanitize samples slightly.
         row[self._sample_col] = row[self._sample_col].replace(" ", "_")
-
-    def _validate_platform(self, row):
-        """Assert that the instrument platform exists and is valid."""
-        platform = row.get(self._platform_col, "").strip().upper()
-        if platform not in self.ALLOWED_PLATFORMS:
-            allowed = ", ".join(self.ALLOWED_PLATFORMS)
-            raise AssertionError(
-                f"Instrument platform '{platform}' is invalid. Allowed values: {allowed}."
-            )
 
     def _validate_first(self, row):
         """Assert that the first FASTQ entry is non-empty and has the right format."""
@@ -127,7 +118,8 @@ class RowChecker:
         Assert that the combination of sample name and FASTQ filename is unique.
 
         In addition to the validation, also rename all samples to have a suffix of _T{n}, where n is the
-        number of times the same sample exists, but with different FASTQ files, e.g., multiple runs per experiment.
+        number of times the same sample exist, but with different FASTQ files, e.g., multiple runs per experiment.
+
         """
         if len(self._seen) != len(self.modified):
             raise AssertionError("The pair of sample name and FASTQ must be unique.")
@@ -187,21 +179,28 @@ def check_samplesheet(file_in, file_out):
             be created; always in CSV format.
 
     Example:
-        This function checks that the samplesheet follows the following structure:
+        This function checks that the samplesheet follows the following structure,
+        see also the `viral recon samplesheet`_::
 
-            sample,instrument_platform,fastq_1,fastq_2
-            SAMPLE_PE,ILLUMINA,SAMPLE_PE_RUN1_1.fastq.gz,SAMPLE_PE_RUN1_2.fastq.gz
-            SAMPLE_PE,ILLUMINA,SAMPLE_PE_RUN2_1.fastq.gz,SAMPLE_PE_RUN2_2.fastq.gz
-            SAMPLE_SE,NANOPORE,SAMPLE_SE_RUN1_1.fastq.gz,
+            sample,fastq_1,fastq_2
+            SAMPLE_PE,SAMPLE_PE_RUN1_1.fastq.gz,SAMPLE_PE_RUN1_2.fastq.gz
+            SAMPLE_PE,SAMPLE_PE_RUN2_1.fastq.gz,SAMPLE_PE_RUN2_2.fastq.gz
+            SAMPLE_SE,SAMPLE_SE_RUN1_1.fastq.gz,
+
+    .. _viral recon samplesheet:
+        https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv
 
     """
-    required_columns = {"sample", "instrument_platform", "fastq_1", "fastq_2"}
+    required_columns = {"sample", "fastq_1", "fastq_2"}
+    # See https://docs.python.org/3.9/library/csv.html#id3 to read up on `newline=""`.
     with file_in.open(newline="") as in_handle:
         reader = csv.DictReader(in_handle, dialect=sniff_format(in_handle))
+        # Validate the existence of the expected header columns.
         if not required_columns.issubset(reader.fieldnames):
             req_cols = ", ".join(required_columns)
             logger.critical(f"The sample sheet **must** contain these column headers: {req_cols}.")
             sys.exit(1)
+        # Validate each row.
         checker = RowChecker()
         for i, row in enumerate(reader):
             try:
@@ -212,6 +211,7 @@ def check_samplesheet(file_in, file_out):
         checker.validate_unique_samples()
     header = list(reader.fieldnames)
     header.insert(1, "single_end")
+    # See https://docs.python.org/3.9/library/csv.html#id3 to read up on `newline=""`.
     with file_out.open(mode="w", newline="") as out_handle:
         writer = csv.DictWriter(out_handle, header, delimiter=",")
         writer.writeheader()
