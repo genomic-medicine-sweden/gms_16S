@@ -12,9 +12,10 @@
 //               list (`[]`) instead of a file can be used to work around this issue.
 
 process PHYLOSEQ_OBJECT {
+    errorStrategy 'ignore'
     // debug true
-    // tag "$meta.id"
-    // label 'process_high'
+    tag "${meta.id}"
+    label 'process_single'
 
     // //               Software MUST be pinned to channel (i.e. "bioconda"), version (i.e. "1.10").
     // //               For Conda, the build (i.e. "h9402c20_2") must be EXCLUDED to support installation on different operating systems.
@@ -31,7 +32,7 @@ process PHYLOSEQ_OBJECT {
     //  Where applicable please provide/convert compressed files as input/output
     //               e.g. "*.fastq.gz" and NOT "*.fastq", "*.bam" and NOT "*.sam" etc.
     // tuple val(meta), path(reads)
-    path abundance_file
+    path report
     path taxonomy_file
 
     output:
@@ -40,7 +41,7 @@ process PHYLOSEQ_OBJECT {
     // path "versions.yml"           , emit: versions
     // tuple val(meta), path("*.sam"), emit: samfile, optional:true
     // tuple val(meta), path("*.fa"), emit: unclassified_fa , optional:true
-
+    path "physoseq_output.RDS"      , emit: phyloseq_output
 
 
     // when:
@@ -62,7 +63,7 @@ process PHYLOSEQ_OBJECT {
     // END_VERSIONS
     // """
     """
-     Rscript --vanilla main.R $abundance_file $taxonomy_file
+     Rscript --vanilla main.R $report $taxonomy_file
     """
 }
 

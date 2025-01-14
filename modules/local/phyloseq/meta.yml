@@ -1,0 +1,54 @@
+name: "phyloseq_object"
+##  Add a description of the module and list keywords
+description: ...
+keywords:
+  - Phyloseq
+  - R
+
+tools:
+  - "phyloseq":
+      ## TODO nf-core: Add a description and other details for the software below
+      ## TODO Change!!
+      description: "Phloseq is a data type in R to save taxonomic and phylognetic data."
+      homepage: "https://gitlab.com/treangenlab/emu"
+      documentation: "https://gitlab.com/treangenlab/emu"
+      tool_dev_url: "None"
+      doi: "https://doi.org/10.1038/s41592-022-01520-4"
+      licence: "['MIT']"
+
+## TODO nf-core: Add a description of all of the variables used as input
+input:
+  # Only when we have meta
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. [ id:'test', single_end:false ]
+  # Abundance file
+ - report:
+      type: file
+      description: "A tab-delimited file with taxonomy IDs and (optionally) query IDs, magnitudes, and scores>
+      pattern: "*.{tsv}"
+  #
+  ## TODO nf-core: Delete / customise this example input
+  - taxonomy_file:
+      type: file
+      description: Taxonomy file for the database that was used
+      pattern: "*.{tsv}"
+
+## TODO nf-core: Add a description of all of the variables used as output
+output:
+  #
+  - versions:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
+  ## TODO nf-core: Delete / customise this example output
+  - phyloseq_output:
+      type: file
+      description: Phyloseq object generated from the output of the pipeline, saved in RDS format
+      pattern: "*{.RDS}"
+
+
+authors:
+  - "@kdannenberg"

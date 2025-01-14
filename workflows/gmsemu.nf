@@ -251,10 +251,7 @@ workflow GMSEMU {
     multiqc_report = MULTIQC.out.report.toList()
 
 
-}
-
-
-  	//
+ 	//
   	// PHYLOSEQ
     //
 
@@ -264,8 +261,12 @@ workflow GMSEMU {
         EMU_ABUNDANCE.out.report,
         ch_tax_file
     )
-    ch_versions = ch_versions.mix(PHYLOSEQ.out.versions)
+    // ch_versions = ch_versions.mix(PHYLOSEQ.out.versions)
 
+}
+
+
+ 
 
 
 
