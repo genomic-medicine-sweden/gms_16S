@@ -1,4 +1,4 @@
-
+#!/usr/bin/env Rscript
 # TODO: if not installed, install
 if (!require(phyloseq)){
   install.packages("phyloseq")

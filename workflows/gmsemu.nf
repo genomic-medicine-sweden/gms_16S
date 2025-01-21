@@ -76,7 +76,7 @@ include { KRONA_KTIMPORTTAXONOMY      } from '../modules/nf-core/krona/ktimportt
 include { CUSTOM_DUMPSOFTWAREVERSIONS } from '../modules/nf-core/custom/dumpsoftwareversions/main'
 include { MULTIQC                     } from '../modules/nf-core/multiqc/main'
 include { FASTQC                      } from '../modules/nf-core/fastqc/main'
-include { PHYLOSEQ_OBJECT 			  } from '../modules/local/phyloseq/main.nf'   // todo: add below!
+include { PHYLOSEQ_OBJECT             } from '../modules/local/phyloseq/main.nf'   // todo: add below!
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     RUN MAIN WORKFLOW
