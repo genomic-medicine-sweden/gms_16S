@@ -21,8 +21,8 @@ process PHYLOSEQ_OBJECT {
     // //               For Conda, the build (i.e. "h9402c20_2") must be EXCLUDED to support installation on different operating systems.
     // conda "bioconda::emu=3.4.4"
      container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-         'https://depot.galaxyproject.org/singularity/r-base:3.4.2':
-         'quay.io/biocontainers/r-base:3.4.2' }"
+         'https://depot.galaxyproject.org/singularity/bioconductor-phyloseq:1.50.0':
+         'quay.io/biocontainers/bioconductor-phyloseq:1.50.0--r44hdfd78af_0' }"
 
     input:
     //  Where applicable all sample-specific information e.g. "id", "single_end", "read_group"

@@ -1,9 +1,15 @@
 #!/usr/bin/env Rscript
 # TODO: if not installed, install
-if (!require(phyloseq)){
-  install.packages("phyloseq")
+#if (!require(BiocManager)){
+#  install.packages("BiocManager")
+#  BiocManager::install(version = "3.20")
+#}
+
+
+#if (!require(phyloseq)){
+#  BiocManager::install("phyloseq")
   # library(phyloseq)  # to check that it works
-}
+#}
 
 # TODO: if not installed, install
 if (!require(stringr)){
