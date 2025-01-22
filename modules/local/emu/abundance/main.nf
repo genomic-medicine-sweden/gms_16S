@@ -18,10 +18,10 @@ process EMU_ABUNDANCE {
 
     //               Software MUST be pinned to channel (i.e. "bioconda"), version (i.e. "1.10").
     //               For Conda, the build (i.e. "h9402c20_2") must be EXCLUDED to support installation on different operating systems.
-    conda "bioconda::emu=3.4.4"
+    conda "bioconda::emu=3.5.1"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://depot.galaxyproject.org/singularity/emu:3.5.0--hdfd78af_0':
-        'quay.io/biocontainers/emu:3.5.0--hdfd78af_0' }"
+        'https://depot.galaxyproject.org/singularity/emu:3.5.1--hdfd78af_0':
+        'quay.io/biocontainers/emu:3.5.1--hdfd78af_0' }"
 
     input:
     //  Where applicable all sample-specific information e.g. "id", "single_end", "read_group"
