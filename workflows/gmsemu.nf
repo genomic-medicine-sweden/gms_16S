@@ -99,29 +99,46 @@ workflow GMSEMU {
     )
     ch_versions = ch_versions.mix(FASTQC.out.versions.first())
 
-
-
-    // Processing based on seqtype
     if (params.seqtype == "map-ont") {
-        // Long-read processing
         NANOPLOT1(INPUT_CHECK.out.reads)
         ch_versions = ch_versions.mix(NANOPLOT1.out.versions.first())
 
-	  //  NANOPLOT2 (
-	  //      INPUT_CHECK.out.reads
-	  //  )
-
-        if (params.adapter_trimming  && !params.quality_filtering  ) {
+        if (params.adapter_trimming && !params.quality_filtering) {
             PORECHOP_ABI(INPUT_CHECK.out.reads)
-            ch_clipped_reads = PORECHOP_ABI.out.reads.map { meta, reads -> [meta + [single_end: 1], reads] }
-            ch_processed_reads = FILTLONG(ch_clipped_reads.map { meta, reads -> [meta, [], reads] }).reads
+
+            ch_processed_reads = PORECHOP_ABI.out.reads
+                .map { meta, reads -> [meta + [single_end: 1], reads] }
+
+            ch_versions = ch_versions.mix(PORECHOP_ABI.out.versions.first())
+            ch_multiqc_files = ch_multiqc_files.mix(PORECHOP_ABI.out.log)
+
+        } else if (!params.adapter_trimming && params.quality_filtering) { 
+            ch_processed_reads = FILTLONG(
+                INPUT_CHECK.out.reads.map { meta, reads -> [meta, [], reads] }
+            ).reads
+
+            ch_versions = ch_versions.mix(FILTLONG.out.versions.first())
+            ch_multiqc_files = ch_multiqc_files.mix(FILTLONG.out.log)
+
+        } else if (params.adapter_trimming && params.quality_filtering) {
+            // Both adapter trimming and quality filtering
+            PORECHOP_ABI(INPUT_CHECK.out.reads)
+
+            ch_clipped_reads = PORECHOP_ABI.out.reads
+                .map { meta, reads -> [meta + [single_end: 1], reads] }
+
+            ch_processed_reads = FILTLONG(
+                ch_clipped_reads.map { meta, reads -> [meta, [], reads] }
+            ).reads
 
             ch_versions = ch_versions.mix(PORECHOP_ABI.out.versions.first())
             ch_versions = ch_versions.mix(FILTLONG.out.versions.first())
+            ch_multiqc_files = ch_multiqc_files.mix(PORECHOP_ABI.out.log)
+            ch_multiqc_files = ch_multiqc_files.mix(FILTLONG.out.log)
+
         } else {
             ch_processed_reads = INPUT_CHECK.out.reads
         }
-
 
     } else if (params.seqtype == "sr") {
         // Short-read processing
@@ -135,6 +152,7 @@ workflow GMSEMU {
     } else {
         error "Invalid seqtype. Please specify either 'map-ont' or 'sr'."
     }
+
 
 
     // Run EMU_ABUNDANCE
