@@ -107,6 +107,10 @@ workflow GMSEMU {
         NANOPLOT1(INPUT_CHECK.out.reads)
         ch_versions = ch_versions.mix(NANOPLOT1.out.versions.first())
 
+	  //  NANOPLOT2 (
+	  //      INPUT_CHECK.out.reads
+	  //  )
+
         if (params.adapter_trimming  && !params.quality_filtering  ) {
             PORECHOP_ABI(INPUT_CHECK.out.reads)
             ch_clipped_reads = PORECHOP_ABI.out.reads.map { meta, reads -> [meta + [single_end: 1], reads] }
@@ -118,8 +122,6 @@ workflow GMSEMU {
             ch_processed_reads = INPUT_CHECK.out.reads
         }
 
-        NANOPLOT2(ch_processed_reads)
-        ch_versions = ch_versions.mix(NANOPLOT2.out.versions.first())
 
     } else if (params.seqtype == "sr") {
         // Short-read processing

@@ -128,8 +128,7 @@ nextflow run main.nf \
   --outdir [absolute path]/gms_16S/results \
   --db /[absolute path]/gms_16S/assets/databases/emu_database \
   --seqtype sr \
-   -profile singularity \
-  --quality_filtering \
+   -profile singularity
 ```
 
 ```bash
@@ -139,7 +138,6 @@ nextflow run main.nf \
   --db /[absolute path]/gms_16S/assets/databases/emu_database \
   --seqtype sr \
    -profile singularity \
-  --quality_filtering \
   --FW_primer AGCTGNCCTG\
   --RV_primer TGCATNCTGA
 ```
