@@ -18,7 +18,7 @@ Longfilt, EMU, and Krona. EMU is the tool that does the taxonomic profiling of
 ensures portability and reproducibility across different computational
 infrastructures. It has been tested on Linux and on mac M1 (not recommended,
 quite slow). FastQC and Nanoplot performs quality control, Porechop_ABI trims
-adapters (optional)), Longfilt filters the fastq-files such that only reads
+adapters (optional), Longfilt filters the fastq-files such that only reads
 that are close to 1500 bp are used (optional), EMU assigns taxonomic
 classifications, and Krona visualises the result table from EMU. The pipeline
 enables microbial community analysis, offering insights into the diversity in
@@ -35,9 +35,9 @@ and update software dependencies.
 
 ![Pipeline overview image](docs/images/gms_16s_20240415.png)
 
-Roadmap/workflow. Only the NanoPore flow is available. Minor testing has been
-done for PacBio and it seems to work. short read has no support yet. MultiQC
-collects only info from FastQC and some information about software versions and
+ The Nanopore and shortread workflow is available. 
+Minor testing has been done for PacBio and it seems to work.
+MultiQC collects only info from FastQC and some information about software versions and
 pipeline info.
 
 ![Krona plot](https://github.com/genomic-medicine-sweden/gms_16S/assets/115690981/dcdd5da4-135c-48c4-b64f-82f0452b5520)
@@ -111,12 +111,45 @@ nextflow run main.nf \
   --barcodes_samplesheet /[absolute path to barcode sample sheet]/sample_sheet_merge.csv
 ```
 
+## Runs with shortreads
+
+When running gms_16s with short reads, the primer sequences are trimmed using cutadapt by default using the provided primer sequences. 
+The primer sequences can be provided in the samplesheet or passed as arguments (FW_primer, RV_primer). Primer trimming with cutadapt can be skipped with --skip_cutadapt.
+
+```bash
+sample,fastq_1,fastq_2,FW_primer,RV_primer
+SAMPLE,/absolute_path/gms_16s/Sample_R1_001.fastq.gz,/absolute_path/gms_16s/Sample_R2_001.fastq.gz,GTGCCAGCMGCCGCGGTAA,GGACTACNVGGGTWTCTAAT
+```
+
+
+```bash
+nextflow run main.nf \
+  --input sample_sheet.csv
+  --outdir [absolute path]/gms_16S/results \
+  --db /[absolute path]/gms_16S/assets/databases/emu_database \
+  --seqtype sr \
+   -profile singularity
+```
+
+```bash
+nextflow run main.nf \
+  --input sample_sheet.csv
+  --outdir [absolute path]/gms_16S/results \
+  --db /[absolute path]/gms_16S/assets/databases/emu_database \
+  --seqtype sr \
+   -profile singularity \
+  --FW_primer AGCTGNCCTG\
+  --RV_primer TGCATNCTGA
+```
+
+
+
 ## Sample sheets
 
 There are two types of sample sheets that can be used: 1) If the fastq files
 are already concatenated/merged i.e., the fastq-files in Nanopore barcode
 directories have been concataned already, the `--input` can be used.
-`--input` expects a `.csv` sample sheet with 3 columns (note the header
+`--input` expects a `.csv` sample sheet with 4 columns (note the header
 names). It looks like this (See also the `examples` directory):
 
 ```csv
