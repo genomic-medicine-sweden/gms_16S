@@ -37,8 +37,8 @@ process EMU_ABUNDANCE {
     tuple val(meta), path("*read-assignment-distributions.tsv"), emit: assignment_report, optional:true
     path "versions.yml"           , emit: versions
     tuple val(meta), path("*.sam"), emit: samfile, optional:true
-    tuple val(meta), path("*.fa"), emit: unclassified_fa , optional:true
-
+    tuple val(meta), path("*.fastq_unclassified_mapped.fasta"), emit: unclassified_mapped_fa , optional:true
+    tuple val(meta), path("*.fastq_unmapped.fasta"), emit: unclassified_unmapped_fa , optional:true
 
 
     when:
