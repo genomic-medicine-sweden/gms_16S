@@ -54,6 +54,17 @@ output:
       type: file
       description: File containing alignment data
       pattern: "*{.sam}
+  //unclassified and mapped fasta file
+  - unclassified_fa
+      type: file
+      description: File containing reads that mapped to the database but was presumed to be not in the sample by EMU´s algorithm. 
+      pattern: "*{.fastq_unclassified_mapped.fasta}
+  //unmapped fasta file
+  - unclassified_unmapped_fa
+      type: file
+      description: File containing reads that was not mapped to the database. 
+      pattern: "*{.fastq_unmapped.fasta}
+
 
   # emu log. Put on ice.
  // - emulog
