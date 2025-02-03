@@ -88,8 +88,6 @@ workflow GMSEMU {
         ch_input = GENERATE_INPUT.out.sample_sheet_merged
     }
 
-    GENERATE_MASTER_HTML(GENERATE_INPUT.out.sample_sheet_merged)
-
     // Validate and stage input files
     INPUT_CHECK(ch_input)
     ch_versions = ch_versions.mix(INPUT_CHECK.out.versions)
@@ -197,6 +195,7 @@ workflow GMSEMU {
     )
     multiqc_report = MULTIQC.out.report.toList()
 
+    GENERATE_MASTER_HTML(GENERATE_INPUT.out.sample_sheet_merged)
 
 }
 /*
