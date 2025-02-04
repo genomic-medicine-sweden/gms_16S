@@ -54,6 +54,7 @@ include { INPUT_CHECK } from '../subworkflows/local/input_check'
 include { MERGE_BARCODES              } from '../modules/local/merge_barcodes/main.nf'
 include { MERGE_BARCODES_SAMPLESHEET  } from '../modules/local/merge_barcodes_samplesheet/main.nf'
 include { GENERATE_INPUT              } from '../modules/local/generate_input/main.nf'
+include { GENERATE_MASTER_HTML        } from '../modules/local/generate_master_html/main.nf'
 include { EMU_ABUNDANCE               } from '../modules/local/emu/abundance/main.nf'
 include { KRONA_KTIMPORTTAXONOMY      } from '../modules/nf-core/krona/ktimporttaxonomy/main.nf'
 include { CUSTOM_DUMPSOFTWAREVERSIONS } from '../modules/nf-core/custom/dumpsoftwareversions/main'
@@ -194,6 +195,7 @@ workflow GMSEMU {
     )
     multiqc_report = MULTIQC.out.report.toList()
 
+    GENERATE_MASTER_HTML(GENERATE_INPUT.out.sample_sheet_merged)
 
 }
 /*
