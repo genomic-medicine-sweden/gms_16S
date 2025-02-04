@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added repective `GENERATE_MASTER_HTML` process
 - Added `cmd.config`
 - Added `params.trace_timestamp` to `nextflow.config`
+- Added `changelog_update_reminder` GA workflow
 
 ### Fixed
 
