@@ -53,9 +53,9 @@
                                 <td><a href="./nanoplot/{{ sample_id }}_T1_nanoplot_unprocessedWeightedHistogramReadlength.html">Weighted Histogram</a></td>
                                 <td><a href="./nanoplot/{{ sample_id }}_T1_nanoplot_unprocessedWeightedLogTransformed_HistogramReadlength.html">Weighted Log-transformed Histogram</a></td>
                                 <td><a href="./nanoplot/{{ sample_id }}_T1_nanoplot_unprocessedYield_By_Length.html">Yield by Length</a></td>
-                                <td><a href="./pipeline_info/execution_report.html">Execution Report</a></td>
-                                <td><a href="./pipeline_info/execution_timeline.html">Execution Timeline</a></td>
-                                <td><a href="./pipeline_info/pipeline_dag.html">Pipeline DAG</a></td>
+                                <td><a href="./pipeline_info/execution_report_{{ timestamp }}.html">Execution Report</a></td>
+                                <td><a href="./pipeline_info/execution_timeline_{{ timestamp }}.html">Execution Timeline</a></td>
+                                <td><a href="./pipeline_info/pipeline_dag_{{ timestamp }}.html">Pipeline DAG</a></td>
                             </tr>
                             {% endfor %}
                         </tbody>
