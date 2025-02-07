@@ -1,5 +1,5 @@
 // This module has been modified. Added     "def prefix = task.ext.prefix ?: "${meta.id}""
-// and         "-p $prefix" meaning that the output files get the sample prefix. 
+// and         "-p $prefix" meaning that the output files get the sample prefix.
 
 process NANOPLOT {
     tag "$meta.id"

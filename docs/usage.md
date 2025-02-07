@@ -51,7 +51,7 @@ An [example samplesheet](../assets/samplesheet.csv) has been provided with the p
 The typical command for running the pipeline is as follows:
 
 ```bash
-nextflow run main.nf --input assets/samplesheet_medium.csv     --outdir results_emu     --db /aux/db/workdir_fwa010/emu_pipe_project/gms_16S/assets/databases/emu_database/     --seqtype map-ont     -profile singularity,test 
+nextflow run main.nf --input assets/samplesheet_medium.csv     --outdir results_emu     --db /aux/db/workdir_fwa010/emu_pipe_project/gms_16S/assets/databases/emu_database/     --seqtype map-ont     -profile singularity,test
 ```
 
 This will launch the pipeline with the `docker` configuration profile. See below for more information about profiles.
@@ -116,7 +116,7 @@ You can also supply a run name to resume a specific run: `-resume [run-name]`. U
 
 ### `-c`
 
-Specify the path to a specific config file (this is a core Nextflow command). 
+Specify the path to a specific config file (this is a core Nextflow command).
 
 
 

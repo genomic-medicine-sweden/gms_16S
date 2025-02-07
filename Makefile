@@ -86,11 +86,11 @@
 #
 #    This also goes for command substitution, so rather than:
 #
-#    	echo "Lines in file:" $(wc -l somefile.txt)
+#        echo "Lines in file:" $(wc -l somefile.txt)
 #
 #    ... you would write:
 #
-#    	echo "Lines in file:" $$(wc -l somefile.txt)
+#        echo "Lines in file:" $$(wc -l somefile.txt)
 #
 # 2. Makefiles also use some special variables with special meaning, to access
 #    things like the output and input files:
@@ -119,9 +119,9 @@
 #  like so:
 #
 #  name_of_rule: dependency1 \
-#  		dependency2 \
-#  		dependency3 \
-#  		dependency4 \
+#      dependency2 \
+#      dependency3 \
+#      dependency4 \
 
 # ==============================================================================
 # Various definitions
@@ -140,9 +140,9 @@ MNT_ROOT := /$(shell readlink -f . | cut -d"/" -f2)
 INSTALL_LOG := "$(SCRIPT_DIR)/.install.log"
 
 define log_message
-	@echo "--------------------------------------------------------------------------------" | tee -a $(INSTALL_LOG);
-	@echo "$$(date "+%Y-%m-%d %H:%M:%S"): $1" | tee -a $(INSTALL_LOG);
-	@echo "--------------------------------------------------------------------------------" | tee -a $(INSTALL_LOG);
+    @echo "--------------------------------------------------------------------------------" | tee -a $(INSTALL_LOG);
+    @echo "$$(date "+%Y-%m-%d %H:%M:%S"): $1" | tee -a $(INSTALL_LOG);
+    @echo "--------------------------------------------------------------------------------" | tee -a $(INSTALL_LOG);
 endef
 
 # ==============================================================================

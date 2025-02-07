@@ -321,14 +321,14 @@ class NfcoreTemplate {
         Map colors = logColours(monochrome_logs)
         String workflow_version = NfcoreTemplate.version(workflow)
         String.format(
-              """\n
+            """\n
             ${dashedLine(monochrome_logs)}
-${colors.blue}                     _____ __  __  _____      __   __  _____
-${colors.blue}                    / ____|  \\/  |/ ____|    /_ | / / / ____|
-${colors.blue}                   | |  __| \\  / | (___ ______| |/ /_| (___
-${colors.blue}                   | | |_ | |\\/| |\\___ \\______| | '_ \\\\___ \\
-${colors.blue}                   | |__| | |  | |____) |     | | (_) |___) |
-${colors.blue}                    \\_____|_|  |_|_____/      |_|\\___/_____/
+            ${colors.blue}                     _____ __  __  _____      __   __  _____
+            ${colors.blue}                    / ____|  \\/  |/ ____|    /_ | / / / ____|
+            ${colors.blue}                   | |  __| \\  / | (___ ______| |/ /_| (___
+            ${colors.blue}                   | | |_ | |\\/| |\\___ \\______| | '_ \\\\___ \\
+            ${colors.blue}                   | |__| | |  | |____) |     | | (_) |___) |
+            ${colors.blue}                    \\_____|_|  |_|_____/      |_|\\___/_____/
 
 
             ${colors.purple}  ${workflow.manifest.name} ${workflow_version}${colors.reset}
