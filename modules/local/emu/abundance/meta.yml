@@ -51,18 +51,15 @@ output:
       pattern: "*{.tsv}"
   # sam files
   - samfile:
-      pattern:
-        "*{.tsv}"
       type: file
       description: File containing alignment data
       pattern: "*{.sam}"
 
-  # emu log. Put on ice.
-  #- emulog
-  #    type: file
-  #    description: File containing emu stdou & stderror
-  #    pattern: "emu_log*{.txt}"
-
+# emu log. Put on ice.
+# - emulog
+#     type: file
+#     description: File containing emu stdou & stderror
+#     pattern: "emu_log*{.txt}"
 
 authors:
   - "@fwa93"
