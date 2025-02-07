@@ -1,12 +1,28 @@
 bump_version: null
 lint:
-  files_exist: []
-  files_unchanged: []
+  files_exist:
+    - CODE_OF_CONDUCT.md
+    - .github/.dockstore.yml
+    - .github/ISSUE_TEMPLATE/config.yml
+    - assets/nf-core-GMS_16S_logo_light.png
+    - docs/images/nf-core-GMS_16S_logo_light.png
+    - docs/images/nf-core-GMS_16S_logo_dark.png
+  files_unchanged:
+    - .github/CONTRIBUTING.md
+    - .github/PULL_REQUEST_TEMPLATE.md
+    - .github/workflows/linting.yml
+    - assets/email_template.html
+    - assets/email_template.txt
+    - docs/README.md
+    - LICENSE
   multiqc_config:
   - report_comment
   nextflow_config:
     - manifest.name
     - manifest.homePage
+    - params.max_cpus
+    - params.max_memory
+    - params.max_time
     - validation.help.beforeText
     - validation.help.afterText
     - validation.summary.beforeText
