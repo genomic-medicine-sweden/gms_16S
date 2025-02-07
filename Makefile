@@ -159,3 +159,6 @@ assets/databases/emu_database/taxonomy.tsv: assets/databases/emu_database/taxono
 
 assets/databases/krona/taxonomy/taxonomy.tab: assets/databases/krona/taxonomy/taxonomy.tab.gz
 	zcat $< > $@
+
+nflint:
+	nf-core pipelines lint
