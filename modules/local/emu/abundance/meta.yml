@@ -49,17 +49,19 @@ output:
       type: file
       description: Report (tsv file) over detected species and estimated number of reads and relative abundance
       pattern: "*{.tsv}"
-  //sam files
-  - samfile
+  # sam files
+  - samfile:
+      pattern:
+        "*{.tsv}"
       type: file
       description: File containing alignment data
-      pattern: "*{.sam}
+      pattern: "*{.sam}"
 
   # emu log. Put on ice.
- // - emulog
- //     type: file
- //     description: File containing emu stdou & stderror
- //     pattern: "emu_log*{.txt}"
+  #- emulog
+  #    type: file
+  #    description: File containing emu stdou & stderror
+  #    pattern: "emu_log*{.txt}"
 
 
 authors:
