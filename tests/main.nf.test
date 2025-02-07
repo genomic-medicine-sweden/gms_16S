@@ -1,0 +1,27 @@
+nextflow_pipeline {
+
+    name "Test Main Pipeline"
+    script "main.nf"
+
+    test("Should run pipeline with test profile") {
+
+        when {
+            params {
+                outdir = "$projectDir/results"
+                db = "$projectDir/assets/databases/emu_database"
+                seqtype = "map-ont"
+                quality_filtering = true
+                longread_qc_qualityfilter_minlength = 1200
+                longread_qc_qualityfilter_maxlength = 1800
+                merge_fastq_pass = "$projectDir/assets/test_assets/ci"
+            }
+        }
+
+        then {
+            assert workflow.success
+            assert workflow.trace.succeeded().size() > 0 // Adjust this number based on the number of processes in your pipeline
+            assert path("$projectDir/results/results/barcode01_T1_filtered.fastq_rel-abundance.tsv").exists()
+            assert path("$projectDir/results/results/barcode02_T1_filtered.fastq_rel-abundance.tsv").exists()
+        }
+    }
+}
