@@ -10,4 +10,4 @@ testing/
 testing*
 *.pyc
 bin/
-LICENSE
+ro-crate-metadata.json
