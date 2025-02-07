@@ -6,6 +6,7 @@ on:
   push:
     branches:
       - dev
+      - "*nfcore*"
   pull_request:
   release:
     types: [published]
