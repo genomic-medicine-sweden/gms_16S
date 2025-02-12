@@ -19,6 +19,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Provided option to `save_merged_reads`
+
 ## [v0.1.0]
 
 ### Added
