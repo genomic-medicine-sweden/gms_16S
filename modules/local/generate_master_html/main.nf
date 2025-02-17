@@ -14,6 +14,6 @@ process GENERATE_MASTER_HTML {
 
     script:
     """
-    generate_master_html.py --csv $csv --html $params.master_template
+    generate_master_html.py --csv ${csv} --html ${params.master_template} --timestamp ${params.trace_timestamp}
     """
 }
