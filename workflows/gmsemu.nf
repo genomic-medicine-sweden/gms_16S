@@ -82,14 +82,21 @@ workflow GMSEMU {
         MERGE_BARCODES(params.merge_fastq_pass)
         GENERATE_INPUT(MERGE_BARCODES.out.fastq_dir_merged)
         ch_input = GENERATE_INPUT.out.sample_sheet_merged
-    } else if (params.merge_fastq_pass && params.barcodes_samplesheet) {
+    } else if ( params.merge_fastq_pass && params.barcodes_samplesheet) {
         MERGE_BARCODES_SAMPLESHEET(params.barcodes_samplesheet, params.merge_fastq_pass)
         GENERATE_INPUT(MERGE_BARCODES_SAMPLESHEET.out.fastq_dir_merged)
         ch_input = GENERATE_INPUT.out.sample_sheet_merged
     }
 
-    // Validate and stage input files
-    INPUT_CHECK(ch_input)
+    GENERATE_MASTER_HTML(GENERATE_INPUT.out.sample_sheet_merged)
+
+
+    //
+    // SUBWORKFLOW: Read in samplesheet, validate and stage input files
+    //
+    INPUT_CHECK (
+        ch_input
+    )
     ch_versions = ch_versions.mix(INPUT_CHECK.out.versions)
 
     //
