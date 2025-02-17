@@ -54,7 +54,7 @@ def cli(sample_sheet: TextIOWrapper, output_dir: Path, fastq_dir: Path) -> None:
         except ValidationError:
             click.Abort(f"Malformed barcode or sample id at line {row_no} in {sample_sheet.name}")
         except FileNotFoundError:
-            LOG.error("Barcode '%s' not found in fastq directory '%s'", sample_obj.barcode, output_dir.absolute())
+            LOG.error("Barcode '%s' not found in fastq directory '%s'", sample_obj.barcode, fastq_dir.absolute())
             continue
         else:
             samples.append(sample_obj)
