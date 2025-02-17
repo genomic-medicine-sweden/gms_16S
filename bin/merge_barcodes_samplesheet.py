@@ -1,96 +1,89 @@
 #!/usr/bin/env python
-
 """
+Merge fastq.gz files present in barcode folders.
+
 Author: Frans Wallin
 Date: 20230707
-
-Description: merge fastq.gz files present in barcode folders. Typically for nanopore.
-
-A samplesheet is needed.
-
 """
+import logging
+import shutil
+from csv import DictReader
+from io import TextIOWrapper
+from pathlib import Path
+
+import click
+from pydantic import BaseModel, ValidationError
+
+LOG = logging.getLogger(__name__)
+
+
+class SampleObject(BaseModel):
+    """Barcode."""
+
+    barcode: str
+    sample_id: str
+
+
+@click.command()
+@click.argument("sample-sheet", type=click.File())
+@click.argument("output-dir", type=click.Path(dir_okay=True, readable=True, path_type=Path))
+@click.argument("fastq-dir", type=click.Path(dir_okay=True, readable=True, path_type=Path))
+def cli(sample_sheet: TextIOWrapper, output_dir: Path, fastq_dir: Path) -> None:
+    """Merge fastq files on barcodes in a sample sheet."""
+    # Create output folder and make ensure its writeable
+    try:
+        output_dir.mkdir(parents=True, exist_ok=True)
+    except PermissionError:
+        raise click.UsageError(f"Could not create '{output_dir}', output directory is not writable.")
+
+    # Read the sample sheet file and validate the contents
+    click.secho(f"Using sample sheet: {sample_sheet.name}")
+    tsv_file = DictReader(sample_sheet, delimiter="\t", fieldnames=["barcode", "sample_id"])
+    samples: list[SampleObject] = []
+    for row_no, row in enumerate(tsv_file, start=1):
+        # skip suspected header
+        if row["barcode"] == "barcode":
+            continue
+
+        # validate file
+        try:
+            sample_obj = SampleObject(barcode=row["barcode"], sample_id=row["sample_id"])
+            # assert that barcode is in fastq directory
+            if not fastq_dir.joinpath(sample_obj.barcode).exists():
+                raise FileNotFoundError(sample_obj.barcode)
+        except ValidationError:
+            click.Abort(f"Malformed barcode or sample id at line {row_no} in {sample_sheet.name}")
+        except FileNotFoundError:
+            LOG.error("Barcode '%s' not found in fastq directory '%s'", sample_obj.barcode, output_dir.absolute())
+            continue
+        else:
+            samples.append(sample_obj)
+
+    # merge split fastq into a single file per barcode
+    for sample_obj in samples:
+        merge_fastq(
+            barcode_dir=fastq_dir.joinpath(sample_obj.barcode),
+            output_file=output_dir.joinpath(f"{sample_obj.sample_id}.fastq.gz"),
+        )
+    click.secho(f"Merged {len(samples)} ", bg="green")
+
+
+def merge_fastq(barcode_dir: Path, output_file: Path) -> Path:
+    """Find split gzipped fastq files in path and merge into the output file."""
+    LOG.info("Merging fq files into %s", output_file)
+    with output_file.open("wb") as out_fq:
+        # lookup split fq
+        split_fq_files = list(barcode_dir.glob("*.fastq.gz"))
+        if len(split_fq_files) == 0:
+            LOG.warning("No fastq files found for barcode '%s'", barcode_dir.name)
+
+        # merge files
+        for fq_file in split_fq_files:
+            with fq_file.open("rb") as fq:
+                LOG.debug("Merging %s file into %s", fq_file, output_file)
+                shutil.copyfileobj(fq, out_fq)
+    return output_file
 
 
 if __name__ == "__main__":
-    # Import regex package
-    import re
-    # Import package that allows you to make bash commands
-    import subprocess
-    # Import sys to allow CLI arguments
-    import sys
-    from os import path
-
-    if len(sys.argv) == 4:
-        # Flags to variables
-        # samplesheet containing tqo tab separated columns. barcode sample_id
-        sample_sheet = sys.argv[1]
-        # outputfolder
-        mapp = sys.argv[2]
-        #your_path = sys.argv[3]
-        # path to fastq_pass
-        fastq_pass = sys.argv[3]
-       # if mapp[-1] == "/":
-       #     mapp = mapp[:-1]
-       # if mapp[1] == "/":
-       #     print("your output folder cannot start with /")
-       #     sys.exit()
-        # check if folder already exist
-       # my_mapp = path.exists(f"{mapp}")
-        # exit if folder exist
-        #if my_mapp:
-        #    print(f"dir {mapp} already exists. Exiting script")
-        #    sys.exit()
-        #if fastq_pass[-1] == "/":
-         #   fastq_pass = fastq_pass[:-1]
-       # if your_path[-1] == "/":
-        #    your_path = your_path[:-1]
-        # Open  sample sheet
-        file = open(f"{sample_sheet}")
-        file_1 = file.read()
-        # Close sample sheet file. The file is now in a variable
-        file.close()
-        # Print the sample sheet
-        print("Sample sheet: ", "\n", file_1)
-
-        # Define the pattern to look for in the sample sheet file.
-        #pattern = re.compile(r"(barcode\d+)\t([\w\-]+)\t(\w+)")
-        pattern = re.compile(r"(barcode\d+)\t([\w\-]+)")
-        # Extract the capture groups i.e. barcode, sample_id.
-        captures = pattern.finditer(str(file_1))
-
-        # # create the folder for appended files
-        command1 = 'mkdir -p ./%s || exit $?' % (mapp,)
-        out = subprocess.run(command1, shell=True).returncode
-        if out != 0:
-            print("command did not work ", command1)
-            sys.exit()
-
-        # counter for number of samples
-        counter = 0
-        # execute the bash command such that each sample´s fastq.gz-files are appended to one file.
-        for i in captures:
-            barcode = i[1]
-            sample_id = i[2]
-            print(barcode, sample_id)
-            command = 'cat %s/%s/*.fastq.gz > ./%s/%s.fastq.gz || exit $?' % (fastq_pass, barcode, mapp, sample_id,)
-            out = subprocess.run(command, shell=True).returncode
-            if out != 0:
-                print("command did not work", command)
-                sys.exit()
-            print("Command used: ", command)
-            counter = counter + 1
-        #command = 'rsync -r -v ./%s/  %s  || exit $?; rm -r ./temporary_dir_sammanf  || exit $?' % (mapp, your_path,)
-        #out = subprocess.run(command, shell=True).returncode
-        #if out != 0:
-        #    print("command did not work ", command)
-        #    sys.exit()
-
-        print("Number of samples found by script: ", counter)
-    else:
-        print("\n Usage:\n python <path to bin/merge_barcodes_samplesheet.py> <path to sample_sheet-file. Two columns. Barcode and sample id> <NAME of output directory > "
-              "<PATH to fastq_pass directory> \n")
-else:
-    print("Error. Script is not main.")
-    exit
-print("end")
-
+    cli()
