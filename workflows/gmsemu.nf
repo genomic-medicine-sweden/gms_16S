@@ -88,9 +88,6 @@ workflow GMSEMU {
         ch_input = GENERATE_INPUT.out.sample_sheet_merged
     }
 
-    GENERATE_MASTER_HTML(GENERATE_INPUT.out.sample_sheet_merged)
-
-
     //
     // SUBWORKFLOW: Read in samplesheet, validate and stage input files
     //
@@ -160,8 +157,6 @@ workflow GMSEMU {
     } else {
         error "Invalid seqtype. Please specify either 'map-ont' or 'sr'."
     }
-
-
 
     // Run EMU_ABUNDANCE
     EMU_ABUNDANCE(ch_processed_reads)
