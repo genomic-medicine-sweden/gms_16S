@@ -81,11 +81,11 @@ def find_date_in_string(input_string, date_pattern):
     date = "(No date found)"
     match = re.search(date_pattern, input_string)
     if match:
-        date_regex = match.group(1)
-        if len(date_regex) == 8:
-            date = datetime.strptime(date_regex, "%Y%m%d").strftime("%d-%m-%Y")
-        elif len(date_regex) > 8:
-            date = date_regex
+        date_matched = match.group(1)
+        if len(date_matched) == 8:
+            date = datetime.strptime(date_matched, "%Y%m%d").strftime("%d-%m-%Y")
+        elif len(date_matched) > 8:
+            date = date_matched
     return date
 
 def get_sample_ids(samplesheet_csv):
