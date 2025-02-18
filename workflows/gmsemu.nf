@@ -54,6 +54,7 @@ include { INPUT_CHECK } from '../subworkflows/local/input_check'
 include { MERGE_BARCODES              } from '../modules/local/merge_barcodes/main.nf'
 include { MERGE_BARCODES_SAMPLESHEET  } from '../modules/local/merge_barcodes_samplesheet/main.nf'
 include { GENERATE_INPUT              } from '../modules/local/generate_input/main.nf'
+include { GENERATE_MASTER_HTML        } from '../modules/local/generate_master_html/main.nf'
 include { EMU_ABUNDANCE               } from '../modules/local/emu/abundance/main.nf'
 include { KRONA_KTIMPORTTAXONOMY      } from '../modules/nf-core/krona/ktimporttaxonomy/main.nf'
 include { CUSTOM_DUMPSOFTWAREVERSIONS } from '../modules/nf-core/custom/dumpsoftwareversions/main'
@@ -81,14 +82,18 @@ workflow GMSEMU {
         MERGE_BARCODES(params.merge_fastq_pass)
         GENERATE_INPUT(MERGE_BARCODES.out.fastq_dir_merged)
         ch_input = GENERATE_INPUT.out.sample_sheet_merged
-    } else if (params.merge_fastq_pass && params.barcodes_samplesheet) {
+    } else if ( params.merge_fastq_pass && params.barcodes_samplesheet) {
         MERGE_BARCODES_SAMPLESHEET(params.barcodes_samplesheet, params.merge_fastq_pass)
         GENERATE_INPUT(MERGE_BARCODES_SAMPLESHEET.out.fastq_dir_merged)
         ch_input = GENERATE_INPUT.out.sample_sheet_merged
     }
 
-    // Validate and stage input files
-    INPUT_CHECK(ch_input)
+    //
+    // SUBWORKFLOW: Read in samplesheet, validate and stage input files
+    //
+    INPUT_CHECK (
+        ch_input
+    )
     ch_versions = ch_versions.mix(INPUT_CHECK.out.versions)
 
     //
@@ -153,8 +158,6 @@ workflow GMSEMU {
         error "Invalid seqtype. Please specify either 'map-ont' or 'sr'."
     }
 
-
-
     // Run EMU_ABUNDANCE
     EMU_ABUNDANCE(ch_processed_reads)
     ch_versions = ch_versions.mix(EMU_ABUNDANCE.out.versions.first())
@@ -194,6 +197,7 @@ workflow GMSEMU {
     )
     multiqc_report = MULTIQC.out.report.toList()
 
+    GENERATE_MASTER_HTML(GENERATE_INPUT.out.sample_sheet_merged)
 
 }
 /*
