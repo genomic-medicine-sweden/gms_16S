@@ -144,7 +144,7 @@
         },
         "krona_taxonomy_tab": {
             "type": "string",
-            "default": "$projectDir/assets/databases/krona/taxonomy/taxonomy.tab"
+            "default": "assets/databases/krona/taxonomy/taxonomy.tab"
         },
         "merge_fastq_pass": {
             "type": "string"

@@ -4,9 +4,9 @@ lint:
     - CODE_OF_CONDUCT.md
     - .github/.dockstore.yml
     - .github/ISSUE_TEMPLATE/config.yml
-    - assets/nf-core-GMS_16S_logo_light.png
-    - docs/images/nf-core-GMS_16S_logo_light.png
-    - docs/images/nf-core-GMS_16S_logo_dark.png
+    - assets/nf-core-gms_16S_logo_light.png
+    - docs/images/nf-core-gms_16S_logo_light.png
+    - docs/images/nf-core-gms_16S_logo_dark.png
   files_unchanged:
     - .github/CONTRIBUTING.md
     - .github/PULL_REQUEST_TEMPLATE.md
