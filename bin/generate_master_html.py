@@ -78,7 +78,7 @@ args = parser.parse_args()
 
 def find_date_in_string(input_string, date_pattern):
     """Searches for a date within a given string."""
-    date = ""
+    date = "(No date found)"
     match = re.search(date_pattern, input_string)
     if match:
         date_regex = match.group(1)
@@ -86,8 +86,6 @@ def find_date_in_string(input_string, date_pattern):
             date = datetime.strptime(date_regex, "%Y%m%d").strftime("%d-%m-%Y")
         elif len(date_regex) > 8:
             date = date_regex
-        else:
-            date = "(No date found)"
     return date
 
 def get_sample_ids(samplesheet_csv):
