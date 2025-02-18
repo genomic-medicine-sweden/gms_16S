@@ -18,10 +18,10 @@ process EMU_ABUNDANCE {
 
     //               Software MUST be pinned to channel (i.e. "bioconda"), version (i.e. "1.10").
     //               For Conda, the build (i.e. "h9402c20_2") must be EXCLUDED to support installation on different operating systems.
-    conda "bioconda::emu=3.4.4"
+    conda "bioconda::emu=3.5.1"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://depot.galaxyproject.org/singularity/emu:3.4.4--hdfd78af_1':
-        'quay.io/biocontainers/emu:3.4.4--hdfd78af_1' }"
+        'https://depot.galaxyproject.org/singularity/emu:3.5.1--hdfd78af_0':
+        'quay.io/biocontainers/emu:3.5.1--hdfd78af_0' }"
 
     input:
     //  Where applicable all sample-specific information e.g. "id", "single_end", "read_group"
@@ -37,8 +37,8 @@ process EMU_ABUNDANCE {
     tuple val(meta), path("*read-assignment-distributions.tsv"), emit: assignment_report, optional:true
     path "versions.yml"           , emit: versions
     tuple val(meta), path("*.sam"), emit: samfile, optional:true
-    tuple val(meta), path("*.fa"), emit: unclassified_fa , optional:true
-
+    tuple val(meta), path("*.fastq_unclassified_mapped.fasta"), emit: unclassified_mapped_fa , optional:true
+    tuple val(meta), path("*.fastq_unmapped.fasta"), emit: unclassified_unmapped_fa , optional:true
 
 
     when:
