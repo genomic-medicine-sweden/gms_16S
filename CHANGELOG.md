@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Provided option to `save_merged_reads`
+- Provided ability to overwrite files in `publishDir` (`params.publish_dir_overwrite`)
 
 ## [v0.1.0]
 
