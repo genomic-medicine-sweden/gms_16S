@@ -112,7 +112,7 @@ workflow GMSEMU {
             ch_versions = ch_versions.mix(PORECHOP_ABI.out.versions.first())
             ch_multiqc_files = ch_multiqc_files.mix(PORECHOP_ABI.out.log)
 
-        } else if (!params.adapter_trimming && params.quality_filtering) { 
+        } else if (!params.adapter_trimming && params.quality_filtering) {
             ch_processed_reads = FILTLONG(
                 INPUT_CHECK.out.reads.map { meta, reads -> [meta, [], reads] }
             ).reads
