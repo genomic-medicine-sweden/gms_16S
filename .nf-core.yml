@@ -23,7 +23,7 @@ lint:
     - LICENSE
     - .prettierignore
   multiqc_config:
-  - report_comment
+    - report_comment
   nextflow_config:
     - manifest.name
     - manifest.homePage
@@ -39,7 +39,7 @@ nf_core_version: 3.2.0
 org_path: null
 repository_type: pipeline
 template:
-  author: '@fwa93'
+  author: "@fwa93"
   description: A Nextflow pipeline for 16S typing of bacteria based on the EMU tool
     from treangenlab.
   force: true
