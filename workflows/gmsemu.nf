@@ -19,11 +19,11 @@ for (param in checkPathParamList) { if (param) { file(param, checkIfExists: true
 
 // Check mandatory parameters
 if (params.input) {
-  ch_input = file(params.input)
+    ch_input = file(params.input)
 } else if (params.merge_fastq_pass) {
     // Do nothing.
 } else {
-  exit 1, "Input samplesheet not specified. Unless '--merge_fastq_pass' is used, a sample_sheet.csv must be defined!"
+    exit 1, "Input samplesheet not specified. Unless '--merge_fastq_pass' is used, a sample_sheet.csv must be defined!"
 }
 
 /*
