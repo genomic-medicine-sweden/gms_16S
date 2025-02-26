@@ -2,9 +2,12 @@
 
 """Generate a master html template."""
 
+import os
+import re
 import argparse
 import pandas as pd
 from jinja2 import Template
+from datetime import datetime
 
 description = '''
 ------------------------
@@ -64,31 +67,45 @@ parser.add_argument(
     required=True
     )
 parser.add_argument(
-    '-i',
-    help='input directory',
-    metavar='INPUT_DIRECTORY',
-    dest='input',
+    '-t', '--timestamp',
+    help='pipeline execution timestamp',
+    metavar='PIPELINE_EXECUTION_TIMESTAMP',
+    dest='timestamp',
     required=True
     )
 
 args = parser.parse_args()
 
+def find_date_in_string(input_string, date_pattern):
+    """Searches for a date within a given string."""
+    date = "(No date found)"
+    match = re.search(date_pattern, input_string)
+    if match:
+        date_matched = match.group(1)
+        if len(date_matched) == 8:
+            date = datetime.strptime(date_matched, "%Y%m%d").strftime("%d-%m-%Y")
+        elif len(date_matched) > 8:
+            date = date_matched
+    return date
+
 def get_sample_ids(samplesheet_csv):
+    """Get sample id from csv."""
     df = pd.read_csv(samplesheet_csv)
     sample_ids = df['sample'].tolist()
     return sample_ids
 
-def generate_master_html(template_html_fpath, sample_ids):
-    # Read the template from an HTML file
+def generate_master_html(template_html_fpath, sample_ids, seqrun_date, timestamp):
+    """Read the template from an HTML file."""
     with open(template_html_fpath, "r") as file:
         master_template = file.read()
     template = Template(master_template)
-    rendered_html = template.render(sample_ids=sample_ids)
+    rendered_html = template.render(sample_ids=sample_ids, seqrun_date=seqrun_date, timestamp=timestamp)
     return rendered_html
 
 def main():
     sample_ids = get_sample_ids(args.csv)
-    rendered_html = generate_master_html(args.html, sample_ids)
+    seqrun_date = find_date_in_string(args.csv, r'/(\d{8})_')
+    rendered_html = generate_master_html(args.html, sample_ids, seqrun_date, args.timestamp)
     with open("master.html", "w") as fout:
         fout.write(rendered_html)
 
