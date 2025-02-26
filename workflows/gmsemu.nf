@@ -54,7 +54,7 @@ include { INPUT_CHECK } from '../subworkflows/local/input_check'
 include { MERGE_BARCODES              } from '../modules/local/merge_barcodes/main.nf'
 include { MERGE_BARCODES_SAMPLESHEET  } from '../modules/local/merge_barcodes_samplesheet/main.nf'
 include { GENERATE_INPUT              } from '../modules/local/generate_input/main.nf'
-include { EMU_ABUNDANCE               } from '../modules/local/emu/abundance/main.nf'
+include { EMU_ABUNDANCE               } from '../modules/nf-core/emu/abundance/main.nf'
 include { KRONA_KTIMPORTTAXONOMY      } from '../modules/nf-core/krona/ktimporttaxonomy/main.nf'
 include { CUSTOM_DUMPSOFTWAREVERSIONS } from '../modules/nf-core/custom/dumpsoftwareversions/main'
 include { MULTIQC                     } from '../modules/nf-core/multiqc/main'
@@ -64,6 +64,7 @@ include { NANOPLOT as NANOPLOT1       } from '../modules/nf-core/nanoplot/main.n
 include { NANOPLOT as NANOPLOT2       } from '../modules/nf-core/nanoplot/main.nf'
 include { PORECHOP_ABI                } from '../modules/nf-core/porechop/abi/main.nf'
 include { FILTLONG                    } from '../modules/nf-core/filtlong/main.nf'
+include { UNTAR                       } from '../modules/nf-core/untar/main.nf'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -112,7 +113,7 @@ workflow GMSEMU {
             ch_versions = ch_versions.mix(PORECHOP_ABI.out.versions.first())
             ch_multiqc_files = ch_multiqc_files.mix(PORECHOP_ABI.out.log)
 
-        } else if (!params.adapter_trimming && params.quality_filtering) { 
+        } else if (!params.adapter_trimming && params.quality_filtering) {
             ch_processed_reads = FILTLONG(
                 INPUT_CHECK.out.reads.map { meta, reads -> [meta, [], reads] }
             ).reads
@@ -156,7 +157,14 @@ workflow GMSEMU {
 
 
     // Run EMU_ABUNDANCE
-    EMU_ABUNDANCE(ch_processed_reads)
+    ch_db = Channel.value([
+        [ id: 'emu_db' ],
+        file(params.db)
+    ])
+
+    UNTAR(ch_db)
+    ch_untar_out = UNTAR.out.untar.map { meta, path -> path }
+    EMU_ABUNDANCE(ch_processed_reads, ch_untar_out)
     ch_versions = ch_versions.mix(EMU_ABUNDANCE.out.versions.first())
 
     if (params.run_krona) {
@@ -181,7 +189,7 @@ workflow GMSEMU {
     ch_multiqc_files = ch_multiqc_files.mix(CUSTOM_DUMPSOFTWAREVERSIONS.out.mqc_yml.collect())
     ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip.collect{it[1]}.ifEmpty([]))
 
-   if (params.seqtype == "sr" && !params.skip_cutadapt) {
+    if (params.seqtype == "sr" && !params.skip_cutadapt) {
     ch_multiqc_files = ch_multiqc_files.mix(CUTADAPT.out.log.collect { it[1] })
     }
 
@@ -190,7 +198,9 @@ workflow GMSEMU {
         ch_multiqc_files.collect(),
         ch_multiqc_config.toList(),
         ch_multiqc_custom_config.toList(),
-        ch_multiqc_logo.toList()
+        ch_multiqc_logo.toList(),
+        [],
+        []
     )
     multiqc_report = MULTIQC.out.report.toList()
 
