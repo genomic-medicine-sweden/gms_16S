@@ -7,13 +7,18 @@ process GENERATE_MASTER_HTML {
         'quay.io/biocontainers/nf-core:3.0.2' }"
 
     input:
-        path csv
+    path csv
 
     output:
-        path 'master.html', emit: master_html
+    path 'master.html', emit: master_html
 
     script:
     """
     generate_master_html.py --csv ${csv} --html ${params.master_template} --timestamp ${params.trace_timestamp}
+    """
+
+    stub:
+    """
+    touch master.html
     """
 }
