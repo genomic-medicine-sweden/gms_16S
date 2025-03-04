@@ -15,15 +15,12 @@ WorkflowGmsemu.initialise(params, log)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-include { MERGE_BARCODES              } from '../modules/local/merge_barcodes/main.nf'
-include { MERGE_BARCODES_SAMPLESHEET  } from '../modules/local/merge_barcodes_samplesheet/main.nf'
-include { GENERATE_INPUT              } from '../modules/local/generate_input/main.nf'
 include { GENERATE_MASTER_HTML        } from '../modules/local/generate_master_html/main.nf'
 include { EMU_ABUNDANCE               } from '../modules/local/emu/abundance/main.nf'
 include { KRONA_KTIMPORTTAXONOMY      } from '../modules/nf-core/krona/ktimporttaxonomy/main.nf'
-include { CUSTOM_DUMPSOFTWAREVERSIONS } from '../modules/nf-core/custom/dumpsoftwareversions/main'
-include { MULTIQC                     } from '../modules/nf-core/multiqc/main'
-include { FASTQC                      } from '../modules/nf-core/fastqc/main'
+include { CUSTOM_DUMPSOFTWAREVERSIONS } from '../modules/nf-core/custom/dumpsoftwareversions/main.nf'
+include { MULTIQC                     } from '../modules/nf-core/multiqc/main.nf'
+include { FASTQC                      } from '../modules/nf-core/fastqc/main.nf'
 include { CUTADAPT                    } from '../modules/nf-core/cutadapt/main.nf'
 include { NANOPLOT                    } from '../modules/nf-core/nanoplot/main.nf'
 include { PORECHOP_ABI                } from '../modules/nf-core/porechop/abi/main.nf'

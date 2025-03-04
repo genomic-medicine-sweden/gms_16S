@@ -2,7 +2,10 @@
 // Check input samplesheet and get read channels
 //
 
-include { SAMPLESHEET_CHECK } from '../../modules/local/samplesheet_check/main.nf'
+include { GENERATE_INPUT             } from '../../../modules/local/generate_input/main.nf'
+include { MERGE_BARCODES             } from '../../../modules/local/merge_barcodes/main.nf'
+include { MERGE_BARCODES_SAMPLESHEET } from '../../../modules/local/merge_barcodes_samplesheet/main.nf'
+include { SAMPLESHEET_CHECK          } from '../../../modules/local/samplesheet_check/main.nf'
 
 workflow PIPELINE_INITIALISATION {
     take:
