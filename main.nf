@@ -28,6 +28,14 @@ WorkflowMain.initialise(workflow, params, log)
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    IMPORT LOCAL SUBWORKFLOWS
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*/
+
+include { PIPELINE_INITIALISATION } from '../subworkflows/local/pipeline_initialisation/main.nf'
+
+/*
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     NAMED WORKFLOW FOR PIPELINE
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
@@ -38,7 +46,18 @@ include { GMSEMU } from './workflows/gmsemu'
 // WORKFLOW: Run main gms_16S  analysis pipeline
 //
 workflow GMS_EMU {
-    GMSEMU ()
+    take:
+    samplesheet // channel: samplesheet read in from --input
+    reads
+
+    main:
+    //
+    // WORKFLOW: Run pipeline
+    //
+    GMSEMU (samplesheet, reads)
+
+    emit:
+    nanostats = GMSEMU.out.nanostats // channel: /path/to/nanostats.txt
 }
 
 /*
@@ -51,7 +70,17 @@ workflow GMS_EMU {
 // WORKFLOW: Execute a single named workflow for the pipeline
 //
 workflow {
-    GMS_EMU ()
+
+    main:
+    //
+    // SUBWORKFLOW: Run initialisation tasks
+    //
+    PIPELINE_INITIALISATION (params.input)
+
+    //
+    // WORKFLOW: Run main workflow
+    //
+    GMS_EMU (PIPELINE_INITIALISATION.out.samplesheet, PIPELINE_INITIALISATION.out.reads)
 }
 
 /*
