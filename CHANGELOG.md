@@ -15,14 +15,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added `params.trace_timestamp` to `nextflow.config`
 - Added `changelog_update_reminder` GA workflow
 - Added optional ability to save merged reads
+- Added capability to emit nanoplot nanostats text file
+- Added clear commenting for modules and subworkflows
+- Added stubs for all local modules
 
 ### Fixed
+
+- Removed unused `NANOPLOT2`
 
 ### Changed
 
 - `merge_barcodes_samplesheet.py` can now handle custom barcodes.
 - Provided option to `save_merged_reads`
 - Provided ability to overwrite files in `publishDir` (`params.publish_dir_overwrite`)
+- Cleaned up input preprocessing steps
 
 ## [v0.1.0]
 
