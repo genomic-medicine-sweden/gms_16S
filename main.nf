@@ -57,8 +57,9 @@ workflow GMS_EMU {
     GMSEMU (samplesheet, reads)
 
     emit:
-    nanostats = GMSEMU.out.nanostats // channel: /path/to/nanostats.txt
-    versions  = GMSEMU.out.versions  // channel: /path/to/nanostats.txt
+    nanostats_unprocessed   = GMSEMU.out.nanostats_unprocessed  // channel: /path/to/nanostats.txt
+    nanostats_processed     = GMSEMU.out.nanostats_processed    // channel: /path/to/nanostats.txt
+    versions                = GMSEMU.out.versions               // channel: /path/to/versions.yaml
 }
 
 /*

@@ -18,10 +18,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added capability to emit nanoplot nanostats text file
 - Added clear commenting for modules and subworkflows
 - Added stubs for all local modules
+- Added `when` operator for nanoplot process
 
 ### Fixed
 
-- Removed unused `NANOPLOT2`
+- Fixed unused `NANOPLOT2` to `NANOPLOT_PROCESSED_READS`
+- Fixed `Nanoplot` output dirs and prefix in `modules.config`
 
 ### Changed
 
@@ -29,6 +31,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Provided option to `save_merged_reads`
 - Provided ability to overwrite files in `publishDir` (`params.publish_dir_overwrite`)
 - Cleaned up input preprocessing steps
+- Updated `master_template.html` for nanoplot prefix and output changes
 
 ## [v0.1.0]
 

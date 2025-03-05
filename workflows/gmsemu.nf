@@ -15,16 +15,17 @@ WorkflowGmsemu.initialise(params, log)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-include { GENERATE_MASTER_HTML        } from '../modules/local/generate_master_html/main.nf'
-include { EMU_ABUNDANCE               } from '../modules/local/emu/abundance/main.nf'
-include { KRONA_KTIMPORTTAXONOMY      } from '../modules/nf-core/krona/ktimporttaxonomy/main.nf'
-include { CUSTOM_DUMPSOFTWAREVERSIONS } from '../modules/nf-core/custom/dumpsoftwareversions/main.nf'
-include { MULTIQC                     } from '../modules/nf-core/multiqc/main.nf'
-include { FASTQC                      } from '../modules/nf-core/fastqc/main.nf'
-include { CUTADAPT                    } from '../modules/nf-core/cutadapt/main.nf'
-include { NANOPLOT                    } from '../modules/nf-core/nanoplot/main.nf'
-include { PORECHOP_ABI                } from '../modules/nf-core/porechop/abi/main.nf'
-include { FILTLONG                    } from '../modules/nf-core/filtlong/main.nf'
+include { GENERATE_MASTER_HTML                   } from '../modules/local/generate_master_html/main.nf'
+include { EMU_ABUNDANCE                          } from '../modules/local/emu/abundance/main.nf'
+include { KRONA_KTIMPORTTAXONOMY                 } from '../modules/nf-core/krona/ktimporttaxonomy/main.nf'
+include { CUSTOM_DUMPSOFTWAREVERSIONS            } from '../modules/nf-core/custom/dumpsoftwareversions/main.nf'
+include { MULTIQC                                } from '../modules/nf-core/multiqc/main.nf'
+include { FASTQC                                 } from '../modules/nf-core/fastqc/main.nf'
+include { CUTADAPT                               } from '../modules/nf-core/cutadapt/main.nf'
+include { NANOPLOT as NANOPLOT_UNPROCESSED_READS } from '../modules/nf-core/nanoplot/main.nf'
+include { NANOPLOT as NANOPLOT_PROCESSED_READS   } from '../modules/nf-core/nanoplot/main.nf'
+include { PORECHOP_ABI                           } from '../modules/nf-core/porechop/abi/main.nf'
+include { FILTLONG                               } from '../modules/nf-core/filtlong/main.nf'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -52,10 +53,10 @@ workflow GMSEMU {
     if (params.seqtype == "map-ont") {
 
         //
-        // MODULE: Run NANOPLOT
+        // MODULE: Run NANOPLOT_UNPROCESSED_READS
         //
-        NANOPLOT(ch_reads)
-        ch_versions = ch_versions.mix(NANOPLOT.out.versions.first())
+        NANOPLOT_UNPROCESSED_READS(ch_reads)
+        ch_versions = ch_versions.mix(NANOPLOT_UNPROCESSED_READS.out.versions.first())
 
         if (params.adapter_trimming && !params.quality_filtering) {
 
@@ -107,7 +108,7 @@ workflow GMSEMU {
             ch_multiqc_files = ch_multiqc_files.mix(FILTLONG.out.log)
 
         } else {
-            ch_processed_reads = ch_reads
+            ch_reads.set{ ch_processed_reads }
         }
 
     } else if (params.seqtype == "sr") {
@@ -120,14 +121,20 @@ workflow GMSEMU {
             CUTADAPT.out.reads.set{ ch_processed_reads }
             ch_versions = ch_versions.mix(CUTADAPT.out.versions.first())
         } else {
-            ch_processed_reads = ch_reads
+            ch_reads.set{ ch_processed_reads }
         }
     } else {
         error "Invalid seqtype. Please specify either 'map-ont' or 'sr'."
     }
 
     //
-    // MODULE: EMU abundance calculation
+    // MODULE: run NANOPLOT_PROCESSED_READS
+    //
+    NANOPLOT_PROCESSED_READS(ch_processed_reads)
+    ch_versions = ch_versions.mix(NANOPLOT_PROCESSED_READS.out.versions.first())
+
+    //
+    // MODULE: run EMU abundance calculation
     //
     EMU_ABUNDANCE(ch_processed_reads)
     ch_versions = ch_versions.mix(EMU_ABUNDANCE.out.versions.first())
@@ -183,8 +190,9 @@ workflow GMSEMU {
     ch_versions = ch_versions.mix(GENERATE_MASTER_HTML.out.versions.first())
 
     emit:
-    nanostats      = NANOPLOT.out.txt            // channel: [ path(versions.yml) ]
-    versions       = ch_versions                 // channel: [ path(versions.yml) ]
+    nanostats_unprocessed   = NANOPLOT_UNPROCESSED_READS.out.txt // channel: [ path(versions.yml) ]
+    nanostats_processed     = NANOPLOT_PROCESSED_READS.out.txt   // channel: [ path(versions.yml) ]
+    versions                = ch_versions                        // channel: [ path(versions.yml) ]
 
 }
 
