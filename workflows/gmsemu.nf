@@ -179,7 +179,7 @@ workflow GMSEMU {
     // MODULE: Generate master.html from reports
     //
 
-    GENERATE_MASTER_HTML(GENERATE_INPUT.out.sample_sheet_merged)
+    GENERATE_MASTER_HTML(ch_samplesheet)
     ch_versions = ch_versions.mix(GENERATE_MASTER_HTML.out.versions.first())
 
     emit:
