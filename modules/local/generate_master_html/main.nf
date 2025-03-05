@@ -10,15 +10,26 @@ process GENERATE_MASTER_HTML {
     path csv
 
     output:
-    path 'master.html', emit: master_html
+    path 'master.html'  , emit: master_html
+    path "versions.yml" , emit: versions
 
     script:
     """
     generate_master_html.py --csv ${csv} --html ${params.master_template} --timestamp ${params.trace_timestamp}
+
+    cat <<-END_VERSIONS > versions.yml
+    "${task.process}":
+        generate_master_html.py: \$(echo \$(generate_master_html.py --version 2>&1) | sed 's/^.*generate_master_html.py //; s/ .*\$//' )
+    END_VERSIONS
     """
 
     stub:
     """
     touch master.html
+
+    cat <<-END_VERSIONS > versions.yml
+    "${task.process}":
+        generate_master_html.py: \$(echo \$(generate_master_html.py --version 2>&1) | sed 's/^.*generate_master_html.py //; s/ .*\$//' )
+    END_VERSIONS
     """
 }
