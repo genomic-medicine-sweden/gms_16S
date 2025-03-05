@@ -58,6 +58,7 @@ workflow GMS_EMU {
 
     emit:
     nanostats = GMSEMU.out.nanostats // channel: /path/to/nanostats.txt
+    versions  = GMSEMU.out.versions  // channel: /path/to/nanostats.txt
 }
 
 /*
@@ -81,6 +82,8 @@ workflow {
     // WORKFLOW: Run main workflow
     //
     GMS_EMU (PIPELINE_INITIALISATION.out.samplesheet, PIPELINE_INITIALISATION.out.reads)
+
+    ch_versions = PIPELINE_INITIALISATION.out.versions.first().mix(GMS_EMU.out.versions.first())
 }
 
 /*

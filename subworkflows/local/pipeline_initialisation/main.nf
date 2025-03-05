@@ -41,7 +41,6 @@ workflow PIPELINE_INITIALISATION {
         .splitCsv ( header:true, sep:',' )
         .map { create_fastq_channel(it) }
         .set { ch_reads }
-    ch_versions = ch_versions.mix(INPUT_CHECK.out.versions)
 
     emit:
     reads       = ch_reads                       // channel: [ val(meta), [ reads ] ]
