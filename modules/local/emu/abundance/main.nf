@@ -33,13 +33,12 @@ process EMU_ABUNDANCE {
     tuple val(meta), path(reads)
 
     output:
-    tuple val(meta), path("*abundance.tsv"), emit: report
-    tuple val(meta), path("*read-assignment-distributions.tsv"), emit: assignment_report, optional:true
-    path "versions.yml"           , emit: versions
-    tuple val(meta), path("*.sam"), emit: samfile, optional:true
-    tuple val(meta), path("*.fastq_unclassified_mapped.fasta"), emit: unclassified_mapped_fa , optional:true
-    tuple val(meta), path("*.fastq_unmapped.fasta"), emit: unclassified_unmapped_fa , optional:true
-
+    tuple val(meta), path("*abundance.tsv")                     , emit: report
+    tuple val(meta), path("*read-assignment-distributions.tsv") , emit: assignment_report, optional:true
+    tuple val(meta), path("*.sam")                              , emit: samfile, optional:true
+    tuple val(meta), path("*.fastq_unclassified_mapped.fasta")  , emit: unclassified_mapped_fa , optional:true
+    tuple val(meta), path("*.fastq_unmapped.fasta")             , emit: unclassified_unmapped_fa , optional:true
+    path "versions.yml"                                         , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
@@ -53,6 +52,21 @@ process EMU_ABUNDANCE {
         $args \\
         --threads $task.cpus \\
         $reads
+
+    cat <<-END_VERSIONS > versions.yml
+    "${task.process}":
+        emu: \$(echo \$(emu --version 2>&1) | sed 's/^.*emu //; s/Using.*\$//' )
+    END_VERSIONS
+    """
+
+    stub:
+    def prefix  = task.ext.prefix ?: "${meta.id}"
+    """
+    touch ${prefix}.abundance.tsv
+    touch ${prefix}.read-assignment-distributions.tsv
+    touch ${prefix}.sam
+    touch ${prefix}.fastq_unclassified_mapped.fasta
+    touch ${prefix}.fastq_unmapped.fasta
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
