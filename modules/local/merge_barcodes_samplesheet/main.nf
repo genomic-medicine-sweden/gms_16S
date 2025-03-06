@@ -4,10 +4,10 @@ process MERGE_BARCODES_SAMPLESHEET {
 
     //               Software MUST be pinned to channel (i.e. "bioconda"), version (i.e. "1.10").
     //               For Conda, the build (i.e. "h9402c20_2") must be EXCLUDED to support installation on different operating systems.
-    conda "conda-forge::python=3.9"
+    conda "conda-forge::nf-core=3.0.2"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://depot.galaxyproject.org/singularity/python:3.9':
-        'quay.io/biocontainers/python:3.9' }"
+        'https://depot.galaxyproject.org/singularity/nf-core:3.0.2--pyhdfd78af_1':
+        'quay.io/biocontainers/nf-core:3.0.2' }"
 
     input:
     path('barcodes_samplesheet') 
