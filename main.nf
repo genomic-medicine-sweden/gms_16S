@@ -84,7 +84,7 @@ workflow {
     //
     GMS_EMU (PIPELINE_INITIALISATION.out.samplesheet, PIPELINE_INITIALISATION.out.reads)
 
-    ch_versions = PIPELINE_INITIALISATION.out.versions.first().mix(GMS_EMU.out.versions.first())
+    ch_versions = PIPELINE_INITIALISATION.out.versions.mix(GMS_EMU.out.versions)
 }
 
 /*
