@@ -13,6 +13,9 @@ process NANOPLOT {
     input:
     tuple val(meta), path(ontfile)
 
+    when:
+    task.ext.when
+
     output:
     tuple val(meta), path("*.html")                , emit: html
     tuple val(meta), path("*.png") , optional: true, emit: png
