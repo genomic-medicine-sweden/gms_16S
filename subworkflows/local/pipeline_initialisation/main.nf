@@ -37,6 +37,7 @@ workflow PIPELINE_INITIALISATION {
     samplesheet // file: /path/to/samplesheet.csv
 
     main:
+    ch_versions = Channel.empty()
 
     // Check input path parameters to see if they exist
     def checkPathParamList = !params.merge_fastq_pass ? [params.input] : []
@@ -56,6 +57,7 @@ workflow PIPELINE_INITIALISATION {
     } else if ( params.merge_fastq_pass && params.barcodes_samplesheet ) {
         MERGE_BARCODES_SAMPLESHEET(params.barcodes_samplesheet, params.merge_fastq_pass)
         GENERATE_INPUT(MERGE_BARCODES_SAMPLESHEET.out.fastq_dir_merged).sample_sheet_merged.set{ ch_samplesheet }
+        ch_versions = ch_versions.mix(MERGE_BARCODES_SAMPLESHEET.out.versions.first())
     } else if ( !params.merge_fastq_pass && !params.barcodes_samplesheet && samplesheet ) {
         ch_samplesheet = Channel.value(samplesheet)
     } else {
@@ -70,9 +72,10 @@ workflow PIPELINE_INITIALISATION {
         .splitCsv ( header:true, sep:',' )
         .map { create_fastq_channel(it) }
         .set { ch_reads }
+    ch_versions = ch_versions.mix(SAMPLESHEET_CHECK.out.versions.first())
 
     emit:
-    reads       = ch_reads                       // channel: [ val(meta), [ reads ] ]
-    samplesheet = ch_samplesheet                 // channel: [ val(meta), [ samplesheet ] ]
-    versions    = SAMPLESHEET_CHECK.out.versions // channel: [ versions.yml ]
+    reads       = ch_reads          // channel: [ val(meta), [ reads ] ]
+    samplesheet = ch_samplesheet    // channel: [ val(meta), [ samplesheet ] ]
+    versions    = ch_versions       // channel: [ versions.yml ]
 }

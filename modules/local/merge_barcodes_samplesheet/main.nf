@@ -17,16 +17,27 @@ process MERGE_BARCODES_SAMPLESHEET {
     // publishDir 'fastq_pass_merged'   , mode: 'move'
     path('fastq_pass_merged/*fastq.gz') , emit : fastq_files_merged
     path('fastq_pass_merged')           , emit : fastq_dir_merged
+    path "versions.yml"                 , emit: versions
     
     script:
     """
-    merge_barcodes_samplesheet.py $barcodes_samplesheet fastq_pass_merged $fastq_pass 
+    merge_barcodes_samplesheet.py $barcodes_samplesheet fastq_pass_merged $fastq_pass
+
+    cat <<-END_VERSIONS > versions.yml
+    "${task.process}":
+        merge_barcodes_samplesheet.py: \$(echo \$(merge_barcodes_samplesheet.py --version 2>&1) | sed 's/^.*merge_barcodes_samplesheet.py, version //; s/ .*\$//' )
+    END_VERSIONS
     """
 
     stub:
     """
     mkdir fastq_pass_merged
     touch fastq_pass_merged/1.fastq.gz
+
+    cat <<-END_VERSIONS > versions.yml
+    "${task.process}":
+        merge_barcodes_samplesheet.py: \$(echo \$(merge_barcodes_samplesheet.py --version 2>&1) | sed 's/^.*merge_barcodes_samplesheet.py, version //; s/ .*\$//' )
+    END_VERSIONS
     """
 }
 
