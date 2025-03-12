@@ -2,7 +2,7 @@
 """
 Merge fastq.gz files present in barcode folders.
 
-Author: Frans Wallin
+Author(s): Frans Wallin and Markus H Johansson
 Date: 20230707
 """
 import logging
@@ -28,6 +28,7 @@ class SampleObject(BaseModel):
 @click.argument("sample-sheet", type=click.File())
 @click.argument("output-dir", type=click.Path(dir_okay=True, readable=True, path_type=Path))
 @click.argument("fastq-dir", type=click.Path(dir_okay=True, readable=True, path_type=Path))
+@click.version_option(version="0.1.0", prog_name="merge_barcodes_samplesheet.py")
 def cli(sample_sheet: TextIOWrapper, output_dir: Path, fastq_dir: Path) -> None:
     """Merge fastq files on barcodes in a sample sheet."""
     # Create output folder and make ensure its writeable
