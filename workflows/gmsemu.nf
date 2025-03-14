@@ -186,8 +186,13 @@ workflow GMSEMU {
     // MODULE: Generate master.html from reports
     //
 
-    GENERATE_MASTER_HTML(ch_samplesheet)
-    ch_versions = ch_versions.mix(GENERATE_MASTER_HTML.out.versions.first())
+    ch_reads
+        .map{
+            meta, reads -> [meta]
+        }
+        .set{ch_meta}
+    GENERATE_MASTER_HTML(ch_meta.first(), ch_samplesheet)
+    ch_versions = ch_versions.mix(GENERATE_MASTER_HTML.out.versions)
 
     emit:
     nanostats_unprocessed   = NANOPLOT_UNPROCESSED_READS.out.txt // channel: [ path(versions.yml) ]

@@ -7,15 +7,18 @@ process GENERATE_MASTER_HTML {
         'quay.io/biocontainers/nf-core:3.0.2' }"
 
     input:
+    val meta
     path csv
 
     output:
-    path 'master.html'  , emit: master_html
+    path output         , emit: master_html
     path "versions.yml" , emit: versions
 
     script:
+    def prefix = meta.sequencing_run ?: "${params.trace_timestamp}"
+    output = "${prefix}_master.html"
     """
-    generate_master_html.py --csv ${csv} --html ${params.master_template} --timestamp ${params.trace_timestamp}
+    generate_master_html.py --csv ${csv} --html ${params.master_template} --timestamp ${params.trace_timestamp} --output ${output}
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
