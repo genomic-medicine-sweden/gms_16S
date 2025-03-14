@@ -50,7 +50,7 @@ parser = argparse.ArgumentParser(
 parser.add_argument(
     '-v', '--version',
     action='version',
-    version='%(prog)s 0.1.0'
+    version='%(prog)s 0.2.0'
     )
 parser.add_argument(
     '-c', '--csv',
@@ -71,6 +71,13 @@ parser.add_argument(
     help='pipeline execution timestamp',
     metavar='PIPELINE_EXECUTION_TIMESTAMP',
     dest='timestamp',
+    required=True
+    )
+parser.add_argument(
+    '-o', '--output',
+    help='output filepath',
+    metavar='OUTPUT_FILEPATH',
+    dest='output',
     required=True
     )
 
@@ -106,7 +113,7 @@ def main():
     sample_ids = get_sample_ids(args.csv)
     seqrun_date = find_date_in_string(args.csv, r'/(\d{8})_')
     rendered_html = generate_master_html(args.html, sample_ids, seqrun_date, args.timestamp)
-    with open("master.html", "w") as fout:
+    with open(args.output, "w") as fout:
         fout.write(rendered_html)
 
 if __name__ == "__main__":
