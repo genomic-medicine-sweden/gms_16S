@@ -40,6 +40,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Cleaned up input preprocessing steps
 - Updated `master_template.html` for nanoplot prefix and output changes
 - Changed `merge_barcodes_samplesheet.py` container to nf-core (temporary)
+- Emit `master.html`
 
 ## [v0.1.0]
 

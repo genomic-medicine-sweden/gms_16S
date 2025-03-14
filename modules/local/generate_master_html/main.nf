@@ -11,7 +11,7 @@ process GENERATE_MASTER_HTML {
     path csv
 
     output:
-    path output         , emit: master_html
+    path output         , emit: html
     path "versions.yml" , emit: versions
 
     script:
