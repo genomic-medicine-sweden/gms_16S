@@ -22,6 +22,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added workflow that publishes docker image for python-related processes
 - Added contributors
 - Added versioning to `merge_barcodes_samplesheet.py`
+- Added output argument to `generate_master_html.py`
+- Added prefix to `master.html` filename
 
 ### Fixed
 
@@ -37,6 +39,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Cleaned up input preprocessing steps
 - Updated `master_template.html` for nanoplot prefix and output changes
 - Changed `merge_barcodes_samplesheet.py` container to nf-core (temporary)
+- Emit `master.html`
 
 ## [v0.1.0]
 
