@@ -28,6 +28,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed unused `NANOPLOT2` to `NANOPLOT_PROCESSED_READS`
 - Fixed `Nanoplot` output dirs and prefix in `modules.config`
 - Fixed Dockerfile context
+- Conditionally emit nanostats_unprocessed to avoid undefined output error when using --seqtype SR
 
 ### Changed
 
