@@ -195,6 +195,7 @@ workflow GMSEMU {
     ch_versions = ch_versions.mix(GENERATE_MASTER_HTML.out.versions)
 
     emit:
+    master_html             = GENERATE_MASTER_HTML.out.html      // channel: [ path(master.html) ]
     nanostats_unprocessed   = NANOPLOT_UNPROCESSED_READS.out.txt // channel: [ path(versions.yml) ]
     nanostats_processed     = NANOPLOT_PROCESSED_READS.out.txt   // channel: [ path(versions.yml) ]
     versions                = ch_versions                        // channel: [ path(versions.yml) ]
