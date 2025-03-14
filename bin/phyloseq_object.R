@@ -6,29 +6,38 @@
 #}
 
 
-#if (!require(phyloseq)){
+# if (!require(phyloseq)){
 #  BiocManager::install("phyloseq")
-  # library(phyloseq)  # to check that it works
-#}
+#   library(phyloseq)  # to check that it works
+# } 
 
 # TODO: if not installed, install
-if (!require(stringr)){
-  install.packages("stringr")
-}
+# if (!require(stringr)) {
+#   install.packages("stringr")
+# }
 
-library(stringr)
-library(phyloseq)
+# if (!require(tidyr)) {
+#   install.packages("tidyr")
+# }
+
+
+suppressPackageStartupMessages(library(phyloseq))
+suppressPackageStartupMessages(library(stringr))
 
 
 # # # # # # # # # # # # # # # # #
 ##### FUNCTIONS USED BELOW ######
 # # # # # # # # # # # # # # # # #
 gms16s_to_phyloseq <- function(counts_file, taxonomy_file, sep_file_sample = "_", n_parts_filename_to_sample = 1) {
+  # print(counts_file)
+  # print(taxonomy_file)
   if (endsWith(counts_file, ".xlsx")) {
     gms_counts <- openxlsx::read.xlsx(counts_file)
   } else if (endsWith(counts_file, ".tsv")) {
     gms_counts <- read.csv(counts_file, sep = "\t")
+    # print(head(gms_counts))
     gms_counts$Sample <- sapply(gms_counts$Source_File, str_first_n_elements, n = n_parts_filename_to_sample, sep = sep_file_sample)
+    # print(gms_counts$Sample)
     if (length(unique(gms_counts$Source_File)) != length(unique(gms_counts$Sample))) {
       warning("Source_File prefix specified by sep_file_sample = \"", sep_file_sample, 
               "\" and n_parts_filename_to_sample = ", n_parts_filename_to_sample,
@@ -113,22 +122,20 @@ is_numeric <- function(n) {
 # # # # # # # # # #
 ###### MAIN #######
 # # # # # # # # # #
-args = commandArgs(trailingOnly = TRUE)
+args <- commandArgs(trailingOnly = TRUE)
 
 ### EMU IllV3V4
-phy_obj <- gms16s_to_phyloseq(counts_file = args[1], # e.g. gms_16s_Samples.xlsx or tsv 
-                                        taxonomy_file = args[2]) 
 
-tax_table(phy_obj) <- remove_genus_prefix_from_species(
-  tax_table(phy_obj), 
-  i_genus = 7, 
-  i_species = 8)
+# phy_obj <- gms16s_to_phyloseq(counts_file = "../results/combine/combined-rel-abundance.tsv",
+#                               taxonomy_file = "../assets/databases/emu_database/taxonomy.tsv",
+#                               n_parts_filename_to_sample = 3)
+phy_obj <- gms16s_to_phyloseq(counts_file = args[1], # e.g. gms_16s_Samples.xlsx or tsv
+                              taxonomy_file = args[2], 
+                              n_parts_filename_to_sample = 3)
 
-
-saveRDS(phy_obj, "./physoseq_output.RDS")
-
-
-
+tax_table(phy_obj) <- remove_genus_prefix_from_species(tax_table(phy_obj),
+                                                       i_genus = 7,
+                                                       i_species = 8)
 
 
-
+saveRDS(phy_obj, "./phyloseq_output.RDS")
