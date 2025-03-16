@@ -27,8 +27,10 @@ process GENERATE_MASTER_HTML {
     """
 
     stub:
+    def prefix = meta.sequencing_run ?: "${params.trace_timestamp}"
+    output = "${prefix}_master.html"
     """
-    touch master.html
+    touch ${output}
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
