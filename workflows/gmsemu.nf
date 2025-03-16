@@ -188,10 +188,11 @@ workflow GMSEMU {
 
     ch_reads
         .map{
-            meta, reads -> [meta]
+            meta, reads -> meta
         }
+        .first()
         .set{ch_meta}
-    GENERATE_MASTER_HTML(ch_meta.first(), ch_samplesheet)
+    GENERATE_MASTER_HTML(ch_meta, ch_samplesheet)
     ch_versions = ch_versions.mix(GENERATE_MASTER_HTML.out.versions)
 
     emit:
