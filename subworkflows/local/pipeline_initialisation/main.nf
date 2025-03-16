@@ -3,6 +3,7 @@ def create_fastq_channel(LinkedHashMap row) {
     // Create meta map
     def meta = [:]
     meta.id                 = row.sample
+    meta.sequencing_run     = row.sequencing_run
     meta.single_end         = row.single_end.toBoolean()
     meta.fw_primer          = row.FW_primer
     meta.rv_primer          = row.RV_primer
