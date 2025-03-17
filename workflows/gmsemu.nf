@@ -111,6 +111,12 @@ workflow GMSEMU {
             ch_reads.set{ ch_processed_reads }
         }
 
+        //
+        // MODULE: run NANOPLOT_PROCESSED_READS
+        //
+        NANOPLOT_PROCESSED_READS(ch_processed_reads)
+        ch_versions = ch_versions.mix(NANOPLOT_PROCESSED_READS.out.versions.first())
+
     } else if (params.seqtype == "sr") {
 
         //
@@ -126,12 +132,6 @@ workflow GMSEMU {
     } else {
         error "Invalid seqtype. Please specify either 'map-ont' or 'sr'."
     }
-
-    //
-    // MODULE: run NANOPLOT_PROCESSED_READS
-    //
-    NANOPLOT_PROCESSED_READS(ch_processed_reads)
-    ch_versions = ch_versions.mix(NANOPLOT_PROCESSED_READS.out.versions.first())
 
     //
     // MODULE: run EMU abundance calculation
@@ -190,7 +190,7 @@ workflow GMSEMU {
     ch_versions = ch_versions.mix(GENERATE_MASTER_HTML.out.versions.first())
 
     emit:
-    nanostats_unprocessed   = params.seqtype == "map-ont" ? NANOPLOT_UNPROCESSED_READS.out.txt : Channel.empty() // channel: [ path(versions.yml) ]
+    nanostats_unprocessed   = NANOPLOT_UNPROCESSED_READS.out.txt // channel: [ path(versions.yml) ]
     nanostats_processed     = NANOPLOT_PROCESSED_READS.out.txt   // channel: [ path(versions.yml) ]
     versions                = ch_versions                        // channel: [ path(versions.yml) ]
 
