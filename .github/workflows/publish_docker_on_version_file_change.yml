@@ -25,17 +25,17 @@ jobs:
       - name: Extract version from VERSION file
         run: |
           VERSION=$(<containers/VERSION tr -d '[:space:]')
-          echo "MICROTAX_TAG=${VERSION}" >> $GITHUB_ENV
-          echo "MICROTAX_TAG_LATEST=latest" >> $GITHUB_ENV
+          echo "TACO_TAG=${VERSION}" >> $GITHUB_ENV
+          echo "TACO_TAG_LATEST=latest" >> $GITHUB_ENV
 
       - name: Extract metadata for Docker
         id: meta
         uses: docker/metadata-action@v5.5.0
         with:
-          images: genomicmedicinesweden/microtax-python
+          images: genomicmedicinesweden/taco-python
           tags: |
-            type=raw,value=${{ env.MICROTAX_TAG }}
-            type=raw,value=${{ env.MICROTAX_TAG_LATEST }}
+            type=raw,value=${{ env.TACO_TAG }}
+            type=raw,value=${{ env.TACO_TAG_LATEST }}
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v5.1.0
