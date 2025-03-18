@@ -25,6 +25,7 @@ include { CUTADAPT                               } from '../modules/nf-core/cuta
 include { NANOPLOT as NANOPLOT_UNPROCESSED_READS } from '../modules/nf-core/nanoplot/main.nf'
 include { NANOPLOT as NANOPLOT_PROCESSED_READS   } from '../modules/nf-core/nanoplot/main.nf'
 include { PORECHOP_ABI                           } from '../modules/nf-core/porechop/abi/main.nf'
+include { SEQTK_SAMPLE                           } from '../modules/nf-core/seqtk/sample/main.nf'
 include { FILTLONG                               } from '../modules/nf-core/filtlong/main.nf'
 
 /*
@@ -133,13 +134,26 @@ workflow GMSEMU {
         error "Invalid seqtype. Please specify either 'map-ont' or 'sr'."
     }
 
+    if ( params.sample_size ) {
+        //
+        // MODULE: Downsample reads
+        //
+        seqtk_sample( ch_processed_reads, params.sample_size ).reads.set{ ch_processed_sampled_reads }
+        ch_versions = ch_versions.mix(seqtk_sample.out.versions)
+    } else {
+        ch_processed_reads.set{ ch_processed_sampled_reads }
+    }
+
     //
     // MODULE: run EMU abundance calculation
     //
-    EMU_ABUNDANCE(ch_processed_reads)
+    EMU_ABUNDANCE(ch_processed_sampled_reads)
     ch_versions = ch_versions.mix(EMU_ABUNDANCE.out.versions.first())
 
     if (params.run_krona) {
+        //
+        // MODULE: Run krona plot
+        //
         KRONA_KTIMPORTTAXONOMY(EMU_ABUNDANCE.out.report, file(params.krona_taxonomy_tab, checkExists: true))
         ch_versions = ch_versions.mix(KRONA_KTIMPORTTAXONOMY.out.versions.first())
     }
