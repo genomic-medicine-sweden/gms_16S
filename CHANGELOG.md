@@ -31,6 +31,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed `Nanoplot` output dirs and prefix in `modules.config`
 - Fixed Dockerfile context
 - Moved nanostats_unprocessed process execution into seqtype SR if statement
+- Conditionally emit nanostats unprocessed/processed to avoid undefined output error when using --seqtype SR
 
 ### Changed
 
