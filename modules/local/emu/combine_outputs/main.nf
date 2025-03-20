@@ -11,10 +11,10 @@
 //  Optional inputs are not currently supported by Nextflow. However, using an empty
 //               list (`[]`) instead of a file can be used to work around this issue.
 
-process EMU_ABUNDANCE {
+process EMU_COMBINE_OUTPUTS {
     debug true
     tag "$meta.id"
-    label 'process_medium'
+    label 'process_single'
 
     //               Software MUST be pinned to channel (i.e. "bioconda"), version (i.e. "1.10").
     //               For Conda, the build (i.e. "h9402c20_2") must be EXCLUDED to support installation on different operating systems.
@@ -30,15 +30,14 @@ process EMU_ABUNDANCE {
     //               https://github.com/nf-core/modules/blob/master/modules/nf-core/bwa/index/main.nf
     //  Where applicable please provide/convert compressed files as input/output
     //               e.g. "*.fastq.gz" and NOT "*.fastq", "*.bam" and NOT "*.sam" etc.
-    tuple val(meta), path(reads)
+    tuple val(meta), path(collected_files)
 
     output:
-    tuple val(meta), path("*abundance.tsv"), emit: report
-    tuple val(meta), path("*read-assignment-distributions.tsv"), emit: assignment_report, optional:true
+    tuple val(meta), path("*emu-combined-*.tsv"), emit: combined_report
     path "versions.yml"           , emit: versions
-    tuple val(meta), path("*.sam"), emit: samfile, optional:true
-    tuple val(meta), path("*.fastq_unclassified_mapped.fasta"), emit: unclassified_mapped_fa , optional:true
-    tuple val(meta), path("*.fastq_unmapped.fasta"), emit: unclassified_unmapped_fa , optional:true
+//    tuple val(meta), path("*.sam"), emit: samfile, optional:true
+//    tuple val(meta), path("*.fastq_unclassified_mapped.fasta"), emit: unclassified_mapped_fa , optional:true
+//    tuple val(meta), path("*.fastq_unmapped.fasta"), emit: unclassified_unmapped_fa , optional:true
 
 
     when:
@@ -50,9 +49,8 @@ process EMU_ABUNDANCE {
     """
     emu \\
         combine-outputs \\
+        $collected_files \\
         $args \\
-        --threads $task.cpus \\
-        //lägg till parameter för rapporterna samlade.
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":

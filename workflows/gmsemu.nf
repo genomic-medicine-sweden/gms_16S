@@ -64,6 +64,7 @@ include { NANOPLOT as NANOPLOT1       } from '../modules/nf-core/nanoplot/main.n
 include { NANOPLOT as NANOPLOT2       } from '../modules/nf-core/nanoplot/main.nf'
 include { PORECHOP_ABI                } from '../modules/nf-core/porechop/abi/main.nf'
 include { FILTLONG                    } from '../modules/nf-core/filtlong/main.nf'
+include { EMU_COMBINE_OUTPUTS         } from '../modules/local/emu/combine_outputs/main.nf'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -164,6 +165,19 @@ workflow GMSEMU {
         ch_versions = ch_versions.mix(KRONA_KTIMPORTTAXONOMY.out.versions.first())
     }
 
+   // Run EMU_COMBINE_OUTPUTS
+    ch_emu_combine_input_files = Channel.empty()
+    ch_emu_combine_input_files = ch_emu_combine_input_files.mix(EMU_ABUNDANCE.out.report)
+    
+    ch_emu_combine_input_files
+        .collect()
+        .set{ collected_files }  // Collect all before passing
+
+    EMU_COMBINE_OUTPUTS(collected_files)
+
+    ch_versions = ch_versions.mix(EMU_COMBINE_OUTPUTS.out.versions.first())
+
+    // Custom dumpsoftware
     CUSTOM_DUMPSOFTWAREVERSIONS(ch_versions.unique().collectFile(name: 'collated_versions.yml'))
 
     //
