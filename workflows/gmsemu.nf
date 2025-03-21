@@ -165,15 +165,35 @@ workflow GMSEMU {
         ch_versions = ch_versions.mix(KRONA_KTIMPORTTAXONOMY.out.versions.first())
     }
 
-   // Run EMU_COMBINE_OUTPUTS
+// empty channel
     ch_emu_combine_input_files = Channel.empty()
-    ch_emu_combine_input_files = ch_emu_combine_input_files.mix(EMU_ABUNDANCE.out.report)
-    
-    ch_emu_combine_input_files
-        .collect()
-        .set{ collected_files }  // Collect all before passing
+//    ch_emu_combine_input_files = ch_emu_combine_input_files.mix(EMU_ABUNDANCE.out.report)
 
+// Collect all reports into a single list containing the paths 
+    ch_emu_combine_input_files = EMU_ABUNDANCE.out.report
+        .map { it[1] }  // Extract only the file path from the tuple (meta, path)
+        .collect()
+        .set { collected_files }
+    // collected_files.view()
     EMU_COMBINE_OUTPUTS(collected_files)
+
+
+
+   // Run EMU_COMBINE_OUTPUTS
+//    ch_emu_combine_input_files = Channel.empty()
+//    ch_emu_combine_input_files = ch_emu_combine_input_files.mix(EMU_ABUNDANCE.out.report.collect())
+
+   // ch_multiqc_files = ch_multiqc_files.mix(NANOPLOT1.out.txt.collect{it[1]}.ifEmpty([]))  
+ // ch_emu_combine_input_files = ch_emu_combine_input_files.mix(EMU_ABUNDANCE.out.report)
+    
+ //   ch_emu_combine_input_files.view()
+   
+   // ch_emu_combine_input_files
+     //   .collect()
+       // .view()
+       // .set{ collected_files }  // Collect all before passing
+
+   // EMU_COMBINE_OUTPUTS(collected_files)
 
     ch_versions = ch_versions.mix(EMU_COMBINE_OUTPUTS.out.versions.first())
 
