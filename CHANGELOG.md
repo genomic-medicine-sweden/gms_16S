@@ -25,6 +25,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added output argument to `generate_master_html.py`
 - Added prefix to `master.html` filename
 - Added `seqtk_sample` process
+- Added `Makefile` rules for `precommit`, `lint`, `schema`, `test` as well as a `check` command that runs all checks
+- Added `nf-test`
+- Added `pre-commit` checks, which includes the `prettier` tool
+- Added GitHub Actions workflows for `nf-core` linting checks
 
 ### Fixed
 
@@ -33,6 +37,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed Dockerfile context
 - Moved nanostats_unprocessed process execution into seqtype SR if statement
 - Conditionally emit nanostats unprocessed/processed to avoid undefined output error when using --seqtype SR
+- Fixed a broken configuration file in `modules/local/emu/abundance/meta.yml`
 
 ### Changed
 
@@ -43,6 +48,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated `master_template.html` for nanoplot prefix and output changes
 - Changed `merge_barcodes_samplesheet.py` container to nf-core (temporary)
 - Emit `master.html`
+- Changed project name to Taco (`genomic-medicine-sweden/taco`)
+- Updated nf-core template to version 3.2.0
+- Updated the `ci.yml` config to run test via `nf-test` in addition to the normal test run via cli
+- Updated `README.md` with info about running `make install` to gunzip gzipped assets.
+- Updated `README.md` with info about useful `make` commands for developers.
 
 ## [v0.1.0]
 
