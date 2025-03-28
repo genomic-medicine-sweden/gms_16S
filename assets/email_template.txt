@@ -1,13 +1,13 @@
 ----------------------------------------------------
-  taco v${version}
+  Taco v${version}
 ----------------------------------------------------
 Run Name: $runName
 
 <% if (success){
-    out << "## taco execution completed successfully! ##"
+    out << "## Taco execution completed successfully! ##"
 } else {
     out << """####################################################
-## taco  execution completed unsuccessfully! ##
+## Taco  execution completed unsuccessfully! ##
 ####################################################
 The exit status of the task that caused the workflow execution to fail was: $exitStatus.
 The full error message was:

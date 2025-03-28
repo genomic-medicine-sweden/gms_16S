@@ -35,7 +35,7 @@ include { PIPELINE_INITIALISATION } from './subworkflows/local/pipeline_initiali
 include { TACO } from './workflows/taco.nf'
 
 //
-// WORKFLOW: Run main taco  analysis pipeline
+// WORKFLOW: Run main Taco analysis pipeline
 //
 workflow GMS_TACO {
     take:
