@@ -24,6 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added versioning to `merge_barcodes_samplesheet.py`
 - Added output argument to `generate_master_html.py`
 - Added prefix to `master.html` filename
+- Added `seqtk_sample` process
 
 ### Fixed
 
