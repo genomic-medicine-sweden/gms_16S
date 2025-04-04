@@ -146,7 +146,7 @@ There are two types of sample sheets that can be used:
 
 1. If the fastq files are already concatenated/merged i.e., the fastq-files in
    Nanopore barcode directories have been concataned already, the `--input` can
-   be used.  `--input` expects a `.csv` sample sheet with 3 columns (note the
+   be used. `--input` expects a `.csv` sample sheet with 3 columns (note the
    header names). It looks like this (See also the `examples` directory):
    ```csv
    sample,fastq_1,fastq_2
